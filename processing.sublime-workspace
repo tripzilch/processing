@@ -1,0 +1,589 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"normali",
+				"normalize"
+			],
+			[
+				"c",
+				"class	New Class"
+			],
+			[
+				"subplo",
+				"subplot_params"
+			],
+			[
+				"if",
+				"ifmain	if __name__ == '__main__'"
+			],
+			[
+				"fft",
+				"fft"
+			],
+			[
+				"ff",
+				"fftlen"
+			],
+			[
+				"e",
+				"e"
+			],
+			[
+				"item",
+				"item_id"
+			],
+			[
+				"dis",
+				"disabled"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "blobs_aa/blobs_aa.pde",
+			"settings":
+			{
+				"buffer_size": 3214,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 201.0,
+		"last_filter": "markdo",
+		"selected_items":
+		[
+			[
+				"markdo",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"Package Control: dis",
+				"Package Control: Disable Package"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"disab",
+				"Package Control: Disable Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"repl py",
+				"SublimeREPL: Python - IPython"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"ena",
+				"Package Control: Enable Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"sideb",
+				"View: Toggle Side Bar"
+			],
+			[
+				"disb",
+				"Package Control: Disable Package"
+			],
+			[
+				"python",
+				"Python: Disable Pep8 Linting On View"
+			],
+			[
+				"wra",
+				"Word Wrap: Toggle"
+			],
+			[
+				"side",
+				"View: Toggle Side Bar"
+			],
+			[
+				"spaces",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"disa",
+				"Package Control: Disable Package"
+			],
+			[
+				"snipp",
+				"Snippet: New Class"
+			],
+			[
+				"snip",
+				"Snippet: self"
+			],
+			[
+				"wor",
+				"Word Wrap: Toggle"
+			],
+			[
+				"fetch",
+				"Fetch: File"
+			],
+			[
+				"jav",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"lowe",
+				"Convert Case: Lower Case"
+			],
+			[
+				"markd",
+				"Set Syntax: MultiMarkdown"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Discover Packages"
+			],
+			[
+				"diff",
+				"FileDiffs: Menu"
+			],
+			[
+				"Package Controlin",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"FileDiffs: Menu"
+			],
+			[
+				"Package Control: In",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 593.0
+	},
+	"console":
+	{
+		"height": 341.0,
+		"history":
+		[
+			"1/_",
+			"4/1000.",
+			"70*1.414",
+			"1000/10",
+			"1000/25",
+			"1000/20",
+			"(2*2*2*5*5*5.0) / (5 * 2 * 2 * 5)",
+			"(2*2*2*5*5*5.0) / (5 * 2 * 2)",
+			"(2*2*2*5*5*5.0) / (5 * 5 * 2)",
+			"(2*2*2*5*5*5.0) / (5 * 5 * 5)",
+			"(2*2*2*5*5*5.0) / (5 * 5 * 2)",
+			"(2*2*2*5*5*5.0) / (5 * 5 * 5)",
+			"(2*2*2*5*5*5.0) / (2*2)",
+			"(2*2*2*5*5*5.0) / (2*2*5)",
+			"(2*2*2*5*5*5.0) / (2*5*5)",
+			"(2*2*2*5*5*5.0) / (2*2*5*5)",
+			"(2*2*2*5*5*5.0) / (2*2*2*5*5)",
+			"(2*2*2*5*5*5.0) / (2*2*2*5*5*5)",
+			"2*2*2*5*5*5",
+			"1000/80.",
+			"2*2*2*5*5*5",
+			"2*2*2*5*5",
+			"2*2*2*5",
+			"2*5",
+			"2+2",
+			"print(6)",
+			"help",
+			"?",
+			"print 6",
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/ritz/git/tripzilch/processing",
+		"/home/ritz/git/tripzilch/processing/blobs_aa"
+	],
+	"file_history":
+	[
+		"/home/ritz/Desktop/txt/thing.txt",
+		"/home/ritz/Desktop/txt/movies.md",
+		"/home/ritz/Desktop/txt/books.md",
+		"/home/ritz/Desktop/txt/quotes3.md",
+		"/home/ritz/Desktop/txt/music.txt",
+		"/home/ritz/Desktop/txt/cartoon-ideas.txt.md",
+		"/home/ritz/Desktop/txt/wk17.txt",
+		"/home/ritz/git/tripzilch/processing/blobs_aa/blobs_aa.pde",
+		"/home/ritz/Desktop/txt/gezeik.txt",
+		"/home/ritz/.config/sublime-text-3/Packages/User/ShellCommand.sublime-keymap",
+		"/home/ritz/.config/sublime-text-3/Packages/ShellCommand/Default.sublime-keymap",
+		"/home/ritz/.config/sublime-text-3/Packages/User/ShellCommand.sublime-settings",
+		"/home/ritz/.config/sublime-text-3/Packages/ShellCommand/ShellCommand.sublime-settings",
+		"/home/ritz/.config/sublime-text-3/Packages/ShellCommand/Default.sublime-commands",
+		"/home/ritz/.config/sublime-text-3/Packages/User/Markdown.sublime-settings",
+		"/home/ritz/git/tripzilch/dsp/chunker.py",
+		"/home/ritz/Desktop/txt/ritz-demoscene.txt",
+		"/home/ritz/git/tripzilch/dsp/epoch-ZFR.py",
+		"/home/ritz/git/tripzilch/dsp/wplot.py",
+		"/home/ritz/git/tripzilch/dsp/wav.py",
+		"/home/ritz/git/tripzilch/dsp/midi.py",
+		"/home/ritz/git/tripzilch/dsp/__init__.py",
+		"/home/ritz/.config/sublime-text-3/Packages/SublimePythonIDE/SublimePython.sublime-settings",
+		"/home/ritz/mix/audio samples instruments/perc-kits/Smackos DR660 Drumsamples/DR660SAMPLEZ.txt",
+		"/home/ritz/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/ritz/documents/pgb/coaching heraanvraag 2015.txt",
+		"/home/ritz/documents/pgb/Persoonlijk plan PGB.txt.md",
+		"/home/ritz/documents/pgb/coaching heraanvraag 2015 H2.txt",
+		"/home/ritz/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/opt/sublime_text/sublime.py",
+		"/home/ritz/git/tripzilch/dsp/README.md",
+		"/home/ritz/music/De Huilende Rappers - Verkleed als Sukkel (RVP)/Lyrics.txt",
+		"/home/ritz/.cache/.fr-ICgjGi/tinfoleak-1.5/README.txt",
+		"/home/ritz/ownCloud/pathtracer/vec3.pde",
+		"/home/ritz/ownCloud/pathtracer/pathtracer.pde",
+		"/home/ritz/ownCloud/pathtracer/SceneObject.pde",
+		"/home/ritz/ownCloud/pathtracer/pathtracer (copy).pde",
+		"/home/ritz/Desktop/txt/wk13.txt",
+		"/home/ritz/git/tripzilch/dsp/wanalyze.py",
+		"/home/ritz/code/game.py",
+		"/home/ritz/gfx/pre feb 09/strips/index.html",
+		"/home/ritz/Desktop/txt/xorg performance notes.txt",
+		"/run/user/1000/gvfs/sftp:host=aerv.nl,user=ritz/home/ritz/public_html/strips/index.html",
+		"/home/ritz/Dropbox/do.txt",
+		"/home/ritz/git/tripzilch/dsp/compress-flatten.py",
+		"/home/ritz/git/tripzilch/dsp/espeak-analyze.py",
+		"/home/ritz/.config/sublime-text-3/Packages/Emmet/Emmet.sublime-settings",
+		"/home/ritz/git/tripzilch/javascript/HN-DOM.js",
+		"/home/ritz/git/tripzilch/javascript/bookmarklet-checkHN.js",
+		"/home/ritz/git/tripzilch/javascript/bookmarklet-FIXEDFIXER.js",
+		"/home/ritz/git/tripzilch/javascript/bookmarklet-next.js",
+		"/home/ritz/.config/sublime-text-3/Packages/User/Fetch.sublime-settings",
+		"/home/ritz/video/series/Arrow.S03E17.HDTV.x264-LOL[ettv]/arrow.317.hdtv-lol.srt",
+		"/home/ritz/video/series/Arrow - 03x17 - Suicidal Tendencies.LOL.English.C.updated.Addic7ed.com.srt",
+		"/home/ritz/video/series/Arrow - 03x17 - Suicidal Tendencies.LOL.English.C.updated.Addic7ed",
+		"/home/ritz/documents/admin/coaching heraanvraag 2015.txt",
+		"/home/ritz/documents/ordevos/verhaal1024.txt",
+		"/home/ritz/mix/drum eq.txt",
+		"/home/ritz/Desktop/txt/wk9.txt",
+		"/home/ritz/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/ritz/Desktop/txt/wk8.txt",
+		"/home/ritz/code/2014/oud/ritz.no.sapo.pt/mind.html",
+		"/home/ritz/code/2014/oud/ritz.no.sapo.pt/titelvoormijzelf.html",
+		"/home/ritz/code/2014/oud/ritz.no.sapo.pt/linked.html",
+		"/home/ritz/code/2014/oud/ritz.no.sapo.pt/noise.html",
+		"/home/ritz/code/2014/oud/ritz.no.sapo.pt/strips.html",
+		"/home/ritz/code/2014/oud/ritz.no.sapo.pt/demoscene.html",
+		"/home/ritz/code/2014/oud/ritz.no.sapo.pt/index.html",
+		"/home/ritz/mix/303 notes",
+		"/home/ritz/ownCloud/pathtracer/old scenes.java.txt",
+		"/run/user/1000/gvfs/sftp:host=aerv.nl,user=ritz/home/ritz/test-users.txt",
+		"/tmp/davess.txt",
+		"/tmp/mine.txt",
+		"/tmp/daves.txt",
+		"/home/ritz/documents/admin/coaching heraanvraag 2015 H2.txt",
+		"/home/ritz/documents/admin/coaching heraanvraag 2015 A.txt",
+		"/home/ritz/.config/sublime-text-3/Packages/Diffy/Diffy.sublime-settings",
+		"/home/ritz/documents/admin/coaching heraanvraag 2015 H1.txt"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"ALT SHIFT \\",
+			"ALT SHIFT 1",
+			"",
+			"",
+			"title",
+			"width",
+			"wrap",
+			"wav.",
+			"wav",
+			"widewin",
+			"tight_layout",
+			"_fig",
+			"COLORS",
+			"white_sp",
+			"white_space",
+			"whitespace",
+			"scrolling",
+			"[2]",
+			"[1]",
+			"m",
+			"[0]",
+			"ro[0]",
+			"[1]",
+			"[2]",
+			"[0]",
+			"p",
+			"n",
+			"p",
+			"m",
+			"v",
+			"vec3",
+			"ro[2]",
+			"ro[1]",
+			"ro[0]",
+			"double DE(Vec3 ro) ",
+			"double[] ",
+			"double[]",
+			"rd",
+			"uu",
+			"u",
+			"vec3(",
+			"double[]",
+			"double",
+			"new",
+			"a",
+			"=",
+			"/=",
+			"c",
+			"b",
+			"o",
+			" o",
+			"vec3 ",
+			"0",
+			"2",
+			"1",
+			"CTRL D",
+			"CTRL",
+			"CTRL D",
+			"next",
+			"\\",
+			" ",
+			"def",
+			"tigh",
+			"mpl",
+			"pl",
+			"plot(",
+			"subplot(",
+			"subplot",
+			"gca",
+			"rc",
+			"windo",
+			"\"",
+			"dplot",
+			"    s = zf1 = sub_mean(s, N)\n",
+			"plot",
+			"tplotlib",
+			">>> ",
+			">>>",
+			"n",
+			"y",
+			"range",
+			"n+m",
+			"n",
+			"y",
+			"%20",
+			"line",
+			"break",
+			"wrap",
+			"%20",
+			"notes",
+			"or",
+			" D ]",
+			"D ]",
+			"D",
+			"or",
+			"to",
+			"prevent",
+			"to",
+			"or",
+			"tab",
+			"http://www.ritz.nd-44-zh.net/",
+			"www.ritz.nd-44-zh.net",
+			" \\t\\d[0-9. MB\\t-:]+$",
+			"charact",
+			"status"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"double DE(double x, double y, double z) ",
+			" v",
+			"Vec3 ",
+			"",
+			" ",
+			"",
+			"ritz.no.sapo.pt",
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "blobs_aa/blobs_aa.pde",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3214,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 38.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "processing.sublime-project",
+	"replace":
+	{
+		"height": 70.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"/tmp/davess.txt"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Desktop/txt/txt.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 278.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
