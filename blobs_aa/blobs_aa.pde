@@ -2,6 +2,7 @@ import java.lang.Math;  // de functies in java.lang.Math zijn een stuk sneller
                         // dan die van Processing zelf.
 import java.util.Random;
 float start_time;
+
 class Blobs {
   int N;
   Random RNG;
@@ -54,9 +55,14 @@ class Blobs {
   float dfdy(float x, float y) {
     return (f(x, y + eps) - f(x, y - eps)) / eps;
   }
+
 }
 
+
 Blobs b;
+float[][] pp;
+float[][] cc;
+float[][] oo;
 void setup() {
   // float RGB buffer (gamma correct)
   //
@@ -65,16 +71,26 @@ void setup() {
   //                      dilate colour from white pix neighbours
   // 3 for all edge+white pix: apply gamma correct blur
 
-  size(1280,720);
+  size(400,400);
   colorMode(RGB, 1.0);
   start_time = millis();
-  b = new Blobs(144);
+  b = new Blobs(32);
+  pp = new float[height+1][width+1];
+  oo = new float[height+1][width+1];
+  cc = new float[height][width];
+  for (int j = 0; j <= H; j++) {
+    for (int i = 0; i <= W; i++) {
+      oo[j][i] = b.RNG.nextFloat();
+    }
+  }
 }
 
-int white = color(1);
+float white = 254.0 / 255.0;
+float black = 1.0 / 255.0
 int black = color(0);
-float t = 5, dt = 0.015;
+float t = 5, dt = 0.035;
 int frame = 0;
+
 void draw() {
   //fill(0);
   //rect(0,0,width,height);
@@ -88,37 +104,41 @@ void draw() {
   b.setTime(t);
 
   float threshold = 5;
-  float[] up = new float[W + 1];
-  float left = 0;
-  float pmin=1E+9, pmax=-1E+9, psum=0;
-  for (int j = -1; j < H; j++) {
-    for (int i = -1; i < W; i++) {
+  for (int j = 0; j <= H; j++) {
+    for (int i = 0; i <= W; i++) {
       float x = 2 * (2.0 * i - W) / W;
-      float y = 2 * (2.0 * j - H) / W;
-      float p = b.f(x, y);
-      //pmin = Math.min(pmin, p);
-      //pmax = Math.max(pmax, p);
-      //psum += p;
-      p -= threshold;
+      float y = 2 * (2.0 * j - H) / W;      
+      float p = b.f(x, y) - threshold;
       p = 11.111 - 1.7 * (p * p) - 3.2 * p;
-      if (i >= 0 && j >= 0) {
-        float uu = up[i], vv = up[i + 1];
-        float cc;
-        cc = (Math.max(0, p) + Math.max(0, left) + Math.max(0, uu) + Math.max(0, vv)) /
-             (Math.abs(p) + Math.abs(left) + Math.abs(uu) + Math.abs(vv));
-        pixels[index] = color(cc);
-        index += 1;
-      }
-      left = up[i + 1] = p;
+      pp[j][i] = p;
     }
   }
-  updatePixels();
-  // println("min=", pmin, " max=", pmax, " avg=", psum / ((H+1)*(W+1)));
-  if (frame < 9999) {
-    saveFrame("/tmp/blobs/blobs#####.png");
-    frame++;
-    println(frame, frameCount);
-  } else {
-    exit();
+
+  for (int j = 0; j < H; j++) {
+    for (int i = 0; i < W; i++) {
+      float pa = pp[j][i];
+      float pb = pp[j][i+1];
+      float pc = pp[j+1][i];
+      float pd = pp[j+1][i+1];
+
+      float oc = cc[j][i];
+      float nc = (Math.max(0, pa) + Math.max(0, pb) + Math.max(0, pc) + Math.max(0, pd)) /
+          (Math.abs(pa) + Math.abs(pb) + Math.abs(pc) + Math.abs(pd)));
+      if (oc > black && nc <= black) {
+        oo[j][i] = b.RNG.nextFloat();
+      } else if (nc >= white) {
+        // white:
+        // blur with other white neighbours
+      } else {
+        // edge/gray:
+        // dilate from white neighbours
+      }
+      cc[j][i] = nc;
+      pixels[index] = color(nc);
+          
+      index += 1;
+    }
   }
+
+  updatePixels();
 }
