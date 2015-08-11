@@ -4,6 +4,66 @@
 		"selected_items":
 		[
 			[
+				"di",
+				"distance	(glsl-functions.md)"
+			],
+			[
+				"reloa",
+				"reloadShader"
+			],
+			[
+				"end",
+				"endDraw"
+			],
+			[
+				"b",
+				"beginDraw"
+			],
+			[
+				"Crea",
+				"createGraphics"
+			],
+			[
+				"Tile",
+				"tileSize"
+			],
+			[
+				"Co",
+				"Complex"
+			],
+			[
+				"tile",
+				"tileSize"
+			],
+			[
+				"vert",
+				"vertTexCoord"
+			],
+			[
+				"gl_",
+				"gl_FragCoord"
+			],
+			[
+				"u_",
+				"u_resolution"
+			],
+			[
+				"Z",
+				"Zmag2"
+			],
+			[
+				"z",
+				"Zmag"
+			],
+			[
+				"sum_",
+				"sum_rpos"
+			],
+			[
+				"nex",
+				"nextInt"
+			],
+			[
 				"normali",
 				"normalize"
 			],
@@ -44,25 +104,221 @@
 	"buffers":
 	[
 		{
-			"file": "blobs_aa/blobs_aa.pde",
+			"file": "wupix/wupix.pde",
 			"settings":
 			{
-				"buffer_size": 3214,
+				"buffer_size": 986,
 				"line_ending": "Unix"
 			}
 		}
 	],
-	"build_system": "",
+	"build_system": "Packages/Processing/Build Systems/Processing.sublime-build",
 	"build_system_choices":
 	[
+		[
+			[
+				[
+					"Packages/Processing/Build Systems/Processing 3.sublime-build",
+					""
+				],
+				[
+					"Packages/Processing/Build Systems/Processing 3.sublime-build",
+					"Run sketch fullscreen"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing 3.sublime-build",
+					"Build & run sketch"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing 3.sublime-build",
+					"Build & run sketch fullscreen"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing 3.sublime-build",
+					"Export sketch as a 32-bit linux application"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing 3.sublime-build",
+					"Export sketch as a 64-bit linux application"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing 3.sublime-build",
+					"Export sketch as a macosx application"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing 3.sublime-build",
+					"Export sketch as a 32-bit windows application"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing 3.sublime-build",
+					"Export sketch as a 64-bit windows application"
+				]
+			],
+			[
+				"Packages/Processing/Build Systems/Processing 3.sublime-build",
+				"Build & run sketch"
+			]
+		],
+		[
+			[
+				[
+					"Packages/Processing/Build Systems/Processing.sublime-build",
+					""
+				],
+				[
+					"Packages/Processing/Build Systems/Processing.sublime-build",
+					"Re-run sketch"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing.sublime-build",
+					"Run sketch (Processing 3 only)"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing.sublime-build",
+					"Run sketch fullscreen"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing.sublime-build",
+					"Export sketch as application"
+				]
+			],
+			[
+				"Packages/Processing/Build Systems/Processing.sublime-build",
+				"Re-run sketch"
+			]
+		],
+		[
+			[
+				[
+					"Packages/Processing/Processing.sublime-build",
+					""
+				],
+				[
+					"Packages/Processing/Processing.sublime-build",
+					"Run sketch fullscreen"
+				],
+				[
+					"Packages/Processing/Processing.sublime-build",
+					"Export sketch as a 32-bit linux application"
+				],
+				[
+					"Packages/Processing/Processing.sublime-build",
+					"Export sketch as a 64-bit linux application"
+				],
+				[
+					"Packages/Processing/Processing.sublime-build",
+					"Export sketch as a macosx application"
+				],
+				[
+					"Packages/Processing/Processing.sublime-build",
+					"Export sketch as a 32-bit windows application"
+				],
+				[
+					"Packages/Processing/Processing.sublime-build",
+					"Export sketch as a 64-bit windows application"
+				]
+			],
+			[
+				"Packages/Processing/Processing.sublime-build",
+				""
+			]
+		]
 	],
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 201.0,
-		"last_filter": "markdo",
+		"height": 33.0,
+		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"side",
+				"View: Toggle Side Bar"
+			],
+			[
+				"markdown",
+				"Set Syntax: Markdown"
+			],
+			[
+				"wrap",
+				"Word Wrap: Toggle"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"packa",
+				"Package Control: List Packages"
+			],
+			[
+				"REPL py",
+				"SublimeREPL: Python - IPython"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"process",
+				"Set Syntax: Processing"
+			],
+			[
+				"brows",
+				"File: Open In Browser - Testing Server"
+			],
+			[
+				"glsl",
+				"Open fragment shader with GLSLViewer"
+			],
+			[
+				"hide",
+				"Sublime Text API Helper: sublime.Window.*"
+			],
+			[
+				"brow",
+				"File: Open In Browser - Testing Server"
+			],
+			[
+				"diff",
+				"FileDiffs: Menu"
+			],
+			[
+				"gl",
+				"Open fragment shader with GLSLViewer"
+			],
+			[
+				"",
+				"Convert Case: Lower Case"
+			],
+			[
+				"gls",
+				"Open fragment shader with GLSLViewer"
+			],
+			[
+				"templ",
+				"Create a new fragment shader template for GLSLViewer"
+			],
+			[
+				"package",
+				"Preferences: Browse Packages"
+			],
+			[
+				"create",
+				"Create a new fragment shader template for GLSLViewer"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
 			[
 				"markdo",
 				"Markdown Preview: Preview in Browser"
@@ -72,20 +328,8 @@
 				"Package Control: Disable Package"
 			],
 			[
-				"packa",
-				"Package Control: Remove Package"
-			],
-			[
-				"install",
-				"Package Control: Install Package"
-			],
-			[
 				"disab",
 				"Package Control: Disable Package"
-			],
-			[
-				"inst",
-				"Package Control: Install Package"
 			],
 			[
 				"repl py",
@@ -118,10 +362,6 @@
 			[
 				"wra",
 				"Word Wrap: Toggle"
-			],
-			[
-				"side",
-				"View: Toggle Side Bar"
 			],
 			[
 				"spaces",
@@ -160,33 +400,86 @@
 				"Set Syntax: MultiMarkdown"
 			],
 			[
-				"Package Control: ",
-				"Package Control: Discover Packages"
-			],
-			[
-				"diff",
-				"FileDiffs: Menu"
-			],
-			[
 				"Package Controlin",
 				"Package Control: Install Package"
-			],
-			[
-				"",
-				"FileDiffs: Menu"
 			],
 			[
 				"Package Control: In",
 				"Package Control: Install Package"
 			]
 		],
-		"width": 593.0
+		"width": 548.0
 	},
 	"console":
 	{
 		"height": 341.0,
 		"history":
 		[
+			".5/768",
+			"1./768",
+			"1/2.2",
+			"1/.92",
+			"qq",
+			"(R-w+N-1) / (N - 1.)",
+			"(R-w) / (N - 1.)",
+			"(R-w) // (N - 1.)",
+			"(R-w+N-1.) // (N - 1.)",
+			"(R-w+N-1) // (N - 1.)",
+			"(R-w+N-1) // (N - 1)",
+			"(R-w+N) // (N - 1)",
+			"(R-w) // (N - 1)",
+			"R,w,N",
+			"(R-w) / (N - 1)",
+			"(R-w) / (N - 1.0)",
+			"w",
+			"R,N,w = 31524,65,643",
+			"2700 / 4.",
+			"2**3.6",
+			"2**3.5",
+			"768*2",
+			"print(aap.__dict__)",
+			"aap.__dict__",
+			"aap(4,5)",
+			"aap",
+			"aap = lambda x,y: x*y",
+			"def aap(x,y):",
+			"def aap(x,y): return x*y",
+			"def aap(x,y):; return x*y;",
+			"def aap(x,y): return x*y;",
+			"def aap(x,y): return x*y",
+			"def aap(x,y): print(x,y)",
+			"def aap(x,y): print x,y",
+			"def aap(x,y):",
+			"os.path.join",
+			"os.path.join.__dict__",
+			"print(os.path.join.__doc__)",
+			"print os.path.join.__doc__",
+			"os.path.join.__doc__",
+			"os.path.join",
+			"help(os.path.join)",
+			"os.path.join?",
+			"os.path",
+			"import os",
+			"os",
+			"url",
+			"url='http://i.imgur.com/asdfuiqw.jpg'",
+			"65536 * 32 * 8",
+			"1 << 24",
+			"1 << 16",
+			"2 << 16",
+			"2 << 24",
+			"32 * 65536",
+			"16-21",
+			"24-3",
+			"1.25*.005",
+			"60.0/140/3",
+			"60.0/140/2",
+			"60.0/140",
+			"_/2",
+			"60.0/140",
+			"_/2",
+			"_/4",
+			"60.0/140",
 			"1/_",
 			"4/1000.",
 			"70*1.414",
@@ -231,10 +524,114 @@
 	"expanded_folders":
 	[
 		"/home/ritz/git/tripzilch/processing",
-		"/home/ritz/git/tripzilch/processing/blobs_aa"
+		"/home/ritz/git/tripzilch/processing/wupix",
+		"/home/ritz/ownCloud/processing"
 	],
 	"file_history":
 	[
+		"/tmp/chill LQ.txt",
+		"/tmp/chill HQ.txt",
+		"/tmp/music.txt",
+		"/home/ritz/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/ritz/git/tripzilch/processing/wupix/wupix.pde",
+		"/home/ritz/ownCloud/gl-shaders/utils.glsl",
+		"/home/ritz/ownCloud/gl-shaders/glsl-functions.md",
+		"/home/ritz/ownCloud/gl-shaders/GLSL-types.md",
+		"/home/ritz/ownCloud/gl-shaders/glsl-utils.glsl",
+		"/home/ritz/ownCloud/im.txt",
+		"/home/ritz/ownCloud/gl-shaders/liveproc/liveproc.pde",
+		"/home/ritz/ownCloud/gl-shaders/liveproc/data/jtrap.frag",
+		"/home/ritz/ownCloud/gl-shaders/liveproc/data/test.frag",
+		"/home/ritz/ownCloud/gl-shaders/test.frag",
+		"/home/ritz/.cache/.fr-RYABaf/GLSL-demo/flownoise2.frag",
+		"/home/ritz/.cache/.fr-sTAhM5/GLSL-demo/fbmnoise.frag",
+		"/home/ritz/.cache/.fr-a9FK6U/ChangeLog",
+		"/home/ritz/.cache/.fr-N8LP8r/README.md",
+		"/home/ritz/apps/tinfoleak-1.5/ReportTemplate/Stonehead.html",
+		"/home/ritz/documents/pgb+uwv/ordevos/pgb-Q1-budget.md",
+		"/home/ritz/ownCloud/gl-shaders/liveproc/build-tmp/source/liveproc.java",
+		"/home/ritz/ownCloud/gl-shaders/liveproc/data/jtrip-2.frag",
+		"/home/ritz/ownCloud/gl-shaders/combine/combine.pde",
+		"/home/ritz/ownCloud/gl-shaders/glrender/glrender.pde",
+		"/home/ritz/ownCloud/gl-shaders/test2.frag",
+		"/tmp/script.js",
+		"/home/ritz/ownCloud/gl-shaders/liveproc/data/jtrip-3.frag",
+		"/run/user/1000/gvfs/sftp:host=aerv.nl,user=ritz/home/ritz/public_html/ok/index.php",
+		"/tmp/uitrust.txt",
+		"/tmp/system.log",
+		"/home/ritz/ownCloud/gl-shaders/liveproc/data/jtrip.frag",
+		"/home/ritz/code/2014/sound/mda-vst/mda-vst.linux/readme.txt",
+		"/home/ritz/video/series/Orphan.Black.S03E09.HDTV.x264-KILLERS[ettv]/Orphan Black - 03x09 - Insolvent Phantom of Tomorrow.KILLERS.English.C.updated.Addic7ed.com.srt",
+		"/home/ritz/video/series/Orphan.Black.S03E07.HDTV.x264-KILLERS[ettv]/Orphan Black - 03x07 - Community of Dreadful Fear and Hate.KILLERS.English.C.updated.Addic7ed.com.srt",
+		"/home/ritz/video/series/Orphan.Black.S03E06.HDTV.x264-KILLERS[ettv]/Orphan Black - 03x06 - Certain Agony of the Battlefield.KILLERS.English.C.updated.Addic7ed.com.srt",
+		"/home/ritz/video/series/Orphan.Black.S03E08.HDTV.x264-KILLERS[ettv]/Orphan Black - 03x08 - Ruthless in Purpose, and Insidious in Method.KILLERS.English.C.updated.Addic7ed.com.srt",
+		"/home/ritz/ownCloud/gl-shaders/glrender/data/julia-DE-render.frag",
+		"/home/ritz/ownCloud/gl-shaders/julia-DE-new.frag",
+		"/home/ritz/ownCloud/gl-shaders/glrender/resize.sh",
+		"/home/ritz/Desktop/txt/addic7ed-shows-2015-05-15.md",
+		"/home/ritz/.cache/.fr-vLCttM/glslViewer.sublime-settings",
+		"/home/ritz/.cache/.fr-MxhEKj/glslComments.tmPreferences",
+		"/tmp/bot.py",
+		"/run/user/1000/gvfs/mtp:host=%5Busb%3A001%2C012%5D/Internal storage/Sketchbook/liveproc/data/juliaDE2.frag",
+		"/tmp/juliaDE2.frag",
+		"/run/user/1000/gvfs/mtp:host=%5Busb%3A001%2C011%5D/Internal storage/Sketchbook/liveproc/data/juliaDE2.frag",
+		"/run/user/1000/gvfs/mtp:host=%5Busb%3A001%2C009%5D/Internal storage/Sketchbook/liveproc/data/juliaDE2.frag",
+		"/home/ritz/ownCloud/processing/pathtracer/try_out/vec3.pde",
+		"/home/ritz/ownCloud/processing/MC-miim-julia.pde",
+		"/home/ritz/ownCloud/gl-shaders/julia-trippy.frag",
+		"/home/ritz/ownCloud/gl-shaders/julia-DE.frag",
+		"/home/ritz/video/series/Game.of.Thrones.S05E08.HDTV.x264-KILLERS[ettv]/Game.of.Thrones.S05E08.HDTV.x264-KILLERS.srt",
+		"/home/ritz/video/series/Person of Interest - 04x13 - M.I.A..DIMENSION.English.C.updated.Addic7ed.com.srt",
+		"/home/ritz/ownCloud/processing/pathtracer/vec3.pde",
+		"/home/ritz/.config/sublime-text-3/Packages/User/Base File.sublime-settings",
+		"/home/ritz/.config/sublime-text-3/Packages/Alignment/Base File.sublime-settings",
+		"/home/ritz/ownCloud/gl-shaders/glrender/data/julia-DE.frag",
+		"/home/ritz/ownCloud/mc-miim-j.html",
+		"/home/ritz/ownCloud/gl-shaders/liveproc/data/julia-DE.frag",
+		"/home/ritz/apps/processing-2.2.1/modes/java/examples/Demos/Graphics/LowLevelGL/data/vert.glsl",
+		"/home/ritz/Dropbox/Edzo-het gaat lekker met je PCW hoek..txt",
+		"/home/ritz/ownCloud/gl-shaders/liveproc/data/julia-trippy.frag",
+		"/home/ritz/apps/processing-2.2.1/modes/java/examples/Topics/Shaders/Deform/data/deform.glsl",
+		"/home/ritz/ownCloud/gl-shaders/webgl.html",
+		"/usr/local/lib/python3.4/dist-packages/mps_youtube/main.py",
+		"/home/ritz/bin/extract-audio",
+		"/home/ritz/ownCloud/gl-shaders/webgl-t.js",
+		"/tmp/kees.py",
+		"/run/user/1000/gvfs/sftp:host=new.aerv.nl,user=ritz/home/ritz/public_html/python/irc-parsing.py.txt",
+		"/home/ritz/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/ritz/.config/sublime-text-3/Packages/FileDiffs/FileDiffs.sublime-settings",
+		"/home/ritz/.config/sublime-text-3/Packages/User/Diffy.sublime-settings",
+		"/home/ritz/.config/sublime-text-3/Packages/Diffy/Diffy.sublime-settings",
+		"/home/ritz/ownCloud/gl-shaders/julia.frag",
+		"/home/ritz/ownCloud/gl-shaders/julia-radial1.frag",
+		"/home/ritz/ownCloud/gl-shaders/julia-trippy-shadertoy.frag",
+		"/home/ritz/ownCloud/gl-shaders/blabs.frag",
+		"/home/ritz/git/tripzilch/processing/blobs_aa/blobs_aa.pde",
+		"/home/ritz/git/tripzilch/processing/blobs_aa/vec3.pde",
+		"/home/ritz/ownCloud/gl-shaders/julia-DE-external.frag",
+		"/home/ritz/ownCloud/gl-shaders/julia-DE-1.frag",
+		"/home/ritz/Dropbox/pdf/bugreport-2015-05-07-19-30-43.txt",
+		"/home/ritz/.cache/.fr-X9r88m/glslViewer.py",
+		"/home/ritz/.cache/.fr-zPgc9R/glslViewer.py",
+		"/home/ritz/.cache/.fr-EvVJOR/LICENSE",
+		"/home/ritz/.cache/.fr-60LM6P/messages/install.txt",
+		"/home/ritz/.cache/.fr-yRii0o/Default.sublime-commands",
+		"/home/ritz/.cache/.fr-yRii0o/dependencies.json",
+		"/home/ritz/.cache/.fr-yRii0o/GLSL.sublime-build",
+		"/home/ritz/.cache/.fr-yRii0o/glslViewer.py",
+		"/home/ritz/.cache/.fr-yRii0o/glslViewer.sublime-settings",
+		"/home/ritz/.cache/.fr-yRii0o/LICENSE",
+		"/home/ritz/.cache/.fr-yRii0o/messages.json",
+		"/home/ritz/.cache/.fr-yRii0o/package-metadata.json",
+		"/home/ritz/.cache/.fr-yRii0o/README.md",
+		"/home/ritz/.cache/.fr-j2Jxqt/glslViewer.sublime-settings",
+		"/home/ritz/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/ritz/.config/sublime-text-3/Installed Packages/glslViewer.sublime-package",
+		"/home/ritz/.config/sublime-text-3/Packages/OpenGL Shading Language (GLSL)/README.md",
+		"/home/ritz/ownCloud/processing/pathtracer/paftyrees.txt",
+		"/home/ritz/ownCloud/gl-shaders/blabs.glsl",
+		"/home/ritz/git/tripzilch/processing/thing_grid_1/sketch.properties",
+		"/home/ritz/git/tripzilch/processing/blobs_aa/colormix.pde",
 		"/home/ritz/Desktop/txt/thing.txt",
 		"/home/ritz/Desktop/txt/movies.md",
 		"/home/ritz/Desktop/txt/books.md",
@@ -242,7 +639,6 @@
 		"/home/ritz/Desktop/txt/music.txt",
 		"/home/ritz/Desktop/txt/cartoon-ideas.txt.md",
 		"/home/ritz/Desktop/txt/wk17.txt",
-		"/home/ritz/git/tripzilch/processing/blobs_aa/blobs_aa.pde",
 		"/home/ritz/Desktop/txt/gezeik.txt",
 		"/home/ritz/.config/sublime-text-3/Packages/User/ShellCommand.sublime-keymap",
 		"/home/ritz/.config/sublime-text-3/Packages/ShellCommand/Default.sublime-keymap",
@@ -259,64 +655,12 @@
 		"/home/ritz/git/tripzilch/dsp/__init__.py",
 		"/home/ritz/.config/sublime-text-3/Packages/SublimePythonIDE/SublimePython.sublime-settings",
 		"/home/ritz/mix/audio samples instruments/perc-kits/Smackos DR660 Drumsamples/DR660SAMPLEZ.txt",
-		"/home/ritz/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/ritz/documents/pgb/coaching heraanvraag 2015.txt",
-		"/home/ritz/documents/pgb/Persoonlijk plan PGB.txt.md",
-		"/home/ritz/documents/pgb/coaching heraanvraag 2015 H2.txt",
-		"/home/ritz/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
-		"/opt/sublime_text/sublime.py",
-		"/home/ritz/git/tripzilch/dsp/README.md",
-		"/home/ritz/music/De Huilende Rappers - Verkleed als Sukkel (RVP)/Lyrics.txt",
-		"/home/ritz/.cache/.fr-ICgjGi/tinfoleak-1.5/README.txt",
-		"/home/ritz/ownCloud/pathtracer/vec3.pde",
-		"/home/ritz/ownCloud/pathtracer/pathtracer.pde",
-		"/home/ritz/ownCloud/pathtracer/SceneObject.pde",
-		"/home/ritz/ownCloud/pathtracer/pathtracer (copy).pde",
-		"/home/ritz/Desktop/txt/wk13.txt",
-		"/home/ritz/git/tripzilch/dsp/wanalyze.py",
-		"/home/ritz/code/game.py",
-		"/home/ritz/gfx/pre feb 09/strips/index.html",
-		"/home/ritz/Desktop/txt/xorg performance notes.txt",
-		"/run/user/1000/gvfs/sftp:host=aerv.nl,user=ritz/home/ritz/public_html/strips/index.html",
-		"/home/ritz/Dropbox/do.txt",
-		"/home/ritz/git/tripzilch/dsp/compress-flatten.py",
-		"/home/ritz/git/tripzilch/dsp/espeak-analyze.py",
-		"/home/ritz/.config/sublime-text-3/Packages/Emmet/Emmet.sublime-settings",
-		"/home/ritz/git/tripzilch/javascript/HN-DOM.js",
-		"/home/ritz/git/tripzilch/javascript/bookmarklet-checkHN.js",
-		"/home/ritz/git/tripzilch/javascript/bookmarklet-FIXEDFIXER.js",
-		"/home/ritz/git/tripzilch/javascript/bookmarklet-next.js",
-		"/home/ritz/.config/sublime-text-3/Packages/User/Fetch.sublime-settings",
-		"/home/ritz/video/series/Arrow.S03E17.HDTV.x264-LOL[ettv]/arrow.317.hdtv-lol.srt",
-		"/home/ritz/video/series/Arrow - 03x17 - Suicidal Tendencies.LOL.English.C.updated.Addic7ed.com.srt",
-		"/home/ritz/video/series/Arrow - 03x17 - Suicidal Tendencies.LOL.English.C.updated.Addic7ed",
-		"/home/ritz/documents/admin/coaching heraanvraag 2015.txt",
-		"/home/ritz/documents/ordevos/verhaal1024.txt",
-		"/home/ritz/mix/drum eq.txt",
-		"/home/ritz/Desktop/txt/wk9.txt",
-		"/home/ritz/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
-		"/home/ritz/Desktop/txt/wk8.txt",
-		"/home/ritz/code/2014/oud/ritz.no.sapo.pt/mind.html",
-		"/home/ritz/code/2014/oud/ritz.no.sapo.pt/titelvoormijzelf.html",
-		"/home/ritz/code/2014/oud/ritz.no.sapo.pt/linked.html",
-		"/home/ritz/code/2014/oud/ritz.no.sapo.pt/noise.html",
-		"/home/ritz/code/2014/oud/ritz.no.sapo.pt/strips.html",
-		"/home/ritz/code/2014/oud/ritz.no.sapo.pt/demoscene.html",
-		"/home/ritz/code/2014/oud/ritz.no.sapo.pt/index.html",
-		"/home/ritz/mix/303 notes",
-		"/home/ritz/ownCloud/pathtracer/old scenes.java.txt",
-		"/run/user/1000/gvfs/sftp:host=aerv.nl,user=ritz/home/ritz/test-users.txt",
-		"/tmp/davess.txt",
-		"/tmp/mine.txt",
-		"/tmp/daves.txt",
-		"/home/ritz/documents/admin/coaching heraanvraag 2015 H2.txt",
-		"/home/ritz/documents/admin/coaching heraanvraag 2015 A.txt",
-		"/home/ritz/.config/sublime-text-3/Packages/Diffy/Diffy.sublime-settings",
-		"/home/ritz/documents/admin/coaching heraanvraag 2015 H1.txt"
+		"/home/ritz/documents/pgb/Persoonlijk plan PGB.txt.md"
 	],
 	"find":
 	{
-		"height": 38.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -330,6 +674,123 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"^ ?[0-9]* ?",
+			"[^a-z0-9\\n]+",
+			"^ ?[0-9]* ?",
+			"^ ?[0-9]+ ?",
+			"[^a-z0-9\\n]+",
+			"\\.(mp3|ogg)$",
+			".*/([^/]+$)",
+			"/home/ritz/music/",
+			"delete",
+			"\\.(mp3|ogg).*$",
+			"\\.mp3.*$",
+			".mp3     5.2 MB  2-2-2004    0",
+			"\\.mp3.*$",
+			"tex",
+			"gamma",
+			"T",
+			"\\n\\n",
+			"    ",
+			"              ",
+			"             ",
+			"            ",
+			"           ",
+			"          ",
+			"         ",
+			"        ",
+			"       ",
+			"      ",
+			"     ",
+			"    ",
+			"idPeriode",
+			"/secure/",
+			"                                                                                ",
+			"res",
+			"buf",
+			"pix_",
+			"scale",
+			"sqr",
+			"P",
+			"Px",
+			"wheel",
+			"v",
+			"freeze",
+			"lZ",
+			"a.z",
+			"b.z",
+			"0",
+			"();\n",
+			"pixsi",
+			"u_pix_size",
+			"bufq",
+			"bigq",
+			"Any",
+			"any",
+			"boss",
+			"### ",
+			"![TV](Browse%20by%20shows_files/television.png) ",
+			"\\n\\n+### ",
+			"\\n\\n",
+			"^(?!###).*$",
+			"urls[i]",
+			"\"",
+			" - ",
+			"</i>",
+			"<i>",
+			"-->",
+			"Jor",
+			"float",
+			"vertTexCoord",
+			"pix_size",
+			"u_pix_size",
+			"pix_size",
+			">, ",
+			"Piter",
+			"Edzo/M",
+			"Zst",
+			"Z",
+			"all(lessThan(Zmag2, BAILOUT2))",
+			"Zst",
+			"Z.",
+			".",
+			"x",
+			"*",
+			".",
+			"Z",
+			"a",
+			"DE",
+			"pow",
+			"u_mouse",
+			"u_time",
+			"ox",
+			"px",
+			"u_noise",
+			"data",
+			"par",
+			"Spar",
+			"gl_FragCoord",
+			"u_radial",
+			"u_resolution",
+			"u_mouse",
+			"u_time",
+			"Zmag",
+			"u_tex0",
+			"u_resolution.y",
+			"Zmag",
+			"BAILOUT",
+			"Zmag",
+			"dZmag",
+			"vec2(",
+			"vec2",
+			"vec2(",
+			"vec2",
+			"b",
+			"a",
+			"pc",
+			"'",
+			"sin",
+			"float",
 			"ALT SHIFT \\",
 			"ALT SHIFT 1",
 			"",
@@ -340,108 +801,37 @@
 			"wav.",
 			"wav",
 			"widewin",
-			"tight_layout",
-			"_fig",
-			"COLORS",
-			"white_sp",
-			"white_space",
-			"whitespace",
-			"scrolling",
-			"[2]",
-			"[1]",
-			"m",
-			"[0]",
-			"ro[0]",
-			"[1]",
-			"[2]",
-			"[0]",
-			"p",
-			"n",
-			"p",
-			"m",
-			"v",
-			"vec3",
-			"ro[2]",
-			"ro[1]",
-			"ro[0]",
-			"double DE(Vec3 ro) ",
-			"double[] ",
-			"double[]",
-			"rd",
-			"uu",
-			"u",
-			"vec3(",
-			"double[]",
-			"double",
-			"new",
-			"a",
-			"=",
-			"/=",
-			"c",
-			"b",
-			"o",
-			" o",
-			"vec3 ",
-			"0",
-			"2",
-			"1",
-			"CTRL D",
-			"CTRL",
-			"CTRL D",
-			"next",
-			"\\",
-			" ",
-			"def",
-			"tigh",
-			"mpl",
-			"pl",
-			"plot(",
-			"subplot(",
-			"subplot",
-			"gca",
-			"rc",
-			"windo",
-			"\"",
-			"dplot",
-			"    s = zf1 = sub_mean(s, N)\n",
-			"plot",
-			"tplotlib",
-			">>> ",
-			">>>",
-			"n",
-			"y",
-			"range",
-			"n+m",
-			"n",
-			"y",
-			"%20",
-			"line",
-			"break",
-			"wrap",
-			"%20",
-			"notes",
-			"or",
-			" D ]",
-			"D ]",
-			"D",
-			"or",
-			"to",
-			"prevent",
-			"to",
-			"or",
-			"tab",
-			"http://www.ritz.nd-44-zh.net/",
-			"www.ritz.nd-44-zh.net",
-			" \\t\\d[0-9. MB\\t-:]+$",
-			"charact",
-			"status"
+			"tight_layout"
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": false,
+		"regex": true,
 		"replace_history":
 		[
+			"",
+			" ",
+			"",
+			" ",
+			"",
+			"\\1",
+			"",
+			".\\1",
+			"\\1",
+			".mp3",
+			"\\n",
+			"  ",
+			"bufq",
+			"quad",
+			"* ",
+			"",
+			"\\n### ",
+			"",
+			"'",
+			"",
+			"<Piter>",
+			"<Edzo>",
+			"double",
 			"double DE(double x, double y, double z) ",
 			" v",
 			"Vec3 ",
@@ -465,24 +855,24 @@
 			[
 				{
 					"buffer": 0,
-					"file": "blobs_aa/blobs_aa.pde",
+					"file": "wupix/wupix.pde",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3214,
+						"buffer_size": 986,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								986,
+								986
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Java/Java.tmLanguage",
+							"syntax": "Packages/Processing/Syntaxes/Processing.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
@@ -498,7 +888,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 38.0
+		"height": 23.0
 	},
 	"input":
 	{
@@ -527,15 +917,19 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 300.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0
 	},
-	"pinned_build_system": "",
+	"pinned_build_system": "Packages/Processing/Build Systems/Processing.sublime-build",
 	"project": "processing.sublime-project",
 	"replace":
 	{
-		"height": 70.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -559,7 +953,7 @@
 		[
 			[
 				"",
-				"~/Desktop/txt/txt.sublime-project"
+				"~/code/sublime-projects/glsl-shaders.sublime-project"
 			]
 		],
 		"width": 380.0

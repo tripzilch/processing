@@ -11,7 +11,7 @@ void setup() {
 }
 
 void wupix(float x, float y) {
-  x = (x + 1.0) * width / 2; 
+  x = (x + 1.0) * width / 2;
   y = (y + 1.0) * width / 2;
   int xi = (int) x, yi = (int) y;
   if (xi >= 0 && xi < width && yi >= 0 && yi < height) {
@@ -33,7 +33,7 @@ void draw() {
   loadPixels();
   for (int i = 0; i < 100; i++) {
     float x = 2 * noise(i * 3.8 - now * .035, 1 + now * .029, now * .033) - 1;
-    float y = 2 * noise(i * 7.2 + now * .028, 2 - now * .034, now * .030) - 1;    
+    float y = 2 * noise(i * 7.2 + now * .028, 2 - now * .034, now * .030) - 1;
     wupix(x, y);
   }
   updatePixels();
