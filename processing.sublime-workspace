@@ -104,10 +104,21 @@
 	"buffers":
 	[
 		{
+			"contents": "import java.lang.Math;\n\nfloat half_width;\nvoid setup() {\n  size(500,500,P2D);\n  smooth(4);\n\n  colorMode(RGB, 1.0);\n  noStroke();\n\n  noiseSeed(23);\n\n  half_width = width / 2.0;\n}\n\nvoid wupix(double x, double y) {\n  float xx = (float) (x + 1.0) * half_width;\n  float yy = (float) (y + 1.0) * half_width;\n  float d = 0.5;\n  quad(xx - d, yy - d,\n       xx - d, yy + d,\n       xx + d, yy + d,\n       xx + d, yy - d);\n  /*int xi = (int) x, yi = (int) y;\n  if (xi >= 0 && xi < width - 1 && yi >= 0 && yi < height - 1) {\n    int ii = yi * width + xi;\n    double xf = (x - xi), yf = (y - yi);\n    double xy = xf * yf;\n    pixels[ii] = grey(1.0 - yf - xf + xy);\n    pixels[ii+1] = grey(xf - xy);\n    pixels[ii+width] = grey(yf - xy);\n    pixels[ii+width+1] = grey(xy);\n  }*/\n}\n\ndouble start_time = millis();\nvoid draw() {\n  double now = (millis() - start_time) / 1000.0;\n  float fnow = (float) now;\n  fill(0, 0, 0.0, 1.0); //min(1.0, 1.0 + cos(fnow)));\n  rect(0, 0, width, height);\n\n  fill(1.0, 1.0, 1.0, 1.0);\n  for (int i = 0; i < 100; i++) {\n    float t = fnow * (i * 0.01 + .1);\n    double x = 2.0 * noise(i * 3.8 - t * .035, 1 + t * .029, t * .033) - 1.0;\n    double y = 2.0 * noise(i * 7.2 + t * .028, 2 - t * .034, t * .030) - 1.0;\n    wupix(x, y);\n  }\n}\n",
 			"file": "wupix/wupix.pde",
+			"file_size": 1271,
+			"file_write_time": 130850565129247069,
 			"settings":
 			{
-				"buffer_size": 986,
+				"buffer_size": 1252,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/ritz/ownCloud/processing/pathtracer/vec3.pde",
+			"settings":
+			{
+				"buffer_size": 1970,
 				"line_ending": "Unix"
 			}
 		}
@@ -184,7 +195,7 @@
 			],
 			[
 				"Packages/Processing/Build Systems/Processing.sublime-build",
-				"Re-run sketch"
+				""
 			]
 		],
 		[
@@ -415,6 +426,18 @@
 		"height": 341.0,
 		"history":
 		[
+			"hex(c1 * 258)",
+			"hex(c1 * 255)",
+			"hex(c1 * 192)",
+			"hex(c1)",
+			"c1",
+			"hex(aff + c1 * 7)",
+			".99609375 * 256",
+			"hex(aff + c1 * 7)",
+			"hex(aff + c1)",
+			"hex(aff)",
+			"c1 = 0x00010101",
+			"aff = 0xff000000",
 			".5/768",
 			"1./768",
 			"1/2.2",
@@ -524,8 +547,8 @@
 	"expanded_folders":
 	[
 		"/home/ritz/git/tripzilch/processing",
-		"/home/ritz/git/tripzilch/processing/wupix",
-		"/home/ritz/ownCloud/processing"
+		"/home/ritz/ownCloud/processing",
+		"/home/ritz/ownCloud/processing/pathtracer"
 	],
 	"file_history":
 	[
@@ -674,6 +697,12 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"2.5",
+			"half_width",
+			"rgb",
+			"color",
+			"float",
+			"now",
 			"^ ?[0-9]* ?",
 			"[^a-z0-9\\n]+",
 			"^ ?[0-9]* ?",
@@ -795,13 +824,7 @@
 			"ALT SHIFT 1",
 			"",
 			"",
-			"title",
-			"width",
-			"wrap",
-			"wav.",
-			"wav",
-			"widewin",
-			"tight_layout"
+			"title"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -859,15 +882,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 986,
+						"buffer_size": 1252,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								986,
-								986
+								318,
+								318
 							]
 						],
 						"settings":
@@ -881,6 +904,36 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/ritz/ownCloud/processing/pathtracer/vec3.pde",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1970,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1580,
+								1580
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Processing/Syntaxes/Processing.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 666.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
