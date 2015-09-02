@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"sq",
+				"sqMag	(vec2.pde)"
+			],
+			[
+				"acce",
+				"accepts"
+			],
+			[
+				"mag",
+				"mag_target"
+			],
+			[
+				"scal",
+				"scale_max"
+			],
+			[
+				"sca",
+				"scale_max"
+			],
+			[
+				"ran",
+				"random	(pathtracer.pde)"
+			],
+			[
+				"0x",
+				"0x00FFFF00"
+			],
+			[
+				"dot",
+				"dot_size"
+			],
+			[
 				"di",
 				"distance	(glsl-functions.md)"
 			],
@@ -104,21 +136,29 @@
 	"buffers":
 	[
 		{
-			"contents": "import java.lang.Math;\n\nfloat half_width;\nvoid setup() {\n  size(500,500,P2D);\n  smooth(4);\n\n  colorMode(RGB, 1.0);\n  noStroke();\n\n  noiseSeed(23);\n\n  half_width = width / 2.0;\n}\n\nvoid wupix(double x, double y) {\n  float xx = (float) (x + 1.0) * half_width;\n  float yy = (float) (y + 1.0) * half_width;\n  float d = 0.5;\n  quad(xx - d, yy - d,\n       xx - d, yy + d,\n       xx + d, yy + d,\n       xx + d, yy - d);\n  /*int xi = (int) x, yi = (int) y;\n  if (xi >= 0 && xi < width - 1 && yi >= 0 && yi < height - 1) {\n    int ii = yi * width + xi;\n    double xf = (x - xi), yf = (y - yi);\n    double xy = xf * yf;\n    pixels[ii] = grey(1.0 - yf - xf + xy);\n    pixels[ii+1] = grey(xf - xy);\n    pixels[ii+width] = grey(yf - xy);\n    pixels[ii+width+1] = grey(xy);\n  }*/\n}\n\ndouble start_time = millis();\nvoid draw() {\n  double now = (millis() - start_time) / 1000.0;\n  float fnow = (float) now;\n  fill(0, 0, 0.0, 1.0); //min(1.0, 1.0 + cos(fnow)));\n  rect(0, 0, width, height);\n\n  fill(1.0, 1.0, 1.0, 1.0);\n  for (int i = 0; i < 100; i++) {\n    float t = fnow * (i * 0.01 + .1);\n    double x = 2.0 * noise(i * 3.8 - t * .035, 1 + t * .029, t * .033) - 1.0;\n    double y = 2.0 * noise(i * 7.2 + t * .028, 2 - t * .034, t * .030) - 1.0;\n    wupix(x, y);\n  }\n}\n",
-			"file": "wupix/wupix.pde",
-			"file_size": 1271,
-			"file_write_time": 130850565129247069,
+			"file": "gkale/gkale.pde",
 			"settings":
 			{
-				"buffer_size": 1252,
+				"buffer_size": 4793,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/ritz/ownCloud/processing/pathtracer/vec3.pde",
+			"contents": "import java.lang.Math;\n\n//double phi = Math.sqrt(5.0) * 0.5 + 0.5\nfloat pscale, dot_size;\nPShape dod;\nvoid setup() {\n  size(1080,1080, P2D);\n  dot_size = 1.0;\n  colorMode(RGB, 1.0);\n  noStroke();\n  dod = regularPolygon(12);\n}\n\nPShape regularPolygon(int N) {\n  PShape p = createShape();\n  p.beginShape(TRIANGLE_STRIP);\n  p.noStroke();\n  p.fill(#000000);\n  for (int i = 0; i < N; i++) {\n    int k = (i / 2) + (i % 2) * (N - i);\n    p.vertex(cos(k * TAU / N), sin(k * TAU / N));\n  }\n  p.endShape(CLOSE);\n  p.disableStyle();\n  return p;\n}\n\nvoid dot(double x, double y, double s) {\n  float ps = dot_size * (float) s;\n  shape(dod, (float) x, (float) y, ps, ps);\n}\n\nint cAlpha(int c, double a) { return ((int) Math.min(255.0, 255.0 * a)) * 0x01000000 | (c & 0x00FFFFFF); }\nint c0 = 0xFF000000;\nint c1 = 0xFF773300;\nint c2 = 0xFF330077;\n\ndouble start_time = millis();\ndouble prev_now = 0.0;\nint step = 0;\nfloat pmx=0, pmy=0;\nvoid draw() {\n  step = (step + 1) % min(width, height);\n\n  fill(0,0,0,.5);\n  rect(step, 0, 1, height);\n  rect(0, step, width, 1);\n\n  fill(.9,.3,.3,.75) ;\n  int S = mousePressed ? 12 : 4;\n  int R = S / 2;\n  rect(step, min(pmouseY, mouseY)-R, 1, S + abs(pmouseY - mouseY));\n  rect(min(pmouseY, mouseY), step, 1 + abs(pmouseY - mouseY), 1);\n  fill(.2,.4,.9,.75);\n  rect(min(pmouseX, mouseX)-R, step, S + abs(pmouseX - mouseX), 1);\n  rect(step, min(pmouseX, mouseX), 1, 1 + abs(pmouseX - mouseX));\n\n  pmx=mouseX; pmy=mouseY;\n}\n\n\n\nvoid wupix(double x, double y) {\n  /*int xi = (int) x, yi = (int) y;\n  if (xi >= 0 && xi < width - 1 && yi >= 0 && yi < height - 1) {\n    int ii = yi * width + xi;\n    double xf = (x - xi), yf = (y - yi);\n    double xy = xf * yf;\n    pixels[ii] = grey(1.0 - yf - xf + xy);\n    pixels[ii+1] = grey(xf - xy);\n    pixels[ii+width] = grey(yf - xy);\n    pixels[ii+width+1] = grey(xy);\n  }*/\n}\n\n//double W\ndouble wobble(double x, double y, double z) {\n  double a = Math.cos( 23 * x - 17 * y + 87);\n  double b = Math.cos( 37 * y + 28 * z + 53);\n  double c = Math.cos( 61 * z - 45 * x + 33);\n\n  return  (Math.cos(17 * a + 31 * b + 39)\n         + Math.cos(21 * b + 13 * c + 24)\n         + Math.cos(19 * c + 5 * a + 15 - 43 * z)) * 0.33333;\n}\n\n",
+			"file": "/home/ritz/Dropbox/code/posteststop.pde",
+			"file_size": 2176,
+			"file_write_time": 130855848850000000,
 			"settings":
 			{
-				"buffer_size": 1970,
+				"buffer_size": 2177,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "gkale/vec2.pde",
+			"settings":
+			{
+				"buffer_size": 1438,
 				"line_ending": "Unix"
 			}
 		}
@@ -238,13 +278,21 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 33.0,
+		"height": 392.0,
 		"last_filter": "",
 		"selected_items":
 		[
 			[
+				"sid",
+				"View: Toggle Side Bar"
+			],
+			[
 				"side",
 				"View: Toggle Side Bar"
+			],
+			[
+				"curso",
+				"Snippet: noCursor"
 			],
 			[
 				"markdown",
@@ -426,113 +474,134 @@
 		"height": 341.0,
 		"history":
 		[
-			"hex(c1 * 258)",
-			"hex(c1 * 255)",
-			"hex(c1 * 192)",
-			"hex(c1)",
-			"c1",
-			"hex(aff + c1 * 7)",
-			".99609375 * 256",
-			"hex(aff + c1 * 7)",
-			"hex(aff + c1)",
-			"hex(aff)",
-			"c1 = 0x00010101",
-			"aff = 0xff000000",
-			".5/768",
-			"1./768",
-			"1/2.2",
-			"1/.92",
-			"qq",
-			"(R-w+N-1) / (N - 1.)",
-			"(R-w) / (N - 1.)",
-			"(R-w) // (N - 1.)",
-			"(R-w+N-1.) // (N - 1.)",
-			"(R-w+N-1) // (N - 1.)",
-			"(R-w+N-1) // (N - 1)",
-			"(R-w+N) // (N - 1)",
-			"(R-w) // (N - 1)",
-			"R,w,N",
-			"(R-w) / (N - 1)",
-			"(R-w) / (N - 1.0)",
-			"w",
-			"R,N,w = 31524,65,643",
-			"2700 / 4.",
-			"2**3.6",
-			"2**3.5",
-			"768*2",
-			"print(aap.__dict__)",
-			"aap.__dict__",
-			"aap(4,5)",
-			"aap",
-			"aap = lambda x,y: x*y",
-			"def aap(x,y):",
-			"def aap(x,y): return x*y",
-			"def aap(x,y):; return x*y;",
-			"def aap(x,y): return x*y;",
-			"def aap(x,y): return x*y",
-			"def aap(x,y): print(x,y)",
-			"def aap(x,y): print x,y",
-			"def aap(x,y):",
-			"os.path.join",
-			"os.path.join.__dict__",
-			"print(os.path.join.__doc__)",
-			"print os.path.join.__doc__",
-			"os.path.join.__doc__",
-			"os.path.join",
-			"help(os.path.join)",
-			"os.path.join?",
-			"os.path",
-			"import os",
-			"os",
-			"url",
-			"url='http://i.imgur.com/asdfuiqw.jpg'",
-			"65536 * 32 * 8",
-			"1 << 24",
-			"1 << 16",
-			"2 << 16",
-			"2 << 24",
-			"32 * 65536",
-			"16-21",
-			"24-3",
-			"1.25*.005",
-			"60.0/140/3",
-			"60.0/140/2",
-			"60.0/140",
-			"_/2",
-			"60.0/140",
-			"_/2",
-			"_/4",
-			"60.0/140",
-			"1/_",
-			"4/1000.",
-			"70*1.414",
-			"1000/10",
-			"1000/25",
-			"1000/20",
-			"(2*2*2*5*5*5.0) / (5 * 2 * 2 * 5)",
-			"(2*2*2*5*5*5.0) / (5 * 2 * 2)",
-			"(2*2*2*5*5*5.0) / (5 * 5 * 2)",
-			"(2*2*2*5*5*5.0) / (5 * 5 * 5)",
-			"(2*2*2*5*5*5.0) / (5 * 5 * 2)",
-			"(2*2*2*5*5*5.0) / (5 * 5 * 5)",
-			"(2*2*2*5*5*5.0) / (2*2)",
-			"(2*2*2*5*5*5.0) / (2*2*5)",
-			"(2*2*2*5*5*5.0) / (2*5*5)",
-			"(2*2*2*5*5*5.0) / (2*2*5*5)",
-			"(2*2*2*5*5*5.0) / (2*2*2*5*5)",
-			"(2*2*2*5*5*5.0) / (2*2*2*5*5*5)",
-			"2*2*2*5*5*5",
-			"1000/80.",
-			"2*2*2*5*5*5",
-			"2*2*2*5*5",
-			"2*2*2*5",
-			"2*5",
-			"2+2",
-			"print(6)",
-			"help",
-			"?",
-			"print 6",
-			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+			"8/.03125",
+			".25/8.",
+			".25/32.",
+			"90-71.47",
+			"_**2",
+			"1/1.414",
+			"2480/12.",
+			"2480/6.",
+			"2480/2",
+			"1748/2",
+			".618*1.5",
+			"80/1.618",
+			"343/44.65",
+			"0.13",
+			"44.65/343",
+			"500/40",
+			"15*2.5/6.28",
+			"15*2.5",
+			"1/.02",
+			".995 ** 480",
+			".993 ** 480",
+			".992 ** 480",
+			".999 ** 480",
+			".99 ** 480",
+			"print('\\n'.join('%3d - %s' % (k, s32 - set([(x*k) % 32 for x in range(32)])) for k in range(1,32)))",
+			"print('\\n'.join(str(s32 - set([(x*k) % 32 for x in range(32)])) for k in range(1,32)))",
+			"print('\\n'.join(str(s32 - set([(x*4) % 32 for x in range(32)])) for k in range(1,32)))",
+			"for i in range(6): print(s32 - set([(x*4) % 32 for x in range(32)]));end",
+			"for i in range(6): print(s32 - set([(x*4) % 32 for x in range(32)]));",
+			"for i in range(6):;print(s32 - set([(x*4) % 32 for x in range(32)]));",
+			"for i in range(6):    print(s32 - set([(x*4) % 32 for x in range(32)]));",
+			"for i in range(6):    print(s32 - set([(x*4) % 32 for x in range(32)]))",
+			"for i in range(6): print(s32 - set([(x*4) % 32 for x in range(32)]))",
+			"print(s32 - set([(x*4) % 32 for x in range(32)]))",
+			"print s32 - set([(x*4) % 32 for x in range(32)])",
+			"s32 - set([(x*4) % 32 for x in range(32)])",
+			"s32 - set([(x*3) % 32 for x in range(32)])",
+			"s32 = set([x % 32 for x in range(32)])",
+			"set([(x*3) % 32 for x in range(32)])",
+			"set([(x*2) % 32 for x in range(32)])",
+			"set([x % 32 for x in range(32)])",
+			"30*3.1415*2/32",
+			"30*3.1415*2",
+			".95 * (1<<23)",
+			".95523555 * (1<<23)",
+			".95523555 * (1<<16)",
+			".95523555",
+			"512./768",
+			"pp(26)",
+			"pp(33)",
+			"33*phi,33*phi*phi",
+			"pp=lambda x:[int(y) for y in [x,x*phi,x*phi*phi,x*phi*phi*phi]]",
+			"15*phi",
+			"15*phi*phi",
+			"33*phi*phi",
+			"33*phi",
+			"phi",
+			"phi = .5 + .5*5**.5",
+			"tau/5",
+			"tau/6",
+			"tau/8",
+			"tau/4",
+			"tau=pi*2",
+			"pi=3.1415926536",
+			"pi",
+			"(tau / 128 / 2048) / (1/65536)",
+			"tau / 128 / 2048",
+			"tau / 128 / 4096",
+			"1/65536",
+			"65536 * tau / 128",
+			"tau / 128",
+			"tau",
+			"tau = 2 * 3.1415926536",
+			"pi",
+			"1472 / 64.",
+			"24*64",
+			"64/1024.",
+			"print(cc % tuple(18.0 * (random.random()**0.25) * (random.random()-0.5) for x in range(18)))",
+			"print(cc % tuple(10.0 * (random.random()-0.5) for x in range(18)))",
+			"cc = cc.replace('3.', '4.')",
+			"print(cc)",
+			"print(cc % tuple(10.0 * (random.random()-0.5) for x in range(18)))",
+			"print(cc % [10.0 * (random.random()-0.5) for x in range(18)])",
+			"print(cc % [10 * (random.random()-0.5) for x in range(18)])",
+			"random.random()",
+			"print(cc % [10 * (random.random()-0.5)) for x in range(18)])",
+			"import random",
+			"random",
+			"rand",
+			"print(cc)",
+			"cc=\" x = wobble(%3.1fe-5 * t + %3.1fe+1, %3.1fe-5 * t + %3.1fe+1, %3.1fe-5 * t + %3.1fe+1);\\n y = wobble(%3.1fe-5 * t + %3.1fe+1, %3.1fe-5 * t + %3.1fe+1, %3.1fe-5 * t + %3.1fe+1);\\n s = wobble(%3.1fe-5 * t + %3.1fe+1, %3.1fe-5 * t + %3.1fe+1, %3.1fe-5 * t + %3.1fe+1);\\n\"",
+			"print(cc)",
+			"cc=cc[3:]",
+			"print(cc)",
+			"cc=\"    x = wobble(%3.1fe-5 * t + %3.1fe+1,  %3.1fe-5 * t + %3.1fe+1, %3.1fe-5 * t + %3.1fe+1);\\n y = wobble(%3.1fe-5 * t + %3.1fe+1,  %3.1fe-5 * t + %3.1fe+1, %3.1fe-5 * t + %3.1fe+1);\\n s = wobble(%3.1fe-5 * t + %3.1fe+1, %3.1fe-5 * t + %3.1fe+1, %3.1fe-5 * t + %3.1fe+1);\\n\"",
+			"19*3e-5",
+			"19*3",
+			"sorted(pp(11) + pp(13) + pp(17) + pp(19) + pp(23) + pp(29))",
+			" sorted(pp(11) + pp(13) + pp(17) + pp(19) + pp(23) + pp(29))",
+			"print('\\n'.join([str(a) for a in [pp(11), pp(13), pp(17), pp(19), pp(23), pp(29)]]))",
+			"print('\\n'.join([str(a) for a in pp(11), pp(13), pp(17), pp(19), pp(23), pp(29)]))",
+			"print('\\n'.join([pp(11), pp(13), pp(17), pp(19), pp(23), pp(29)]))",
+			"print('\\n'.join(pp(11), pp(13), pp(17), pp(19), pp(23), pp(29)))",
+			"print(pp(11), pp(13), pp(17), pp(19), pp(23), pp(29))",
+			"print pp(11), pp(13), pp(17), pp(19), pp(23), pp(29)",
+			"pp(23)",
+			"pp(11)",
+			"pp(13)",
+			"pp(19)",
+			"pp(17)",
+			"sorted(pp(11) + pp(13) + pp(17) + pp(19) + pp(23) + pp(29))",
+			"set(pp(11) + pp(13) + pp(17) + pp(19) + pp(23) + pp(29))",
+			"pp(11) + pp(13) + pp(17) + pp(19) + pp(23) + pp(29)",
+			"pp(11), pp(13), pp(17), pp(19), pp(23), pp(29)",
+			"pp = lambda x: [round(x*phi**i) for i in range(3)]",
+			"pp(19)",
+			"pp(13)",
+			"pp = lambda x: [round(x*phi**i) for i in range(8)]",
+			"round(1.7)",
+			"int(1.7)",
+			"pp = lambda x: [int(x), int(x*phi), int(x*phi*phi)]",
+			"pp(19)",
+			"pp(13)",
+			"pp = lambda x: [x, x*phi, x*phi*phi]",
+			"phi2=phi*phi",
+			"33 * phi, 33*phi*phi",
+			"17 * phi, 17 * phi * phi",
+			"phi * 23 * phi"
 		]
 	},
 	"distraction_free":
@@ -546,17 +615,17 @@
 	},
 	"expanded_folders":
 	[
-		"/home/ritz/git/tripzilch/processing",
-		"/home/ritz/ownCloud/processing",
-		"/home/ritz/ownCloud/processing/pathtracer"
 	],
 	"file_history":
 	[
+		"/home/ritz/git/tripzilch/processing/wupix/shapes.pde.txt",
+		"/home/ritz/git/tripzilch/processing/flollock/flollock.pde",
+		"/run/user/1000/gvfs/sftp:host=new.aerv.nl,user=ritz/home/ritz/public_html/canvas/gravel.html",
+		"/home/ritz/git/tripzilch/processing/wupix/wupix.pde",
 		"/tmp/chill LQ.txt",
 		"/tmp/chill HQ.txt",
 		"/tmp/music.txt",
 		"/home/ritz/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
-		"/home/ritz/git/tripzilch/processing/wupix/wupix.pde",
 		"/home/ritz/ownCloud/gl-shaders/utils.glsl",
 		"/home/ritz/ownCloud/gl-shaders/glsl-functions.md",
 		"/home/ritz/ownCloud/gl-shaders/GLSL-types.md",
@@ -676,10 +745,7 @@
 		"/home/ritz/git/tripzilch/dsp/wav.py",
 		"/home/ritz/git/tripzilch/dsp/midi.py",
 		"/home/ritz/git/tripzilch/dsp/__init__.py",
-		"/home/ritz/.config/sublime-text-3/Packages/SublimePythonIDE/SublimePython.sublime-settings",
-		"/home/ritz/mix/audio samples instruments/perc-kits/Smackos DR660 Drumsamples/DR660SAMPLEZ.txt",
-		"/home/ritz/documents/pgb/coaching heraanvraag 2015.txt",
-		"/home/ritz/documents/pgb/Persoonlijk plan PGB.txt.md"
+		"/home/ritz/.config/sublime-text-3/Packages/SublimePythonIDE/SublimePython.sublime-settings"
 	],
 	"find":
 	{
@@ -697,6 +763,86 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"4",
+			"new",
+			"max_dist",
+			"d",
+			"pd",
+			"pt",
+			"p",
+			"rr",
+			"pp",
+			"r",
+			"p",
+			"w_re",
+			"w_nb",
+			"d_nb",
+			"scale_max",
+			",",
+			", .",
+			"w_2nd_neighbour",
+			"w_1st_neighbour",
+			"d_target",
+			"repulsion",
+			"1.0",
+			", ",
+			".3",
+			", \"",
+			"EEp",
+			"2",
+			"d",
+			"nfs",
+			"mag_target",
+			"double ",
+			"Bead ",
+			"pp.size()",
+			"2,",
+			"nf",
+			"g_old",
+			"g",
+			"+",
+			"pp_E",
+			"m",
+			"4.0",
+			"Vec2",
+			"double",
+			"Vec2",
+			"dot_size",
+			"ps",
+			"pscale",
+			"p",
+			"e-5 * t ",
+			"24",
+			" * t",
+			"* t ",
+			"i",
+			"    z",
+			" [+*/-] z .+?; \\}",
+			"; z .?= .+?; \\}",
+			"double x, double y, double z",
+			"x, y, z",
+			"Vec3",
+			"dod",
+			"  ",
+			"* t",
+			" * t",
+			"* t",
+			" * t",
+			"const ",
+			"TAU * k",
+			"dod",
+			"t * ",
+			"'",
+			"1000",
+			" * dot_size",
+			"half_width",
+			"dot",
+			"float",
+			"noise",
+			"5",
+			"1",
+			"8",
+			"2",
 			"2.5",
 			"half_width",
 			"rgb",
@@ -744,87 +890,7 @@
 			"Px",
 			"wheel",
 			"v",
-			"freeze",
-			"lZ",
-			"a.z",
-			"b.z",
-			"0",
-			"();\n",
-			"pixsi",
-			"u_pix_size",
-			"bufq",
-			"bigq",
-			"Any",
-			"any",
-			"boss",
-			"### ",
-			"![TV](Browse%20by%20shows_files/television.png) ",
-			"\\n\\n+### ",
-			"\\n\\n",
-			"^(?!###).*$",
-			"urls[i]",
-			"\"",
-			" - ",
-			"</i>",
-			"<i>",
-			"-->",
-			"Jor",
-			"float",
-			"vertTexCoord",
-			"pix_size",
-			"u_pix_size",
-			"pix_size",
-			">, ",
-			"Piter",
-			"Edzo/M",
-			"Zst",
-			"Z",
-			"all(lessThan(Zmag2, BAILOUT2))",
-			"Zst",
-			"Z.",
-			".",
-			"x",
-			"*",
-			".",
-			"Z",
-			"a",
-			"DE",
-			"pow",
-			"u_mouse",
-			"u_time",
-			"ox",
-			"px",
-			"u_noise",
-			"data",
-			"par",
-			"Spar",
-			"gl_FragCoord",
-			"u_radial",
-			"u_resolution",
-			"u_mouse",
-			"u_time",
-			"Zmag",
-			"u_tex0",
-			"u_resolution.y",
-			"Zmag",
-			"BAILOUT",
-			"Zmag",
-			"dZmag",
-			"vec2(",
-			"vec2",
-			"vec2(",
-			"vec2",
-			"b",
-			"a",
-			"pc",
-			"'",
-			"sin",
-			"float",
-			"ALT SHIFT \\",
-			"ALT SHIFT 1",
-			"",
-			"",
-			"title"
+			"freeze"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -832,6 +898,8 @@
 		"regex": true,
 		"replace_history":
 		[
+			"; }",
+			"Vec2",
 			"",
 			" ",
 			"",
@@ -873,24 +941,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "wupix/wupix.pde",
+					"file": "gkale/gkale.pde",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1252,
+						"buffer_size": 4793,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								318,
-								318
+								0,
+								0
 							]
 						],
 						"settings":
@@ -903,24 +971,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/home/ritz/ownCloud/processing/pathtracer/vec3.pde",
-					"semi_transient": true,
+					"file": "/home/ritz/Dropbox/code/posteststop.pde",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1970,
+						"buffer_size": 2177,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1580,
-								1580
+								1069,
+								1069
 							]
 						],
 						"settings":
@@ -930,10 +998,40 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 666.0,
+						"translation.y": 702.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "gkale/vec2.pde",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1438,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1438,
+								1438
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Processing/Syntaxes/Processing.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 399.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1006,7 +1104,7 @@
 		[
 			[
 				"",
-				"~/code/sublime-projects/glsl-shaders.sublime-project"
+				"~/Desktop/txt/txt.sublime-project"
 			]
 		],
 		"width": 380.0
