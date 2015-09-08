@@ -1,15 +1,186 @@
+import java.util.Map;
 import java.lang.Math;
 import java.lang.Double;
 
+class Cell extends ArrayList<Vec2> {
+}
+
+static final int INITIAL_CAPACITY = 1000;
+class Grid extends HashMap<Integer,Cell> { // would Integer[2] work?
+  double grid_spacing;
+  int count;
+  Grid(double max_distance) {
+    super(INITIAL_CAPACITY);
+    this.grid_spacing = max_distance * 2;
+    this.count = 0;
+  }
+
+  Cell getCell(int xi, int yi) {
+    int key = (xi << 16) + yi;
+    Cell val = this.get(key);
+    if (val == null) {
+      val = new Cell();
+      this.put(key, val);
+    }
+    return val;
+  }
+
+  void add(Vec2 p) {
+    int xi = (int) (p.x / grid_spacing);
+    int yi = (int) (p.y / grid_spacing);
+    this.getCell(xi, yi).add(p);
+    count++;
+  }
+
+  Cell query(Vec2 p, double d) {
+    double dd = d * d;
+    int xi0 = (int) ((p.x - d) / grid_spacing);
+    int yi0 = (int) ((p.y - d) / grid_spacing);
+    int xi1 = (int) ((p.x + d) / grid_spacing) + 1;
+    int yi1 = (int) ((p.y + d) / grid_spacing) + 1;
+    for (int xi = xi0; xi < xi1; xi++) {
+      int xk = xi << 16;
+      for (int yi = yi0; yi < yi1; yi++) {
+        Cell val = this.get(xk + yi); // maybe null
+        // concat to result
+        // NO PREMATURE OPTIMIZATION
+      }
+    }
+
+  }
+}
+
 class Bead extends Vec2 {
-  Bead q, r;
-  Bead(double x, double y) { super(x, y); }
+  static HashGrid grid = new HashGrid(max_repulsion_distance);
+  static double total_energy = 0.0;
+  double energy;
+  Set<Bead> connections;
+  Set<Bead> proximity;
+  Bead(double x, double y, Collection<Bead> connections) {
+    static
+    this.x = x;
+    this.y = y;
+    this.energy = 0.0;
+    this.connections = new Set<Bead>(connections);
+    update_connections_energy();
+    this.proximity = new Set<Bead>();
+    update_proximity();
+  }
+
+  void connect(Bead other) {
+    this.connections.add(other);
+    other.connections.add(this);
+    update_connections_energy();
+  }
+  void disconnect(Bead other) {
+    this.connections.remove(other);
+    other.connections.remove(this);
+    update_connections_energy();
+  }
+
+  void update_connections_energy() {
+
+  }
+
+  void update_proximity_energy() {
+
+  }
+
+
+  void update_proximity() {
+    new_prox = grid_prox_query(this, max_repulsion_distance);
+    //: remove this Bead from Beads in (proximity - new_prox)
+    //: add this Bead to Beads in (new_prox - proximity)
+    //: proximity = new_prox
+  }
+
+  void move(double dx, double dy) {
+    x += dx;
+    y += dy;
+    update_proximity();
+    update_proximity_energy();
+  }
+
+
+}
+
+class Necklace {
+  ArrayList<Bead> points;
+  HashMap<Bead,Bead> prox; // double proximity map, beads < max_repulsion_distance
+
+  int size;
+  double max_repulsion_distance;
+  double energy;
+
+  // default constructor
+  Necklace() {
+    points = new Arraylist<Bead>(INITIAL_CAPACITY);
+    grid = new HashMap<Integer,Bead>(INITIAL_CAPACITY * 4 / 3);
+    size = 0;
+    energy = 0.0;
+    max_repulsion_distance = 1.0;
+  }
+  Necklace(int N, double radius, double random_offset) {
+    this();
+    max_repulsion_distance = 2.0 * (radius + random_offset) * TAU / N);
+    for (int k = 0; k < N; k++) {
+      double r = radius + random_offset * (2 * Math.random() - 1);
+      add(new Bead(r * cos(k * TAU / N), r * sin(k * TAU / N)));
+    }
+  }
+
+  double d_tgt = 3.5, d_tgt2 = 2 * d_tgt;
+  double w_neighbour = 1.0;
+  double w_repulsion = 256.0;
+  double update_energy(int i) {
+    // recalc energies local to bead[i]
+    //
+    // - adj.neighbours -2,-1,1,2
+    // - beads in radius max_repulsion_distance
+    update_neighbour_energy((i - 2) % size);
+    update_neighbour_energy((i - 1) % size);
+    update_neighbour_energy((i    ) % size);
+    update_neighbour_energy((i + 1) % size);
+    update_neighbour_energy((i + 2) % size);
+
+    Bead bi = points.get(i);
+    update_repulsion_energy(bi);
+    for (Bead p in grid radius) {
+      update_repulsion_energy(p);
+    }
+
+    double d, cE;
+    double E = 0.0;
+    int L = pp.size();
+    pt = pp.get(0);
+    for (int i = 0; i < L; i++) {
+      // neighbour springs
+      d = pt.dist(pt.q) - d_tgt;    cE = d * d;
+      d = pt.dist(pt.r) - d_tgt;    cE += d * d;
+      d = pt.dist(pt.q.q) - d_tgt2; cE += d * d;
+      d = pt.dist(pt.r.r) - d_tgt2; cE += d * d;
+      E += w_neighbour * cE;
+
+      // global repulsion
+      rt = pt.r;
+      // cE = 0.0;
+      for (int j = i + 1; j < L; j++) {
+        d = pt.sqDist(rt);
+        E += w_repulsion / (d * d);
+        rt = rt.r;
+      }
+      // E += w_repulsion * cE;
+
+      // next
+      pt = pt.r;
+    }
+    return E;
+  }
 }
 
 double phi = Math.sqrt(5.0) * 0.5 + 0.5;
 float ax_size;
-ArrayList<Bead> pp;
-double EE;
+Necklace P;
 void setup() {
   size(500, 500, P2D);
   ax_size = width / 2.0;
@@ -18,22 +189,7 @@ void setup() {
   noStroke();
   strokeWeight(0.25);
   dot = regularPolygon(12);
-
-  // init Beads
-  int N = 25;
-  pp = new ArrayList<Bead>(N * 4);
-  // positions
-  for (int k = 0; k < N; k++) {
-    double r = 2 * (5.0 + Math.random());
-    pp.add(new Bead(r * cos(k * TAU / N), r * sin(k * TAU / N)));
-  }
-  // neighbours
-  for (int k = 0; k < N; k++) {
-    pp.get(k).q = pp.get((k - 1 + N) % N);
-    pp.get(k).r = pp.get((k + 1 + N) % N);
-  }
-  // energy potential
-  EE = energy();
+  P = new Necklace(25, 10.0, 2.0);
 }
 
 PShape regularPolygon(int N) {
@@ -66,41 +222,6 @@ String nfd(double x, int a, int b) {
   return nfs((float) x, a, b);
 }
 int irand(int N) { return (int) (N * Math.random()); }
-
-double d_tgt = 3.5, d_tgt2 = 2 * d_tgt;
-double w_neighbour = 1.0;
-//double w_neighbour2 = 1.0;
-double w_repulsion = 256.0;
-Bead pt, rt;
-double energy() {
-  double d, cE;
-  double E = 0.0;
-  int L = pp.size();
-  pt = pp.get(0);
-  for (int i = 0; i < L; i++) {
-    // neighbour springs
-    d = pt.dist(pt.q) - d_tgt;    cE = d * d;
-    d = pt.dist(pt.r) - d_tgt;    cE += d * d;
-    d = pt.dist(pt.q.q) - d_tgt2; cE += d * d;
-    d = pt.dist(pt.r.r) - d_tgt2; cE += d * d;
-    E += w_neighbour * cE;
-
-    // global repulsion
-    rt = pt.r;
-    // cE = 0.0;
-    for (int j = i + 1; j < L; j++) {
-      d = pt.sqDist(rt);
-      E += w_repulsion / (d * d);
-      rt = rt.r;
-    }
-    // E += w_repulsion * cE;
-
-    // next
-    pt = pt.r;
-  }
-  return E;
-}
-
 void rand2(double a, Vec2 out) {
   out.x = 2.0 * a * (Math.random() - .5);
   out.y = 2.0 * a * (Math.random() - .5);
