@@ -17,20 +17,20 @@ class Particle extends Vec2 {
 ArrayList<Particle> points;
 Grid grid;
 float ax_size;
-static final double GDIST = 0.25;
+static final double GDIST = 0.5;
 void setup() {
   size(500, 500, P2D);
   ax_size = width;
   smooth(4);
   colorMode(RGB, 1.0);
   noStroke();
-  strokeWeight(0.01);
+  strokeWeight(0.02);
   dot = regularPolygon(12);
 
   points = new ArrayList<Particle>(1000);
-  for (int i = 0; i < 750; i++) {
-    Particle p = new Particle(3.0 * (Math.random() - .5),
-                              3.0 * (Math.random() - .5));
+  for (int i = 0; i < 500; i++) {
+    Particle p = new Particle(1.0 * (Math.random() - .5),
+                              1.0 * (Math.random() - .5));
     points.add(p);
   }
   grid = new Grid(GDIST);
@@ -40,7 +40,7 @@ void line(double x0, double y0, double x1, double y1) {
   line((float) x0,(float) y0,(float) x1,(float) y1);
 }
 
-double ad = .0375;
+double ad = .01;
 double frr(double r) { return 1.0 / (r*r + ad) - 1.0 / (GDIST*GDIST + ad); }
 
 double start_time = millis();
@@ -50,30 +50,30 @@ void draw() {
   fill(c0);
   rect(0, 0, width, height);
   translate(width/2, height/2);
-  scale(ax_size / 5.0);
+  scale(ax_size / 0.8);
 
   grid.clear();
   for (Particle p: points) {
-    p.addmul(p.v, 0.01);
+    p.addmul(p.v, 0.001);
     grid.add(p);
   }
 
   double dx,dy,dd;
+  fill(1,1,1,.5);
   for (Particle p : points) {
-    stroke(1,1,1,.25);
-    p.v.rand(.01);
+    //stroke(1,1,1,.1);
+    p.v.rand(.02);
     for (Vec2 q : grid.query(p, GDIST)) {
-      line(p.x, p.y, .55*p.x + .45*q.x, .55*p.y + .45*q.y);
+      //line(p.x, p.y, q.x, q.y);
       dx = q.x - p.x;
       dy = q.y - p.y;
       dd = Math.sqrt(dx*dx + dy*dy);
-      dd = frr(dd) * (.2 - dd);
+      dd = frr(dd) * (.17 - dd);
       p.v.x -= dx * dd;
       p.v.y -= dy * dd;
     }
-    noStroke();
-    fill(1,1,1,.5);
-    dot(p, 0.07);
+    //noStroke();
+    dot(p, 0.01);
   }
 }
 
