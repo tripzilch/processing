@@ -3,10 +3,12 @@ import java.lang.Math;
 class Vec2 {
   double x, y;
   Vec2(double x, double y) { this.x = x; this.y = y; }
-  Vec2(Vec2 v) { this.x = v.x; this.y = v.y; } // copy constructor
+  Vec2(Vec2 v) { this(v.x, v.y); } // copy constructor
+  Vec2() { this(0.0, 0.0); } // defoelt constructor
 
   Vec2 copy() { return new Vec2(x, y); }
   void set(Vec2 v) { x = v.x; y = v.y; }
+  void set(double x, double y) { this.x = x; this.y = y; }
 
   void add(Vec2 v) { x += v.x; y += v.y; }
   void sub(Vec2 v) { x -= v.x; y -= v.y; }
@@ -56,4 +58,11 @@ class Vec2 {
   String toString() {
     return "(" + Double.toString(x) + ", " + Double.toString(y) + ")";
   }
+
+  void rand(double a) {
+    x = a * (2 * Math.random() - 1);
+    y = a * (2 * Math.random() - 1);
+  }
+  void rand() { x = 2 * Math.random() - 1; y = 2 * Math.random() - 1; }
+
 }

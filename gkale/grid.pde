@@ -1,15 +1,21 @@
+import java.util.Map;
 import java.lang.Math;
 // Grid Cell Class
 
-static final int INITIAL_CAPACITY = 1000;
+static final int INITIAL_CAPACITY = 1333;
 class Grid {
   HashMap<Integer,ArrayList<Vec2>> grid;
   double grid_spacing;
-  int count, density;
+  int count;
   Grid(double max_distance) {
     this.grid = new HashMap<Integer,ArrayList<Vec2>>(INITIAL_CAPACITY);
     this.count = 0;
     this.grid_spacing = max_distance * 2;
+  }
+
+  void clear() {
+    grid.clear();
+    count = 0;
   }
 
   void add(Vec2 p) {
@@ -31,15 +37,14 @@ class Grid {
     int yi0 = (int) ((p.y - d) / grid_spacing);
     int xi1 = (int) ((p.x + d) / grid_spacing);
     int yi1 = (int) ((p.y + d) / grid_spacing);
-    ArrayList<Vec2> result;
+    ArrayList<Vec2> result = new ArrayList<Vec2>();
     for (int xi = xi0; xi <= xi1; xi++) {
       int xk = xi << 16;
       for (int yi = yi0; yi <= yi1; yi++) {
         int key = (xi << 16) + yi;
         ArrayList<Vec2> cell = grid.get(xk + yi); // maybe null
-        for (Vec2 q: cell) {
-          if (p != q && p.sqDist(q) < dd) result.add(q);
-        }
+        if (cell != null) for (Vec2 q: cell) if (p != q && p.sqDist(q) < dd)
+          result.add(q);
       }
     }
     return result;

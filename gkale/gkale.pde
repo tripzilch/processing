@@ -2,55 +2,85 @@ import java.util.Map;
 import java.lang.Math;
 import java.lang.Double;
 
-class Cell extends ArrayList<Vec2> {
-}
+int c0 = #000000;
+int c1 = #FFFFFF;
+int c2 = #8888AA;
 
-static final int INITIAL_CAPACITY = 1000;
-class Grid extends HashMap<Integer,Cell> { // would Integer[2] work?
-  double grid_spacing;
-  int count;
-  Grid(double max_distance) {
-    super(INITIAL_CAPACITY);
-    this.grid_spacing = max_distance * 2;
-    this.count = 0;
-  }
-
-  Cell getCell(int xi, int yi) {
-    int key = (xi << 16) + yi;
-    Cell val = this.get(key);
-    if (val == null) {
-      val = new Cell();
-      this.put(key, val);
-    }
-    return val;
-  }
-
-  void add(Vec2 p) {
-    int xi = (int) (p.x / grid_spacing);
-    int yi = (int) (p.y / grid_spacing);
-    this.getCell(xi, yi).add(p);
-    count++;
-  }
-
-  Cell query(Vec2 p, double d) {
-    double dd = d * d;
-    int xi0 = (int) ((p.x - d) / grid_spacing);
-    int yi0 = (int) ((p.y - d) / grid_spacing);
-    int xi1 = (int) ((p.x + d) / grid_spacing) + 1;
-    int yi1 = (int) ((p.y + d) / grid_spacing) + 1;
-    for (int xi = xi0; xi < xi1; xi++) {
-      int xk = xi << 16;
-      for (int yi = yi0; yi < yi1; yi++) {
-        Cell val = this.get(xk + yi); // maybe null
-        // concat to result
-        // NO PREMATURE OPTIMIZATION
-      }
-    }
-
+class Particle extends Vec2 {
+  Vec2 v;
+  Particle(double x, double y) {
+    super(x, y);
+    v = new Vec2(0, 0);
   }
 }
 
-class Bead extends Vec2 {
+ArrayList<Particle> points;
+Grid grid;
+float ax_size;
+static final double GDIST = 0.25;
+void setup() {
+  size(500, 500, P2D);
+  ax_size = width;
+  smooth(4);
+  colorMode(RGB, 1.0);
+  noStroke();
+  strokeWeight(0.01);
+  dot = regularPolygon(12);
+
+  points = new ArrayList<Particle>(1000);
+  for (int i = 0; i < 750; i++) {
+    Particle p = new Particle(3.0 * (Math.random() - .5),
+                              3.0 * (Math.random() - .5));
+    points.add(p);
+  }
+  grid = new Grid(GDIST);
+}
+
+void line(double x0, double y0, double x1, double y1) {
+  line((float) x0,(float) y0,(float) x1,(float) y1);
+}
+
+double ad = .0375;
+double frr(double r) { return 1.0 / (r*r + ad) - 1.0 / (GDIST*GDIST + ad); }
+
+double start_time = millis();
+void draw() {
+  double now = (double) (millis() - start_time) / 1000.0;
+  if (frameCount % 32 == 31) println(frameRate);
+  fill(c0);
+  rect(0, 0, width, height);
+  translate(width/2, height/2);
+  scale(ax_size / 5.0);
+
+  grid.clear();
+  for (Particle p: points) {
+    p.addmul(p.v, 0.01);
+    grid.add(p);
+  }
+
+  double dx,dy,dd;
+  for (Particle p : points) {
+    stroke(1,1,1,.25);
+    p.v.rand(.01);
+    for (Vec2 q : grid.query(p, GDIST)) {
+      line(p.x, p.y, .55*p.x + .45*q.x, .55*p.y + .45*q.y);
+      dx = q.x - p.x;
+      dy = q.y - p.y;
+      dd = Math.sqrt(dx*dx + dy*dy);
+      dd = frr(dd) * (.2 - dd);
+      p.v.x -= dx * dd;
+      p.v.y -= dy * dd;
+    }
+    noStroke();
+    fill(1,1,1,.5);
+    dot(p, 0.07);
+  }
+}
+
+
+
+
+/* class Bead extends Vec2 {
   static HashGrid grid = new HashGrid(max_repulsion_distance);
   static double total_energy = 0.0;
   double energy;
@@ -114,7 +144,7 @@ class Necklace {
 
   // default constructor
   Necklace() {
-    points = new Arraylist<Bead>(INITIAL_CAPACITY);
+    points = new ArrayList<Bead>(INITIAL_CAPACITY);
     grid = new HashMap<Integer,Bead>(INITIAL_CAPACITY * 4 / 3);
     size = 0;
     energy = 0.0;
@@ -178,56 +208,6 @@ class Necklace {
   }
 }
 
-double phi = Math.sqrt(5.0) * 0.5 + 0.5;
-float ax_size;
-Necklace P;
-void setup() {
-  size(500, 500, P2D);
-  ax_size = width / 2.0;
-  smooth(4);
-  colorMode(RGB, 1.0);
-  noStroke();
-  strokeWeight(0.25);
-  dot = regularPolygon(12);
-  P = new Necklace(25, 10.0, 2.0);
-}
-
-PShape regularPolygon(int N) {
-  PShape r = createShape();
-  r.beginShape(TRIANGLE_STRIP);
-  r.noStroke();
-  r.fill(#000000);
-  for (int i = 0; i < N; i++) {
-    //int k = (i % 2 == 0) ? i / 2 : N - (i + 1) / 2;
-    int k = (i / 2) + (i % 2) * (N - i);
-    r.vertex(cos(k * TAU / N), sin(k * TAU / N));
-  }
-  r.endShape(CLOSE);
-  r.disableStyle();
-  return r;
-}
-
-int c0 = 0xffeeccaa;
-int c1 = 0xff224411;
-int c2 = 0xffAADD88;
-int cAlpha(int c, double a) { return ((int) Math.min(255.0, 255.0 * a)) * 0x01000000 | (c & 0x00FFFFFF); }
-
-PShape dot;
-void dot(Vec2 p, double s) {
-  float fs = (float) s;
-  shape(dot, (float) p.x, (float) p.y, fs, fs);
-}
-
-String nfd(double x, int a, int b) {
-  return nfs((float) x, a, b);
-}
-int irand(int N) { return (int) (N * Math.random()); }
-void rand2(double a, Vec2 out) {
-  out.x = 2.0 * a * (Math.random() - .5);
-  out.y = 2.0 * a * (Math.random() - .5);
-}
-
-double start_time = millis();
 double prev_now, now = 0.0, s_now = 0.0;
 double p_scale = 75.0;
 int gibbi = 0, accepts = 0, rejects = 0;
@@ -323,3 +303,9 @@ void draw() {
     dot(p, 1.0);
   }
 }
+
+
+*/
+
+
+
