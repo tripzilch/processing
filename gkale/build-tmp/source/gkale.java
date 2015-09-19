@@ -44,11 +44,11 @@ static final double GDIST = 0.5f;
 public void setup() {
   size(500, 500, P2D);
   ax_size = width;
-  smooth(4);
+  //smooth(4);
   colorMode(RGB, 1.0f);
   noStroke();
   strokeWeight(0.02f);
-  dot = regularPolygon(12);
+  dot = regularPolygon(5);
 
   points = new ArrayList<Particle>(1000);
   for (int i = 0; i < 500; i++) {
@@ -63,7 +63,7 @@ public void line(double x0, double y0, double x1, double y1) {
   line((float) x0,(float) y0,(float) x1,(float) y1);
 }
 
-double ad = .01f;
+static final double ad = .03f;
 public double frr(double r) { return 1.0f / (r*r + ad) - 1.0f / (GDIST*GDIST + ad); }
 
 double start_time = millis();
@@ -82,21 +82,22 @@ public void draw() {
   }
 
   double dx,dy,dd;
-  fill(1,1,1,.5f);
+  fill(1,1,1);
   for (Particle p : points) {
     //stroke(1,1,1,.1);
-    p.v.rand(.02f);
+    p.v.rand(.25f);
     for (Vec2 q : grid.query(p, GDIST)) {
       //line(p.x, p.y, q.x, q.y);
       dx = q.x - p.x;
       dy = q.y - p.y;
       dd = Math.sqrt(dx*dx + dy*dy);
-      dd = frr(dd) * (.17f - dd);
+      dd = frr(dd) * (.25f - dd);
       p.v.x -= dx * dd;
       p.v.y -= dy * dd;
     }
     //noStroke();
-    dot(p, 0.01f);
+    //ellipse((float)p.x,(float)p.y, 0.01, 0.01);
+    dot(p, .01f);
   }
 }
 
