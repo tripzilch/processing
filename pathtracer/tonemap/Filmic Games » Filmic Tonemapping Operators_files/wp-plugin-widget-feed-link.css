@@ -1,0 +1,25 @@
+.widget ul.wp_plugin_widget_feed_link li.rss {
+	padding: 1px 0 1px 20px;
+	list-style-type: none;
+	background: url(rss.gif) left center no-repeat;
+}
+
+.widget ul.wp_plugin_widget_feed_link li.rss a {
+	line-height: 20px;
+}
+
+.widget ul.wp_plugin_widget_feed_link li.atom {
+	padding: 1px 0 1px 20px;
+	list-style-type: none;
+	background: url(atom.gif) left center no-repeat;
+}
+
+.widget ul.wp_plugin_widget_feed_link li.atom a {
+	line-height: 20px;
+}
+
+.widget ul.wp_plugin_widget_feed_link li.help {
+	padding: 1px 0 1px 20px;
+	list-style-type: none;
+	background: url(help.gif) left center no-repeat;
+}

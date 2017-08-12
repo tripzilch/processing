@@ -1,0 +1,80 @@
+interface SceneObject {
+  float DE(PVector p);
+}
+
+class Sphere implements SceneObject {
+  PVector z;
+  float r;
+  Sphere(float x, float y, float z, float r) {
+    this.z = new PVector(x, y, z);
+    this.r = r;
+  }
+  
+  float DE(PVector p) {
+    return max(0, PVector.dist(this.z, p) - this.r);
+  }
+}
+
+class Plane implements SceneObject {
+  PVector n;
+  float d;
+  Plane(float a, float b, float c, float d) {
+    this.n = new PVector(a, b, c);
+    this.d = d;
+  }
+
+  float DE(PVector p) {
+    return max(0, PVector.dot(this.n, p));
+  }
+} 
+
+ArrayList<SceneObject> scene = new ArrayList<SceneObject>();
+PVector cam_pos, cam_fwd, cam_up, cam_right;
+
+void setup() {
+  size(200, 200);  
+  scene.add(new Plane(0, 1, 0, 0)); // ground plane 
+  scene.add(new Sphere(-10, 50, 0, 50)); 
+  scene.add(new Sphere(15, 20, -5, 20));
+  cam_pos = new PVector(0, 75, -200);  
+  cam_fwd = new PVector(0, 0, 10);
+  cam_up = new PVector(0, 0.1, 0);
+  cam_right = new PVector(0.1, 0, 0);
+  
+  for (int i = 0; i < height; i++) {
+    println(i);
+    for (int j = 0; j < width; j++) {
+      int y = i - height / 2;
+      int x = j - width / 2;
+      PVector ray = PVector.add(PVector.mult(cam_up, y), PVector.mult(cam_right, x));
+      ray.normalize();
+      float c = trace(cam_pos, ray);
+      set(i, j, color(255 * c, 192 * c, 128 * c));            
+    }
+  }
+  
+  println("xklxlx");
+  
+}
+
+float distanceEstimator(PVector p) {
+  float d = 3E+38;
+  for (SceneObject obj : scene) {
+    d = min(d, obj.DE(p));
+  }
+  return d;  
+}
+
+int MAX_RAY_STEPS = 256;
+float MIN_DISTANCE = 0.1;
+float trace(PVector from, PVector dir) {
+  float totalDistance = 0.0;
+  int steps;
+  for (steps = 0; steps < MAX_RAY_STEPS; steps++) {
+    PVector p = PVector.add(from, PVector.mult(dir, totalDistance));
+    float distance = distanceEstimator(p);
+    totalDistance += distance;
+    if (distance < MIN_DISTANCE) break;
+  }
+  return 1.0 - float(steps) / float(MAX_RAY_STEPS);
+}

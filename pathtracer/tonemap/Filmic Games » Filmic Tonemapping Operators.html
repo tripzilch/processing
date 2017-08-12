@@ -1,0 +1,703 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head profile="http://gmpg.org/xfn/11">
+
+	<title>Filmic Games » Filmic Tonemapping Operators</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
+	<meta name="generator" content="WordPress 2.9.2"> <!-- leave this for stats please -->
+
+	<link rel="stylesheet" href="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/style.css" type="text/css" media="screen">
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://filmicgames.com/feed">
+	<link rel="alternate" type="text/xml" title="RSS .92" href="http://filmicgames.com/feed/rss">
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://filmicgames.com/feed/atom">
+	<link rel="pingback" href="http://filmicgames.com/xmlrpc.php">
+
+		<link rel="archives" title="February 2012" href="http://filmicgames.com/archives/date/2012/02">
+	<link rel="archives" title="September 2011" href="http://filmicgames.com/archives/date/2011/09">
+	<link rel="archives" title="August 2011" href="http://filmicgames.com/archives/date/2011/08">
+	<link rel="archives" title="July 2011" href="http://filmicgames.com/archives/date/2011/07">
+	<link rel="archives" title="May 2011" href="http://filmicgames.com/archives/date/2011/05">
+	<link rel="archives" title="April 2011" href="http://filmicgames.com/archives/date/2011/04">
+	<link rel="archives" title="March 2011" href="http://filmicgames.com/archives/date/2011/03">
+	<link rel="archives" title="February 2011" href="http://filmicgames.com/archives/date/2011/02">
+	<link rel="archives" title="December 2010" href="http://filmicgames.com/archives/date/2010/12">
+	<link rel="archives" title="November 2010" href="http://filmicgames.com/archives/date/2010/11">
+	<link rel="archives" title="October 2010" href="http://filmicgames.com/archives/date/2010/10">
+	<link rel="archives" title="September 2010" href="http://filmicgames.com/archives/date/2010/09">
+	<link rel="archives" title="August 2010" href="http://filmicgames.com/archives/date/2010/08">
+	<link rel="archives" title="July 2010" href="http://filmicgames.com/archives/date/2010/07">
+	<link rel="archives" title="June 2010" href="http://filmicgames.com/archives/date/2010/06">
+	<link rel="archives" title="May 2010" href="http://filmicgames.com/archives/date/2010/05">
+	<link rel="archives" title="April 2010" href="http://filmicgames.com/archives/date/2010/04">
+		<link rel="alternate" type="application/rss+xml" title="Filmic Games » Filmic Tonemapping Operators Comments Feed" href="http://filmicgames.com/archives/75/feed">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://filmicgames.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://filmicgames.com/wp-includes/wlwmanifest.xml"> 
+<link rel="index" title="Filmic Games" href="http://filmicgames.com/">
+<link rel="start" title="Hello World!" href="http://filmicgames.com/archives/1">
+<link rel="prev" title="720p != 1080p" href="http://filmicgames.com/archives/35">
+<link rel="next" title="New Theme!" href="http://filmicgames.com/archives/98">
+<meta name="generator" content="WordPress 2.9.2">
+<link rel="canonical" href="http://filmicgames.com/archives/75">
+<link rel="stylesheet" type="text/css" href="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/wp-plugin-widget-feed-link.css"><link rel="stylesheet" type="text/css" href="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/wp-plugin-widget-feed-link.css">	<link type="text/css" rel="stylesheet" href="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/shCore.css">
+	<link type="text/css" rel="stylesheet" href="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/shThemeDefault.css">
+</head>
+<body>
+
+<div id="wrapper">
+	
+<div id="header">
+
+	<a href="http://filmicgames.com/">
+	<img src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/header3.jpg">
+	</a>
+</div>
+
+<div id="header-space">
+</div>
+
+<div id="body-top"><img src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/base-top.png"></div>
+
+
+
+<div id="main-frame">
+
+	<div id="container">
+
+		
+			<div class="post" id="post-75">
+
+				<h2><a href="http://filmicgames.com/archives/75" title="Filmic Tonemapping Operators">Filmic Tonemapping Operators</a></h2>
+				<span class="post-date">May 5, 2010</span><br>
+
+				<div class="entry">
+
+					<p></p>
+<div align="center">
+<img src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/Habib-HP.jpg">
+</div>
+<p>The most common questions that I get about my GDC talk have to do 
+with the tonemapping operators.  In particular, I’ve always found that 
+when I read through presentations for code snippets that I always miss 
+something.  Those 2.2s can be tricky!  So this post is a quick reference
+ for various operators that I talked about.  Also, I copied and pasted 
+this code from my RenderMonkey scene so there may be typos.</p>
+<p>All of these examples use <a href="http://filmicgames.com/Downloads/FilmicTonemapping/Habib_House_Med.dds">this HDR image</a> of Habib’s killer condo.  Also, click any image for the high-res version.</p>
+<p>First off, there is good old linear.  All it does is read the linear 
+data, do an exposure adjustment, and adjust for the monitor’s gamma of 
+2.2.</p>
+<div id="highlighter_778415" class="syntaxhighlighter "><div class="bar"><div class="toolbar"><a class="item viewSource" style="width: 16px; height: 16px;" title="view source" href="#viewSource">view source</a><a class="item printSource" style="width: 16px; height: 16px;" title="print" href="#printSource">print</a><a class="item about" style="width: 16px; height: 16px;" title="?" href="#about">?</a></div></div><div class="lines"><div class="line alt1"><code class="number">1.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">float4 ps_main( float2 texCoord&nbsp; : TEXCOORD0 ) : COLOR</code></span></span></div><div class="line alt2"><code class="number">2.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">{</code></span></span></div><div class="line alt1"><code class="number">3.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 texColor = tex2D(Texture0, texCoord );</code></span></span></div><div class="line alt2"><code class="number">4.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">texColor *= 16;&nbsp; </code><code class="comments">// Hardcoded Exposure Adjustment</code></span></span></div><div class="line alt1"><code class="number">5.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 retColor = </code><code class="functions bold">pow</code><code class="plain">(texColor,1/2.2);</code></span></span></div><div class="line alt2"><code class="number">6.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="keyword bold">return</code> <code class="plain">float4(retColor,1);</code></span></span></div><div class="line alt1"><code class="number">7.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">}</code></span></span></div></div></div>
+<p>Pretty simple.  It looks like this.  Click for high-res.</p>
+<p><span id="more-75"></span></p>
+<div align="center">
+<a href="http://filmicgames.com/Images/FilmicTonemapping/Large/Habib-Linear.jpg"><img src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/Habib-Linear.jpg"></a>
+</div>
+<p>Don’t forget the pow(1/2.2).  If you forget that step, it looks like this:</p>
+<div id="highlighter_200395" class="syntaxhighlighter "><div class="bar"><div class="toolbar"><a class="item viewSource" style="width: 16px; height: 16px;" title="view source" href="#viewSource">view source</a><a class="item printSource" style="width: 16px; height: 16px;" title="print" href="#printSource">print</a><a class="item about" style="width: 16px; height: 16px;" title="?" href="#about">?</a></div></div><div class="lines"><div class="line alt1"><code class="number">1.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">float4 ps_main( float2 texCoord&nbsp; : TEXCOORD0 ) : COLOR</code></span></span></div><div class="line alt2"><code class="number">2.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">{</code></span></span></div><div class="line alt1"><code class="number">3.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 texColor = tex2D(Texture0, texCoord );</code></span></span></div><div class="line alt2"><code class="number">4.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">texColor *= 16;&nbsp; </code><code class="comments">// Hardcoded Exposure Adjustment</code></span></span></div><div class="line alt1"><code class="number">5.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 retColor = texColor;</code></span></span></div><div class="line alt2"><code class="number">6.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="keyword bold">return</code> <code class="plain">float4(retColor,1);</code></span></span></div><div class="line alt1"><code class="number">7.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">}</code></span></span></div></div></div>
+<div align="center">
+<a href="http://filmicgames.com/Images/FilmicTonemapping/Large/Habib-Bad-Gamma.jpg"><img src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/Habib-Bad-Gamma.jpg"></a>
+</div>
+<p>Next up is Reinhard.  There are many variations, bu I’ll do the 
+simplest which is 1/(1+x).  A common variation is to only do it on 
+luminance.  Don’t forget the pow(1/2.2) at the end!</p>
+<div id="highlighter_305697" class="syntaxhighlighter "><div class="bar"><div class="toolbar"><a class="item viewSource" style="width: 16px; height: 16px;" title="view source" href="#viewSource">view source</a><a class="item printSource" style="width: 16px; height: 16px;" title="print" href="#printSource">print</a><a class="item about" style="width: 16px; height: 16px;" title="?" href="#about">?</a></div></div><div class="lines"><div class="line alt1"><code class="number">1.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">float4 ps_main( float2 texCoord&nbsp; : TEXCOORD0 ) : COLOR</code></span></span></div><div class="line alt2"><code class="number">2.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">{</code></span></span></div><div class="line alt1"><code class="number">3.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 texColor = tex2D(Texture0, texCoord );</code></span></span></div><div class="line alt2"><code class="number">4.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">texColor *= 16;&nbsp; </code><code class="comments">// Hardcoded Exposure Adjustment</code></span></span></div><div class="line alt1"><code class="number">5.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">texColor = texColor/(1+texColor);</code></span></span></div><div class="line alt2"><code class="number">6.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 retColor = </code><code class="functions bold">pow</code><code class="plain">(texColor,1/2.2);</code></span></span></div><div class="line alt1"><code class="number">7.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="keyword bold">return</code> <code class="plain">float4(retColor,1);</code></span></span></div><div class="line alt2"><code class="number">8.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">}</code></span></span></div></div></div>
+<div align="center">
+<a href="http://filmicgames.com/Images/FilmicTonemapping/Large/Habib-Reinhard.jpg"><img src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/Habib-Reinhard.jpg"></a>
+</div>
+<p>Here it is with Haarm-Peter Duiker’s curve.  This version is very 
+similar to the Cineon node in Digital Fusion.  The texture FilmLut 
+refers to <a href="http://filmicgames.com/Downloads/FilmicTonemapping/FilmLut.tga">this TGA file</a>.  No pow(1/2.2) necessary.</p>
+<div id="highlighter_682151" class="syntaxhighlighter "><div class="bar"><div class="toolbar"><a class="item viewSource" style="width: 16px; height: 16px;" title="view source" href="#viewSource">view source</a><a class="item printSource" style="width: 16px; height: 16px;" title="print" href="#printSource">print</a><a class="item about" style="width: 16px; height: 16px;" title="?" href="#about">?</a></div></div><div class="lines"><div class="line alt1"><code class="number">01.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">float4 ps_main( float2 texCoord&nbsp; : TEXCOORD0 ) : COLOR</code></span></span></div><div class="line alt2"><code class="number">02.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">{</code></span></span></div><div class="line alt1"><code class="number">03.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 texColor = tex2D(Texture0, texCoord );</code></span></span></div><div class="line alt2"><code class="number">04.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">texColor *= 16;&nbsp; </code><code class="comments">// Hardcoded Exposure Adjustment</code></span></span></div><div class="line alt1"><code class="number">05.</code><span class="content"><span class="block" style="margin-left: 0px !important;">&nbsp;</span></span></div><div class="line alt2"><code class="number">06.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 ld = 0.002;</code></span></span></div><div class="line alt1"><code class="number">07.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="color1 bold">float</code> <code class="plain">linReference = 0.18;</code></span></span></div><div class="line alt2"><code class="number">08.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="color1 bold">float</code> <code class="plain">logReference = 444;</code></span></span></div><div class="line alt1"><code class="number">09.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="color1 bold">float</code> <code class="plain">logGamma = 0.45;</code></span></span></div><div class="line alt2"><code class="number">10.</code><span class="content"><span class="block" style="margin-left: 0px !important;">&nbsp;</span></span></div><div class="line alt1"><code class="number">11.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 LogColor;</code></span></span></div><div class="line alt2"><code class="number">12.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">LogColor.rgb = (</code><code class="functions bold">log10</code><code class="plain">(0.4*texColor.rgb/linReference)/ld*logGamma + logReference)/1023.f;</code></span></span></div><div class="line alt1"><code class="number">13.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">LogColor.rgb = saturate(LogColor.rgb);</code></span></span></div><div class="line alt2"><code class="number">14.</code><span class="content"><span class="block" style="margin-left: 0px !important;">&nbsp;</span></span></div><div class="line alt1"><code class="number">15.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="color1 bold">float</code> <code class="plain">FilmLutWidth = 256;</code></span></span></div><div class="line alt2"><code class="number">16.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="color1 bold">float</code> <code class="plain">Padding = .5/FilmLutWidth;</code></span></span></div><div class="line alt1"><code class="number">17.</code><span class="content"><span class="block" style="margin-left: 0px !important;">&nbsp;</span></span></div><div class="line alt2"><code class="number">18.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="comments">//&nbsp; apply response lookup and color grading for target display</code></span></span></div><div class="line alt1"><code class="number">19.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 retColor;</code></span></span></div><div class="line alt2"><code class="number">20.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">retColor.r = tex2D(FilmLut, float2( lerp(Padding,1-Padding,LogColor.r), .5)).r;</code></span></span></div><div class="line alt1"><code class="number">21.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">retColor.g = tex2D(FilmLut, float2( lerp(Padding,1-Padding,LogColor.g), .5)).r;</code></span></span></div><div class="line alt2"><code class="number">22.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">retColor.b = tex2D(FilmLut, float2( lerp(Padding,1-Padding,LogColor.b), .5)).r;</code></span></span></div><div class="line alt1"><code class="number">23.</code><span class="content"><span class="block" style="margin-left: 0px !important;">&nbsp;</span></span></div><div class="line alt2"><code class="number">24.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="keyword bold">return</code> <code class="plain">float4(retColor,1);</code></span></span></div><div class="line alt1"><code class="number">25.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">}</code></span></span></div></div></div>
+<div align="center">
+<a href="http://filmicgames.com/Images/FilmicTonemapping/Large/Habib-HP.jpg"><img src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/Habib-HP.jpg"></a>
+</div>
+<p>Next up is the optimized formula by Jim Hejl and Richard 
+Burgess-Dawson.  I completely forgot about Richard in the GDC talk, but 
+he shares the credit with Jim.  Sorry Richard!!  Note that you don’t 
+need the pow(1/2.2) for this one either.</p>
+<div id="highlighter_417762" class="syntaxhighlighter "><div class="bar"><div class="toolbar"><a class="item viewSource" style="width: 16px; height: 16px;" title="view source" href="#viewSource">view source</a><a class="item printSource" style="width: 16px; height: 16px;" title="print" href="#printSource">print</a><a class="item about" style="width: 16px; height: 16px;" title="?" href="#about">?</a></div></div><div class="lines"><div class="line alt1"><code class="number">1.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">float4 ps_main( float2 texCoord&nbsp; : TEXCOORD0 ) : COLOR</code></span></span></div><div class="line alt2"><code class="number">2.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">{</code></span></span></div><div class="line alt1"><code class="number">3.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 texColor = tex2D(Texture0, texCoord );</code></span></span></div><div class="line alt2"><code class="number">4.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">texColor *= 16;&nbsp; </code><code class="comments">// Hardcoded Exposure Adjustment</code></span></span></div><div class="line alt1"><code class="number">5.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 x = max(0,texColor-0.004);</code></span></span></div><div class="line alt2"><code class="number">6.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 retColor = (x*(6.2*x+.5))/(x*(6.2*x+1.7)+0.06);</code></span></span></div><div class="line alt1"><code class="number">7.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="keyword bold">return</code> <code class="plain">float4(retColor,1);</code></span></span></div><div class="line alt2"><code class="number">8.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">}</code></span></span></div></div></div>
+<div align="center">
+<a href="http://filmicgames.com/Images/FilmicTonemapping/Large/Habib-Jim-Richard.jpg"><img src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/Habib-Jim-Richard.jpg"></a>
+</div>
+<p>Finally for the Uncharted 2 operator made by yours-truly.  For this image I changed the defaults slightly for A and B.</p>
+<p><b>Edit: Oops, in the previous version, I had the exposure bias 
+outside the tonemapping function.  Now it is fixed, where it is inside 
+the tonemapping function.</b></p>
+<div id="highlighter_266139" class="syntaxhighlighter "><div class="bar"><div class="toolbar"><a class="item viewSource" style="width: 16px; height: 16px;" title="view source" href="#viewSource">view source</a><a class="item printSource" style="width: 16px; height: 16px;" title="print" href="#printSource">print</a><a class="item about" style="width: 16px; height: 16px;" title="?" href="#about">?</a></div></div><div class="lines"><div class="line alt1"><code class="number">01.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="color1 bold">float</code> <code class="plain">A = 0.15;</code></span></span></div><div class="line alt2"><code class="number">02.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="color1 bold">float</code> <code class="plain">B = 0.50;</code></span></span></div><div class="line alt1"><code class="number">03.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="color1 bold">float</code> <code class="plain">C = 0.10;</code></span></span></div><div class="line alt2"><code class="number">04.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="color1 bold">float</code> <code class="plain">D = 0.20;</code></span></span></div><div class="line alt1"><code class="number">05.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="color1 bold">float</code> <code class="plain">E = 0.02;</code></span></span></div><div class="line alt2"><code class="number">06.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="color1 bold">float</code> <code class="plain">F = 0.30;</code></span></span></div><div class="line alt1"><code class="number">07.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="color1 bold">float</code> <code class="plain">W = 11.2;</code></span></span></div><div class="line alt2"><code class="number">08.</code><span class="content"><span class="block" style="margin-left: 0px !important;">&nbsp;</span></span></div><div class="line alt1"><code class="number">09.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">float3 Uncharted2Tonemap(float3 x)</code></span></span></div><div class="line alt2"><code class="number">10.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">{</code></span></span></div><div class="line alt1"><code class="number">11.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="keyword bold">return</code> <code class="plain">((x*(A*x+C*B)+D*E)/(x*(A*x+B)+D*F))-E/F;</code></span></span></div><div class="line alt2"><code class="number">12.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">}</code></span></span></div><div class="line alt1"><code class="number">13.</code><span class="content"><span class="block" style="margin-left: 0px !important;">&nbsp;</span></span></div><div class="line alt2"><code class="number">14.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">float4 ps_main( float2 texCoord&nbsp; : TEXCOORD0 ) : COLOR</code></span></span></div><div class="line alt1"><code class="number">15.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">{</code></span></span></div><div class="line alt2"><code class="number">16.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 texColor = tex2D(Texture0, texCoord );</code></span></span></div><div class="line alt1"><code class="number">17.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">texColor *= 16;&nbsp; </code><code class="comments">// Hardcoded Exposure Adjustment</code></span></span></div><div class="line alt2"><code class="number">18.</code><span class="content"><span class="block" style="margin-left: 0px !important;">&nbsp;</span></span></div><div class="line alt1"><code class="number">19.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="color1 bold">float</code> <code class="plain">ExposureBias = 2.0f;</code></span></span></div><div class="line alt2"><code class="number">20.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 curr = Uncharted2Tonemap(ExposureBias*texColor);</code></span></span></div><div class="line alt1"><code class="number">21.</code><span class="content"><span class="block" style="margin-left: 0px !important;">&nbsp;</span></span></div><div class="line alt2"><code class="number">22.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 whiteScale = 1.0f/Uncharted2Tonemap(W);</code></span></span></div><div class="line alt1"><code class="number">23.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 color = curr*whiteScale;</code></span></span></div><div class="line alt2"><code class="number">24.</code><span class="content"><span class="block" style="margin-left: 0px !important;">&nbsp;</span></span></div><div class="line alt1"><code class="number">25.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="plain">float3 retColor = </code><code class="functions bold">pow</code><code class="plain">(color,1/2.2);</code></span></span></div><div class="line alt2"><code class="number">26.</code><span class="content"><code class="spaces">&nbsp;&nbsp;&nbsp;</code><span class="block" style="margin-left: 21px !important;"><code class="keyword bold">return</code> <code class="plain">float4(retColor,1);</code></span></span></div><div class="line alt1"><code class="number">27.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">}</code></span></span></div></div></div>
+<div align="center">
+<a href="http://filmicgames.com/Images/FilmicTonemapping/Large/Habib-Uncharted2.jpg"><img src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/Habib-Uncharted2.jpg"></a>
+</div>
+<p>Hopefully, that should clear up most of the ambiguity about these operators.</p>
+										
+					<p class="postmetadata">
+						Filed under: <a href="http://filmicgames.com/archives/category/tonemapping" title="View all posts in Tonemapping" rel="category tag">Tonemapping</a> by admin					</p>
+					<img src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/hr.png">
+				</div>
+				<div class="”comments-template”">
+					
+<!-- You can start editing here. -->
+
+	<h3 id="comments">25 Responses to “Filmic Tonemapping Operators”</h3>
+
+<ol class="commentlist">
+
+	<li class="alt" id="comment-23">
+
+<div class="commentmetadata">
+<strong><a href="http://msinilo.pl/" onclick="javascript:pageTracker._trackPageview('/outbound/commentauthor/msinilo.pl');" rel="external nofollow" class="url">MaciejS</a></strong>, on <a href="#comment-23" title="">May 5th, 2010 at 6:13 am</a> Said:  		</div>
+
+<p>Thanks, it helps.<br>
+I think there’s a type in second code snippet, it’s the same as the 
+first one, line 6 should probably be removed and line 7 would read 
+return float4(texColor, 1) then.</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="" id="comment-24">
+
+<div class="commentmetadata">
+<strong>admin</strong>, on <a href="#comment-24" title="">May 5th, 2010 at 9:07 am</a> Said:  		</div>
+
+<p>Thanks.  Fixed it.</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="alt" id="comment-65">
+
+<div class="commentmetadata">
+<strong>Dimi</strong>, on <a href="#comment-65" title="">May 10th, 2010 at 5:47 am</a> Said:  		</div>
+
+<p>Thanks John, this clears up a lot of questions<br>
+I had from the slides.</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="" id="comment-68">
+
+<div class="commentmetadata">
+<strong>Dimi</strong>, on <a href="#comment-68" title="">May 10th, 2010 at 11:49 pm</a> Said:  		</div>
+
+<p>I have one question though.<br>
+Can you get Tonemapping and Gamma adjustmen on<br>
+an engine framework without postprocessing?<br>
+You can just render every object in your scene using these shader techniques right?</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="alt" id="comment-70">
+
+<div class="commentmetadata">
+<strong>admin</strong>, on <a href="#comment-70" title="">May 12th, 2010 at 12:03 am</a> Said:  		</div>
+
+<p>Hi Dimi.  Definitely.  That was the original way it was done.  You just do the tonemapping at the end of the shader.</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="" id="comment-204">
+
+<div class="commentmetadata">
+<strong><a href="http://rich5264.wordpress.com/2010/05/04/tone-mapping-papers-and-articles/" onclick="javascript:pageTracker._trackPageview('/outbound/commentauthor/rich5264.wordpress.com');" rel="external nofollow" class="url">Tone-mapping papers and articles « Daniel's Blog</a></strong>, on <a href="#comment-204" title="">June 28th, 2010 at 12:59 am</a> Said:  		</div>
+
+<p>[...] codes:&nbsp;http://filmicgames.com/archives/75       Tags: Graphics, HDR, [...]</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="alt" id="comment-263">
+
+<div class="commentmetadata">
+<strong>allingm</strong>, on <a href="#comment-263" title="">July 21st, 2010 at 5:37 pm</a> Said:  		</div>
+
+<p>It’s been a while since you posted, but I’ve been programming and graphing a lot of tonemapping operators.  </p>
+<p>I can’t seem to figure out what the following line does for the curve:<br>
+float3 x = max(0,texColor-0.004);</p>
+<p>I thought maybe it maybe it helped the curve in the blacks, but the 
+graph of the algorithm seems almost the same without it.  Also, taking 
+screen shots of my results doesn’t seem to reveal anything different 
+with or without this line.  A factor of 0.004 isn’t much after all.</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="" id="comment-267">
+
+<div class="commentmetadata">
+<strong>admin</strong>, on <a href="#comment-267" title="">July 21st, 2010 at 11:46 pm</a> Said:  		</div>
+
+<p>@allingm: The 0.004 sets the value for the black point to give you a 
+little more contrast in the bottom end.  The graph will look very close,
+ you will see a noticeable difference in the blacks in your images 
+because the human eye has more precision in the darker areas.</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="alt" id="comment-378">
+
+<div class="commentmetadata">
+<strong><a href="http://imdoingitwrong.wordpress.com/2010/08/19/why-reinhard-desaturates-my-blacks-3/" onclick="javascript:pageTracker._trackPageview('/outbound/commentauthor/imdoingitwrong.wordpress.com');" rel="external nofollow" class="url">Why Reinhard desaturates my blacks « I'm doing it wrong</a></strong>, on <a href="#comment-378" title="">August 19th, 2010 at 3:50 pm</a> Said:  		</div>
+
+<p>[...] check out how John’s operator [...]</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="" id="comment-1107">
+
+<div class="commentmetadata">
+<strong><a href="http://www.racer.nl/" onclick="javascript:pageTracker._trackPageview('/outbound/commentauthor/www.racer.nl');" rel="external nofollow" class="url">Ruud van Gaal</a></strong>, on <a href="#comment-1107" title="">November 5th, 2010 at 5:31 am</a> Said:  		</div>
+
+<p>Excellent! I’ve been reading the PPT and didn’t know where exactly 
+all the exposure compensations went. This all makes it clear, including 
+the pow(col,1/2.2) at the end! (after all those pages on gamma <img src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/icon_wink.gif" alt=";-)" class="wp-smiley">  )</p>
+<p>But what does the ‘ExposureBias’ do? Sounds like a magic constant.</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="alt" id="comment-1109">
+
+<div class="commentmetadata">
+<strong><a href="http://www.racedepartment.com/racer/39817-tone-mapping-2.html#post653349" onclick="javascript:pageTracker._trackPageview('/outbound/commentauthor/www.racedepartment.com');" rel="external nofollow" class="url">Tone mapping</a></strong>, on <a href="#comment-1109" title="">November 5th, 2010 at 5:57 am</a> Said:  		</div>
+
+<p>[...]          I've gotten Uncharted2 tonemapping to work correctly, with a nice link: <a href="http://filmicgames.com/archives/75/comment-page-1" rel="nofollow">http://filmicgames.com/archives/75/comment-page-1</a>  I'll see if I can detach the sampling and integration of the exposure. No attachments yet, since I [...]</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="" id="comment-1167">
+
+<div class="commentmetadata">
+<strong>admin</strong>, on <a href="#comment-1167" title="">November 7th, 2010 at 9:24 pm</a> Said:  		</div>
+
+<p>Hi Rudd,</p>
+<p>Exposure bias is in fact a magic constant.  Basically, it just 
+multiplies the whole image by a number before going into the film curve.
+  It’s in there so that when you switch back and forth between linear 
+and filmic then the overall intensity stays about the same.</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="alt" id="comment-4005">
+
+<div class="commentmetadata">
+<strong><a href="http://www.klayge.org/2011/05/11/filmic-tonemapping-rocks/" onclick="javascript:pageTracker._trackPageview('/outbound/commentauthor/www.klayge.org');" rel="external nofollow" class="url">Filmic Tonemapping rocks - KlayGE游戏引擎</a></strong>, on <a href="#comment-4005" title="">May 11th, 2011 at 12:43 am</a> Said:  		</div>
+
+<p>[...] 2的Filmic Tonemapping。虽然只要改2行代码，但Filmic [...]</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="" id="comment-4157">
+
+<div class="commentmetadata">
+<strong>fdsj</strong>, on <a href="#comment-4157" title="">May 17th, 2011 at 9:47 am</a> Said:  		</div>
+
+<p>Sorry to say but those tone-mapping operators simply don’t work in a 
+real world. They maybe can work for the specific image you used but not 
+in a general way.</p>
+<p>The onlyY way to perform tone-mapping is using an histogram and 
+setting manually the white point and, then, cutting the extremes and 
+apply some non-linear function like a log or a polynomial.</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="alt" id="comment-4195">
+
+<div class="commentmetadata">
+<strong>admin</strong>, on <a href="#comment-4195" title="">May 18th, 2011 at 12:57 am</a> Said:  		</div>
+
+<p>@fdsj: Umm, did you actually read the formulas?  The input is implied
+ to be at a reasonable exposure (hence the difference between “exposure 
+correction” and “tonemapping”, which I discuss in a different post).  
+Those formulas have a white point, a black point, and use either a log 
+with a curve or a polynomial.</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="" id="comment-6447">
+
+<div class="commentmetadata">
+<strong><a href="http://www.tomatoengine.com/?p=181" onclick="javascript:pageTracker._trackPageview('/outbound/commentauthor/www.tomatoengine.com');" rel="external nofollow" class="url">HDR and Tone-Mapping Links « Tomato Engine</a></strong>, on <a href="#comment-6447" title="">August 28th, 2011 at 8:07 am</a> Said:  		</div>
+
+<p>[...] codes:&nbsp;http://filmicgames.com/archives/75    
+Share:FacebookEmailPrint  Tagged as: HDR, Tone Mapping Leave a comment  
+   Comments (0) [...]</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="alt" id="comment-11027">
+
+<div class="commentmetadata">
+<strong>Roman Galashov</strong>, on <a href="#comment-11027" title="">January 18th, 2012 at 5:23 am</a> Said:  		</div>
+
+<p>John, why in next to last  listing finished by linear out:<br>
+…<br>
+float3 retColor = (x*(6.2*x+.5))/(x*(6.2*x+1.7)+0.06);<br>
+return float4(retColor,1);</p>
+<p>and in final listing it finished by gamma-correction:<br>
+…<br>
+float3 retColor = pow(color,1/2.2);<br>
+return float4(retColor,1);</p>
+<p>when it is the same polynom function ((x*(A*x+C*B)+D*E)/(x*(A*x+B)+D*F))-E/F ?</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="" id="comment-12219">
+
+<div class="commentmetadata">
+<strong>Guilt</strong>, on <a href="#comment-12219" title="">February 9th, 2012 at 9:48 pm</a> Said:  		</div>
+
+<p>Hi,</p>
+<p>I’m trying out the GLSL version of it. Unfortunately the image gets 
+extremely saturated/exposed. Am I doing something wrong here: </p>
+<p>//From Filmic Tonemapping, Uncharted: <a href="http://filmicgames.com/archives/75" rel="nofollow">http://filmicgames.com/archives/75</a></p>
+<p>uniform bool use_tex;<br>
+uniform sampler2D tex;<br>
+uniform bool use_tex_matrix;<br>
+uniform mat4 tex_matrix;<br>
+varying vec4 varying_color;<br>
+varying vec2 varying_texcoord;</p>
+<p>float A = 0.15;<br>
+float B = 0.50;<br>
+float C = 0.10;<br>
+float D = 0.20;<br>
+float E = 0.02;<br>
+float F = 0.30;<br>
+float W = 11.2;<br>
+float exposurebias = 2.0;<br>
+float multiplier = 16.0;<br>
+float power = 0.454;</p>
+<p>vec3 Tonemap(vec3 x)<br>
+{<br>
+return ((x*(A*x+C*B)+D*E)/(x*(A*x+B)+D*F))-E/F;<br>
+}</p>
+<p>vec3 performTonemap(vec3 tmp)<br>
+{<br>
+  vec3 tmpmap;<br>
+  vec3 cur;<br>
+  vec3 newcur;<br>
+  vec3 whitescale;<br>
+  tmpmap = multiplier * tmp;<br>
+  cur = Tonemap(exposurebias*tmpmap);<br>
+  whitescale = 1.0/Tonemap(vec3(W, W, W));<br>
+  newcur = cur*whitescale;<br>
+  return vec3(pow(newcur.r, power), pow(newcur.g, power), pow(newcur.b, power));<br>
+}</p>
+<p>void main(){<br>
+  vec4 tmp=varying_color;<br>
+  vec4 coord = vec4(varying_texcoord, 0.0, 1.0);<br>
+  if (use_tex_matrix) {<br>
+     vec4 sample;<br>
+     coord = coord * tex_matrix;<br>
+     sample = texture2D(tex, coord.st);<br>
+     tmp *= sample;<br>
+  }<br>
+  else if (use_tex) {<br>
+     vec4 sample = texture2D(tex, coord.st);<br>
+     tmp *= sample;<br>
+  }<br>
+  //Everything till here works as a good passthrough pixel shader.<br>
+  gl_FragColor=vec4(performTonemap(vec3(tmp.r, tmp.g, tmp.b)), tmp.a);<br>
+}</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="alt" id="comment-16086">
+
+<div class="commentmetadata">
+<strong>Phil</strong>, on <a href="#comment-16086" title="">April 17th, 2012 at 7:46 pm</a> Said:  		</div>
+
+<p>Hi Guilt, having the same issues — did you figure out a solution?</p>
+<p>I noticed that point about “The input is implied to be at a 
+reasonable exposure”, so instead of our typical “rendering colors 
+between 0 and 1″ we might have to render to a higher range (-1000 .. 
+1000? who knows?) — but then, I thought that’s what the multiplier=16 
+would do for our LDR texture already.</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="" id="comment-16848">
+
+<div class="commentmetadata">
+<strong>bill</strong>, on <a href="#comment-16848" title="">April 28th, 2012 at 4:47 pm</a> Said:  		</div>
+
+<p>Make sure you do gamma correction the right way:</p>
+<p>- if texture are edited in Gimp/Photoshop are most probably in sRGB 
+space, so you must convert in linear color space manually inside the 
+shader or use GL_TEXTURE_SRGB version..</p>
+<p>- if you framebuffer is not sRGB, call glEnable(GL_FRAMEBUFFER_SRGB) 
+(OpenGL 3+) or manually convert via pow func inside the shader.</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="alt" id="comment-19685">
+
+<div class="commentmetadata">
+<strong><a href="http://jcoluna.wordpress.com/2012/06/05/light-shafts-tone-mapping/" onclick="javascript:pageTracker._trackPageview('/outbound/commentauthor/jcoluna.wordpress.com');" rel="external nofollow" class="url">Light Shafts + Tone Mapping | J.Coluna</a></strong>, on <a href="#comment-19685" title="">June 5th, 2012 at 7:48 pm</a> Said:  		</div>
+
+<p>[...] banding when doing this color space transformation. The 
+technique I’m using is explained here. Here are some examples of the 
+same view using different tone mapping [...]</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="" id="comment-21784">
+
+<div class="commentmetadata">
+<strong>Frank</strong>, on <a href="#comment-21784" title="">July 28th, 2012 at 4:03 pm</a> Said:  		</div>
+
+<p>Thanks for the explaination of tonemapping and putting up the codes <img src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/icon_smile.gif" alt=":)" class="wp-smiley"><br>
+I tried to apply it to Gta4</p>
+<p>[IMG]http://img37.imageshack.us/img37/7038/eflc2012072806470959.png[/IMG]</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="alt" id="comment-21841">
+
+<div class="commentmetadata">
+<strong>Jason</strong>, on <a href="#comment-21841" title="">July 30th, 2012 at 12:55 pm</a> Said:  		</div>
+
+<p>Hi, everyone .<br>
+I am trying to create the HDR rendering using stage3d of adobe flash.<br>
+The problem I have got is flash only supports 8bits per channel Rgba 
+texture format for frame buffer.  Is there any way possible to do the 
+tone mapping properly in this case?<br>
+Thank you very much:)</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="" id="comment-22237">
+
+<div class="commentmetadata">
+<strong><a href="http://www.espadon-online.eu/" onclick="javascript:pageTracker._trackPageview('/outbound/commentauthor/www.espadon-online.eu');" rel="external nofollow" class="url">Delio</a></strong>, on <a href="#comment-22237" title="">August 15th, 2012 at 12:34 pm</a> Said:  		</div>
+
+<p>Hi John,</p>
+<p>This is a very good explanation of the tonemapping process, thanks for that. </p>
+<p>I have a question about the exposure adjustment. What is a good way 
+to correct to exposure of an image, based on the average luminance? Is 
+there any common algorithm?<br>
+And do you limit the adjustment to allow very dark scenes (nighttime) or
+ very bright scenes like snow without getting over or underexposed?</p>
+<p>@Jason I don’t know if you read this, but I suggest taking a look at 
+the RGBE format, it stores a exponent value in the E component and still
+ keeps everything at 8bit.</p>
+	</li>
+
+
+	<br>
+		
+
+	<li class="alt" id="comment-23058">
+
+<div class="commentmetadata">
+<strong><a href="http://lousodrome.net/blog/light/2012/09/11/readings-on-color-management/" onclick="javascript:pageTracker._trackPageview('/outbound/commentauthor/lousodrome.net');" rel="external nofollow" class="url">Readings on color management | Light is beautiful</a></strong>, on <a href="#comment-23058" title="">September 10th, 2012 at 10:55 pm</a> Said:  		</div>
+
+<p>[...] Habble has a series of three short articles on tone mapping: 
+Filmic Tonemapping Operators, Why Reinhard Desaturates Your Blacks, and 
+Why a Filmic Curve Saturates Your [...]</p>
+	</li>
+
+
+	<br>
+		
+	</ol>
+
+
+
+				</div>
+			</div>
+
+		
+			<div class="navigation">
+				« <a href="http://filmicgames.com/archives/35" rel="prev">720p != 1080p</a>  <a href="http://filmicgames.com/archives/98" rel="next">New Theme!</a> »			</div>
+
+		
+	</div>
+		
+	<div id="sidebar-container">
+
+<div class="sidebar">
+	<ul>
+	<li id="categories-3" class="widget widget_categories"><h2 class="widgettitle">Categories</h2>
+		<ul>
+	<li class="cat-item cat-item-5"><a href="http://filmicgames.com/archives/category/csg" title="Constructive Solid Geometry (CSG)">CSG</a> (1)
+</li>
+	<li class="cat-item cat-item-3"><a href="http://filmicgames.com/archives/category/gamma" title="Gamma in 3D Graphics.">Gamma!</a> (6)
+</li>
+	<li class="cat-item cat-item-8"><a href="http://filmicgames.com/archives/category/gpus" title="View all posts filed under GPUs">GPUs</a> (3)
+</li>
+	<li class="cat-item cat-item-7"><a href="http://filmicgames.com/archives/category/materials" title="Materials!">Materials</a> (1)
+</li>
+	<li class="cat-item cat-item-6"><a href="http://filmicgames.com/archives/category/misc" title="Miscellaneous">Misc</a> (5)
+</li>
+	<li class="cat-item cat-item-9"><a href="http://filmicgames.com/archives/category/skin-shading" title="View all posts filed under Skin Shading">Skin Shading</a> (2)
+</li>
+	<li class="cat-item cat-item-4"><a href="http://filmicgames.com/archives/category/tonemapping" title="Filmic Tonemapping and other operators.">Tonemapping</a> (3)
+</li>
+	<li class="cat-item cat-item-1"><a href="http://filmicgames.com/archives/category/uncategorized" title="View all posts filed under Uncategorized">Uncategorized</a> (14)
+</li>
+		</ul>
+</li>
+<li id="wp_plugin_feed_link-3" class="widget widget_wp_plugin_feed_link"><h2 class="widgettitle">RSS Feeds!</h2>
+    
+    <ul class="wp_plugin_widget_feed_link">
+              <li class="rss"><a href="http://filmicgames.com/feed" title="Subscribe posts via RSS">Subscribe posts via RSS</a></li>
+            
+            
+              <li class="rss"><a href="http://filmicgames.com/comments/feed" title="Subscribe comments via RSS">Subscribe comments via RSS</a></li>
+            
+      
+      
+    </ul>
+    
+    </li>
+<li id="meta-3" class="widget widget_meta"><h2 class="widgettitle">Meta Meta Meta!</h2>
+			<ul>
+						<li><a href="http://filmicgames.com/wp-login.php">Log in</a></li>
+			<li><a href="http://filmicgames.com/feed" title="Syndicate this site using RSS 2.0">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://filmicgames.com/comments/feed" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>
+						</ul>
+</li>
+<li id="archives-3" class="widget widget_archive"><h2 class="widgettitle">Archives</h2>
+		<ul>
+			<li><a href="http://filmicgames.com/archives/date/2012/02" title="February 2012">February 2012</a>&nbsp;(1)</li>
+	<li><a href="http://filmicgames.com/archives/date/2011/09" title="September 2011">September 2011</a>&nbsp;(1)</li>
+	<li><a href="http://filmicgames.com/archives/date/2011/08" title="August 2011">August 2011</a>&nbsp;(2)</li>
+	<li><a href="http://filmicgames.com/archives/date/2011/07" title="July 2011">July 2011</a>&nbsp;(1)</li>
+	<li><a href="http://filmicgames.com/archives/date/2011/05" title="May 2011">May 2011</a>&nbsp;(2)</li>
+	<li><a href="http://filmicgames.com/archives/date/2011/04" title="April 2011">April 2011</a>&nbsp;(1)</li>
+	<li><a href="http://filmicgames.com/archives/date/2011/03" title="March 2011">March 2011</a>&nbsp;(1)</li>
+	<li><a href="http://filmicgames.com/archives/date/2011/02" title="February 2011">February 2011</a>&nbsp;(1)</li>
+	<li><a href="http://filmicgames.com/archives/date/2010/12" title="December 2010">December 2010</a>&nbsp;(1)</li>
+	<li><a href="http://filmicgames.com/archives/date/2010/11" title="November 2010">November 2010</a>&nbsp;(1)</li>
+	<li><a href="http://filmicgames.com/archives/date/2010/10" title="October 2010">October 2010</a>&nbsp;(1)</li>
+	<li><a href="http://filmicgames.com/archives/date/2010/09" title="September 2010">September 2010</a>&nbsp;(3)</li>
+	<li><a href="http://filmicgames.com/archives/date/2010/08" title="August 2010">August 2010</a>&nbsp;(2)</li>
+	<li><a href="http://filmicgames.com/archives/date/2010/07" title="July 2010">July 2010</a>&nbsp;(2)</li>
+	<li><a href="http://filmicgames.com/archives/date/2010/06" title="June 2010">June 2010</a>&nbsp;(3)</li>
+	<li><a href="http://filmicgames.com/archives/date/2010/05" title="May 2010">May 2010</a>&nbsp;(7)</li>
+	<li><a href="http://filmicgames.com/archives/date/2010/04" title="April 2010">April 2010</a>&nbsp;(5)</li>
+		</ul>
+</li>
+	</ul>
+</div>
+
+<div id="sidebar-bottom"><img src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/headshot-complete.jpg"></div>
+
+
+<div id="sidebar-about">
+	<img src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/operational-file.png">
+</div>
+
+
+<div id="sidebar-about-post"><img src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/sidebar-spacer.png"><img src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/sidebar-bottom.png"></div>
+
+</div></div>
+	
+
+<div id="footer-top-a"><img src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/footer-top-a.png"></div>
+
+
+
+<div id="footer">
+<p>
+Copyright © 2010 John Hable
+</p>
+</div>
+
+<div>
+
+<!-- Google Analytics for WordPress | http://yoast.com/wordpress/google-analytics/ -->
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+	try {
+		var pageTracker = _gat._getTracker("UA-16227501-1");
+		// Cookied already: 
+		pageTracker._trackPageview();
+	} catch(err) {}
+</script>
+<!-- End of Google Analytics code -->
+
+<!-- SyntaxHighlighter Stuff -->
+<script type="text/javascript" src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/shCore.js"></script>
+	<script type="text/javascript" src="Filmic%20Games%20%C2%BB%20Filmic%20Tonemapping%20Operators_files/shBrushCpp.js"></script>
+	<!-- Reassign aliases -->
+	<script type="text/javascript">
+				SyntaxHighlighter.brushes.Cpp.aliases = ["cpp", "c", "c++"];
+	</script>
+<script type="text/javascript">
+	SyntaxHighlighter.all();
+</script>
+
+</div>	
+</div>
+	
+
+<style>#header + #content > #left > #rlblock_left
+{display:none !important;}</style></body></html>

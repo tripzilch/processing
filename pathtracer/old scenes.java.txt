@@ -1,0 +1,40 @@
+--------------------------------------------------------------------
+
+  Plane back = new Plane(0,0,1,-400, vec3(0,0,5));
+  back.radiance = vec3(0.2,0.2,0.2);
+  world.add(back);
+  Plane front = new Plane(0,0,-1,0, vec3(1,0,0));
+  front.radiance = vec3(0.2,0.2,0.2);
+  world.add(front);
+  //SkySphere sky = new SkySphere(0, 0, 0, 1000, null);
+  //RoundBox sky = new RoundBox(0, 300, 1000, vec3(300, 300, 10), 0, null);
+  //sky.radiance = vec3(1,1,1);
+  //world.add(sky); // background sphere
+
+  RoundBox box1 = new RoundBox(-365, -605, 150, vec3(500,600,300), 5, null);
+  RoundBox box2 = new RoundBox(725, -605, 450, vec3(500,600,300), 5, null);
+  Union boxes = new Union(box1, box2, null);
+  CylinderY cyl_hole = new CylinderY(35, 0, 50, 70, null);
+  Difference boxes_hole = new Difference(boxes, cyl_hole, null);
+  Plane floor = new Plane(0, 1, 0, 0, null);
+  Intersection roof = new Intersection(floor, boxes_hole, vec3(0.05, 0.05, 0.1));
+  roof.reflectance = 0.0; 
+  world.add(roof); // ground plane
+  
+  Sphere sph1 = new Sphere(-80, 50,   0, 50, vec3(0.3, 0.4, 0.5));
+  sph1.reflectance = 2.0;
+  world.add(sph1);
+  Sphere sph2 = new Sphere(-80, 15, -105, 15, vec3(0.3, 0.15, 0.15)); 
+  sph2.reflectance = 1.5;
+  world.add(sph2);
+  Sphere sph3 = new Sphere(-140, 20, -70, 25, vec3(0.2, 0.2, 0.45)); 
+  sph3.reflectance = 1.5;
+  world.add(sph3);
+  
+  CylinderY cyl = new CylinderY(35, 0, 50, 20, vec3(0.15, 0.3, 0.45));
+  cyl.reflectance = 0.25;
+  world.add(cyl);
+  
+  Torus torus = new Torus(35, 195, 50, 120, 15, vec3(0.6, 0.6, 0.6));
+  torus.reflectance = 3.0; 
+  world.add(torus);
