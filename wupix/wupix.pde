@@ -1,86 +1,68 @@
 import java.lang.Math;
+import java.lang.Double;
 
-//double phi = Math.sqrt(5.0) * 0.5 + 0.5
-float pscale, dot_size;
-PShape dod;
+int W, H;
+int W2, H2;
 void setup() {
   size(500, 500, P2D);
-  dot_size = 1.0;
-  colorMode(RGB, 1.0);
-  noStroke();
-  dod = regularPolygon(12);
+  W = width;
+  H = height;
+  W2 = width / 2;
+  H2 = height / 2;
 }
 
-PShape regularPolygon(int N) {
-  PShape p = createShape();
-  p.beginShape(TRIANGLE_STRIP);
-  p.noStroke();
-  p.fill(#000000);
-  for (int i = 0; i < N; i++) {
-    int k = (i / 2) + (i % 2) * (N - i);
-    p.vertex(cos(k * TAU / N), sin(k * TAU / N));
-  }
-  p.endShape(CLOSE);
-  p.disableStyle();
-  return p;
+void pixaa(Vec2 p, double k) {
+  pixaa(p.x, p.y, k);
 }
 
-void dot(double x, double y, double s) {
-  float ps = dot_size * (float) s;
-  shape(dod, (float) x, (float) y, ps, ps);
-}
-
-int cAlpha(int c, double a) { return ((int) Math.min(255.0, 255.0 * a)) * 0x01000000 | (c & 0x00FFFFFF); }
-int c0 = 0xFF000000;
-int c1 = 0xFF773300;
-int c2 = 0xFF330077;
+double r2() { return Math.random() - Math.random(); }
+double mix(double x, double y, double a) { return x + a * (y - x); }
 
 double start_time = millis();
-double prev_now = 0.0;
-int step = 0;
-float pmx=0, pmy=0;
+double now = (double) (millis() - start_time) / 1000.0;
+Vec2 v = new Vec2(0.5, 0.5),
+     p = new Vec2(0.0, 0.0), 
+     x = new Vec2(0.0, 0.0),
+     imouse = new Vec2(mouseX, mouseY),
+     pimouse = new Vec2(mouseX, mouseY);
+
+double vx = 0.5, vy = 0.5, px = 0, py = 0, xx = 0, yy = 0;
+
+final int N = 1024;
 void draw() {
-  step = (step + 1) % min(width, height);
+  double pnow = now;
+  now = (double) (millis() - start_time) / 1000.0;
+  double dt = now - pnow;
+  Vec2 mouse = new Vec2(mouseX, mouseY);
+  Vec2 pmouse = new Vec2(pmouseX, pmouseY);
 
-  fill(0,0,0,.5);
-  rect(step, 0, 1, height);
-  rect(0, step, width, 1);
+  fill(0,0,0,23);
+  rect(0, 0, W, H);
+  loadPixels();
 
-  fill(.9,.3,.3,.75);
-  int S = mousePressed ? 12 : 4;
-  int R = S / 2;
-  rect(step, min(pmouseY, mouseY)-R, 1, S + abs(pmouseY - mouseY));
-  rect(min(pmouseY, mouseY), step, 1 + abs(pmouseY - mouseY), 1);
-  fill(.2,.4,.9,.75);
-  rect(min(pmouseX, mouseX)-R, step, S + abs(pmouseX - mouseX), 1);
-  rect(step, min(pmouseX, mouseX), 1, 1 + abs(pmouseX - mouseX));
+  for (int i = 0; i < N; i++) {
+    pimouse = imouse.copy();
+    imouse.mix(mouse, .001)
+    pixaa(imouse, .1);
+    // double a = Math.pow(0.99, dt / 0.01);  
+    // vx = vx * a + (mouseX - pmouseX) * (1 - a) * 0.25;
+    // vy = vy * a + (mouseY - pmouseY) * (1 - a) * 0.25;
+    // L = Math.sqrt(vx * vx + vy * vy);
+    // vx = vx * (0.4 + 0.1 / (L + 0.01));
+    // vy = vy * (0.4 + 0.1 / (L + 0.01));
+    // px += 512 * vx * dt;
+    // py += 512 * vy * dt;
+    // double xo = Math.cos(px) * 64.0;
+    // double yo = Math.sin(py) * 64.0;
+    // double b = Math.pow(0.9, dt / 0.01);
+    // xx = xx * b + mouseX * (1 - b);
+    // yy = yy * b + mouseY * (1 - b);
+    pixaa((float)(xx + xo + r2()),  (float) (yy + yo + r2()), 0.05);
+  }
+  updatePixels();
+  if (frameCount % 32 == 0) {
+    println("L: ", L, "vx: ", vx , "vy: ", vy, "dt: ", dt);
+  }
 
-  pmx=mouseX; pmy=mouseY;
-}
-
-
-
-void wupix(double x, double y) {
-  /*int xi = (int) x, yi = (int) y;
-  if (xi >= 0 && xi < width - 1 && yi >= 0 && yi < height - 1) {
-    int ii = yi * width + xi;
-    double xf = (x - xi), yf = (y - yi);
-    double xy = xf * yf;
-    pixels[ii] = grey(1.0 - yf - xf + xy);
-    pixels[ii+1] = grey(xf - xy);
-    pixels[ii+width] = grey(yf - xy);
-    pixels[ii+width+1] = grey(xy);
-  }*/
-}
-
-//double W
-double wobble(double x, double y, double z) {
-  double a = Math.cos( 23 * x - 17 * y + 87);
-  double b = Math.cos( 37 * y + 28 * z + 53);
-  double c = Math.cos( 61 * z - 45 * x + 33);
-
-  return  (Math.cos(17 * a + 31 * b + 39)
-         + Math.cos(21 * b + 13 * c + 24)
-         + Math.cos(19 * c + 5 * a + 15 - 43 * z)) * 0.33333;
 }
 

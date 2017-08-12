@@ -32,7 +32,7 @@ class Grid {
   }
 
   ArrayList<Vec2> query(Vec2 p, double d) {
-    double dd = d * d;
+    double sqd = d * d;
     int xi0 = (int) ((p.x - d) / grid_spacing);
     int yi0 = (int) ((p.y - d) / grid_spacing);
     int xi1 = (int) ((p.x + d) / grid_spacing);
@@ -41,9 +41,9 @@ class Grid {
     for (int xi = xi0; xi <= xi1; xi++) {
       int xk = xi << 16;
       for (int yi = yi0; yi <= yi1; yi++) {
-        int key = (xi << 16) + yi;
+        //int key = xk + yi;
         ArrayList<Vec2> cell = grid.get(xk + yi); // maybe null
-        if (cell != null) for (Vec2 q: cell) if (p != q && p.sqDist(q) < dd)
+        if (cell != null) for (Vec2 q: cell) if (p != q && q.sqDist(p) < sqd)
           result.add(q);
       }
     }

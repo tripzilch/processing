@@ -4,8 +4,68 @@
 		"selected_items":
 		[
 			[
+				"ro",
+				"rotate\trotateZ"
+			],
+			[
+				"near",
+				"near_p"
+			],
+			[
+				"rog",
+				"roglol.gif"
+			],
+			[
+				"pie",
+				"pixels"
+			],
+			[
+				"lea",
+				"leaky_bucket_halflife"
+			],
+			[
+				"swa",
+				"swaps_per_frame"
+			],
+			[
+				"0xFF",
+				"0xFF000000"
+			],
+			[
+				"image",
+				"image_filename"
+			],
+			[
+				"set",
+				"setString"
+			],
+			[
+				"D",
+				"D_1_SHL_53"
+			],
+			[
+				"MAXI",
+				"MAXITER3"
+			],
+			[
+				"sphere",
+				"sphere\tsphere"
+			],
+			[
+				"_V",
+				"_VY"
+			],
+			[
+				"_",
+				"_RHO"
+			],
+			[
+				"N",
+				"N_FIELDS"
+			],
+			[
 				"q",
-				"query	(grid.pde)"
+				"query\t(grid.pde)"
 			],
 			[
 				"Arra",
@@ -25,7 +85,7 @@
 			],
 			[
 				"sq",
-				"sqMag	(vec2.pde)"
+				"sqMag\t(vec2.pde)"
 			],
 			[
 				"acce",
@@ -53,7 +113,7 @@
 			],
 			[
 				"di",
-				"distance	(glsl-functions.md)"
+				"distance\t(glsl-functions.md)"
 			],
 			[
 				"reloa",
@@ -117,7 +177,7 @@
 			],
 			[
 				"c",
-				"class	New Class"
+				"class\tNew Class"
 			],
 			[
 				"subplo",
@@ -125,7 +185,7 @@
 			],
 			[
 				"if",
-				"ifmain	if __name__ == '__main__'"
+				"ifmain\tif __name__ == '__main__'"
 			],
 			[
 				"fft",
@@ -152,58 +212,29 @@
 	"buffers":
 	[
 		{
-			"file": "fluids/fluids.pde",
+			"file": "rgb2/rgb2.pde",
 			"settings":
 			{
-				"buffer_size": 1627,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/home/ritz/ownCloud/processing/CFD1/CFD1.pde",
-			"settings":
-			{
-				"buffer_size": 3653,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "gkale/gkale.pde",
-			"settings":
-			{
-				"buffer_size": 7282,
+				"buffer_size": 8143,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "gkale/grid.pde",
+			"contents": "import java.lang.Math;\n\ndouble PHI = Math.sqrt(5.0) * 0.5 + 0.5;\ndouble HW, HH, H, W;\nfloat HWf, HHf;\nPShape dod;\nvoid setup() {\n  size(768, 512, P3D);\n  H = height; W = width;\n  HW = HWf = .5 * width;\n  HH = HHf = .5 * height;\n  smooth(4);\n  colorMode(RGB, 1.0);\n  noStroke();\n  dod = regularPolygon(24);\n}\n\nPShape regularPolygon(int N) {\n  PShape p = createShape();\n  p.beginShape(TRIANGLE_STRIP);\n  p.noStroke();\n  p.fill(#000000);\n  for (int i = 0; i < N; i++) {\n    //int k = (i % 2 == 0) ? i / 2 : N - (i + 1) / 2;\n    int k = (i / 2) + (i % 2) * (N - i);\n    p.vertex(cos(k * TAU / N), sin(k * TAU / N), 0);\n  }\n  p.endShape(CLOSE);\n  p.disableStyle();\n  return p;\n}\n\n//double W\ndouble wobble(double x, double y, double z) {\n  double a = Math.cos( 23 * x - 17 * y + 33);\n  double b = Math.cos( 37 * y + 28 * z + 89);\n  double c = Math.cos( 61 * z - 45 * x + 51);\n\n  return ( c * Math.cos(17 * a + 31 * b + 15 )\n         + a * Math.cos(21 * b + 13 * c + 41 )\n         + b * Math.cos(19 * c +  5 * a + 27 ) ) * 0.33333;\n}\n\nvoid dot(double x, double y, double z, double s) {\n  pushMatrix();\n  translate((float) x, (float) y, (float) z);\n  scale((float) s);\n  shape(dod);\n  popMatrix();\n}\n\nint c0 = 0xFF121008;\nint c1 = 0xFF6622cc;\nint c2 = 0xFFdd4411;\n\nint cAlpha(int c, double a) {\n  return ((int) Math.min(255.0, 255.0 * a)) * 0x01000000 | (c & 0x00FFFFFF);\n}\n\ndouble start_time = millis();\ndouble prev_now, now, t0 = 0.0, ta = 0.0, ts, tc, cspin, sspin;\nint step = 0;\nint NFRAMES = 512;\nvoid draw() {\n  t0 = frameCount * TAU / NFRAMES;\n\n  background(c0);\n  // look at (0,0,0) from (0,0,HHf)\n  camera0(, 0, HHf, 0,0,0, 0,1,0);\n\n  //fill(c2);\n  //dot(0,0,10, 10.0);\n  //rotateZ((float) (t0 * 5.0));\n\n\n\n  ts = (Math.sin(t0)      + .2 * Math.sin(t0 * 5 + .2 * TAU)) / 1024;\n  tc = (Math.cos(t0 - .5) + .2 * Math.cos(t0 * 5 + .4 * TAU)) / 1024;\n\n  int N = 4096;\n  double rN = 1.0 / N;\n  double a, t, x, y, z, s, p, px, py, pz, iz;\n  double near_p = 5.0;\n  for (int i = 0; i < N; i++) {\n    //t = prev_now + (now - prev_now) * fi;\n    p = i * rN;\n    t = 8 * p;\n\n    // position\n    x = wobble( 3.1 * ts +   2.1e-3 * t + 83,  2.8 * tc +  -5.6e-3 * t + 11, -1.1 * tc + 15.7e-3 * t + 24);\n    y = wobble( 2.1 * tc +   2.3e-3 * t + 22, -3.3 * ts +  -3.7e-3 * t + 37,  1.3 * ts + 13.8e-3 * t + 73);\n    z = wobble(-2.4 * tc +   2.5e-3 * t + 12,  3.1 * ts +  -3.9e-3 * t + 10,  1.2 * ts + 14.2e-3 * t + 13);\n\n    // shape size\n    s = wobble(1.4 * ts +  -7.3e-3 * t + 55,  1.9 * ts +  17.3e-3 * t + 41,  3.6 * tc +  6.5e-3 * t + 47);\n    s *= 4.0 * Math.pow(Math.abs(s), 2.5);\n    s = s / (1.0 + Math.abs(s));\n    s *= 60.0;\n    // taper off ends\n    s = s * Math.min(1.0, 18 * (0.5 - Math.abs(p - 0.5 )));\n    // color\n    int c = (s > 0) ? c1 : c2;\n    s = Math.abs(s);\n    // c = cAlpha(c, Math.pow(Math.min(1.0, s), 2.0));\n    if (s < 0.5) continue;\n    fill(c);\n    dot(H * x, .7 * H * y, H * z - 500, s);\n  }\n\n  //prev_now = now;\n  String fn = \"/tmp/flollock/x\" + nf(frameCount, 5) + \".png\";\n  saveFrame(fn);\n  println(\"wrote\", fn, frameCount, t0);\n  if (frameCount >= NFRAMES) exit();\n}\n",
+			"file": "flollock/flollock.pde",
+			"file_size": 3090,
+			"file_write_time": 131153108817318589,
 			"settings":
 			{
-				"buffer_size": 1382,
+				"buffer_size": 3090,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "gkale/vec2.pde",
+			"file": "rgb1/rgb1.pde",
 			"settings":
 			{
-				"buffer_size": 1713,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "gkale/regularPolygon.pde",
-			"settings":
-			{
-				"buffer_size": 479,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "gkale/util.pde",
-			"settings":
-			{
-				"buffer_size": 406,
+				"buffer_size": 6963,
 				"line_ending": "Unix"
 			}
 		}
@@ -280,7 +311,7 @@
 			],
 			[
 				"Packages/Processing/Build Systems/Processing.sublime-build",
-				""
+				"Re-run sketch"
 			]
 		],
 		[
@@ -323,29 +354,61 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
-		"last_filter": "in",
+		"height": 306.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
-				"in",
-				"Indentation: Convert to Spaces"
+				"wra",
+				"Word Wrap: Toggle"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
 			],
 			[
 				"proce",
 				"Set Syntax: Processing"
 			],
 			[
+				"java",
+				"Set Syntax: Java"
+			],
+			[
+				"proces",
+				"Set Syntax: Processing"
+			],
+			[
+				"side",
+				"View: Toggle Side Bar"
+			],
+			[
 				"wrap",
 				"Word Wrap: Toggle"
+			],
+			[
+				"sideb",
+				"View: Toggle Side Bar"
+			],
+			[
+				"upper",
+				"Convert Case: Upper Case"
 			],
 			[
 				"sid",
 				"View: Toggle Side Bar"
 			],
 			[
-				"side",
-				"View: Toggle Side Bar"
+				"syntax pro",
+				"Set Syntax: Processing"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Indentation: Convert to Spaces"
 			],
 			[
 				"curso",
@@ -354,14 +417,6 @@
 			[
 				"markdown",
 				"Set Syntax: Markdown"
-			],
-			[
-				"inst",
-				"Package Control: Install Package"
-			],
-			[
-				"java",
-				"Set Syntax: JavaScript"
 			],
 			[
 				"packa",
@@ -460,20 +515,12 @@
 				"Package Control: Install Package"
 			],
 			[
-				"sideb",
-				"View: Toggle Side Bar"
-			],
-			[
 				"disb",
 				"Package Control: Disable Package"
 			],
 			[
 				"python",
 				"Python: Disable Pep8 Linting On View"
-			],
-			[
-				"wra",
-				"Word Wrap: Toggle"
 			],
 			[
 				"spaces",
@@ -524,137 +571,137 @@
 	},
 	"console":
 	{
-		"height": 341.0,
+		"height": 202.0,
 		"history":
 		[
-			"1410-1140.82",
-			"1140.82-1410",
-			".5*5**.5+.5",
-			"5**.5+.5",
-			"ad=.0375;fr = lambda r:1/(r*r+ad) - 1/(.25**2+ad); print('%6.3f %6.3f %6.3f %6.3f'%(fr(0),fr(0.1),fr(0.2),fr(0.25)))",
-			"fr = lambda r:1/(r*r+.0375); print('%6.3f %6.3f %6.3f %6.3f'%(fr(0),fr(0.1),fr(0.2),fr(0.25)))",
-			".1-.25**2",
-			".25**2",
-			"fr = lambda r:1/(r*r+.01); print('%6.3f %6.3f %6.3f %6.3f'%(fr(0),fr(0.1),fr(0.2),fr(0.25)))",
-			"fr = lambda r:1/(r+.01); print('%6.3f %6.3f %6.3f %6.3f'%(fr(0),fr(0.1),fr(0.2),fr(0.25)))",
-			"fr = lambda r:1/(r+.01); print(fr(0),fr(0.1),fr(0.2),fr(0.25))",
-			"r=0.2; 1/r",
-			"1000/.75",
-			".25*2**.5",
-			".5*2**.5",
-			"prime(157)",
-			"prime(171)",
-			"prime(71)",
-			"prime(7)",
-			"prime = lambda p: all([p%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41] if x != p])",
-			"all([157%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41] if x != 5])",
-			"all([153%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41] if x != 5])",
-			"all([15%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41] if x != 5])",
-			"all([5%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41] if x != 5])",
-			"[5%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41] if x != 5]",
-			"[5%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41]]",
-			"[15%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41]]",
-			"[7%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41]]",
-			"all([7%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41]])",
-			"all([257%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41]])",
-			"prime = lambda p: all([p%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41]])",
-			"prime(9)",
-			"prime(7)",
-			"prime = lambda p: all([p%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41]])",
-			"all([257%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41]])",
-			"clear()",
-			"x",
-			"x = Counter((gk(a,b) for a in range(-250,250) for b in range(-250,250)))",
-			"gk(3,4)",
-			"gk = lambda xi,yi:(xi + 257 * yi) ^ (xi * 157) ^ yi",
-			"print(Counter.__doc__)",
-			"print Counter.__doc__",
-			"show",
-			"?",
-			"help",
-			"doc",
-			"help(Counter)",
-			"Counter",
-			"from collections import Counter",
-			"all([257%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41]])",
-			"all([157%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41]])",
-			"all([79%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41]])",
-			"all([77%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41]])",
-			"all([88%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41]])",
-			"[88%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41]]",
-			"[157%x for x in [2,3,5,7,11,13,17,19,23,29,31,37,41]]",
-			"157",
-			"256/phi",
-			"phi",
-			"phi=.5+.5*5**.5",
-			"8/.03125",
-			".25/8.",
-			".25/32.",
-			"90-71.47",
-			"_**2",
-			"1/1.414",
-			"2480/12.",
-			"2480/6.",
-			"2480/2",
-			"1748/2",
-			".618*1.5",
-			"80/1.618",
-			"343/44.65",
-			"0.13",
-			"44.65/343",
-			"500/40",
-			"15*2.5/6.28",
-			"15*2.5",
-			"1/.02",
-			".995 ** 480",
-			".993 ** 480",
-			".992 ** 480",
-			".999 ** 480",
-			".99 ** 480",
-			"print('\\n'.join('%3d - %s' % (k, s32 - set([(x*k) % 32 for x in range(32)])) for k in range(1,32)))",
-			"print('\\n'.join(str(s32 - set([(x*k) % 32 for x in range(32)])) for k in range(1,32)))",
-			"print('\\n'.join(str(s32 - set([(x*4) % 32 for x in range(32)])) for k in range(1,32)))",
-			"for i in range(6): print(s32 - set([(x*4) % 32 for x in range(32)]));end",
-			"for i in range(6): print(s32 - set([(x*4) % 32 for x in range(32)]));",
-			"for i in range(6):;print(s32 - set([(x*4) % 32 for x in range(32)]));",
-			"for i in range(6):    print(s32 - set([(x*4) % 32 for x in range(32)]));",
-			"for i in range(6):    print(s32 - set([(x*4) % 32 for x in range(32)]))",
-			"for i in range(6): print(s32 - set([(x*4) % 32 for x in range(32)]))",
-			"print(s32 - set([(x*4) % 32 for x in range(32)]))",
-			"print s32 - set([(x*4) % 32 for x in range(32)])",
-			"s32 - set([(x*4) % 32 for x in range(32)])",
-			"s32 - set([(x*3) % 32 for x in range(32)])",
-			"s32 = set([x % 32 for x in range(32)])",
-			"set([(x*3) % 32 for x in range(32)])",
-			"set([(x*2) % 32 for x in range(32)])",
-			"set([x % 32 for x in range(32)])",
-			"30*3.1415*2/32",
-			"30*3.1415*2",
-			".95 * (1<<23)",
-			".95523555 * (1<<23)",
-			".95523555 * (1<<16)",
-			".95523555",
-			"512./768",
-			"pp(26)",
-			"pp(33)",
-			"33*phi,33*phi*phi",
-			"pp=lambda x:[int(y) for y in [x,x*phi,x*phi*phi,x*phi*phi*phi]]",
-			"15*phi",
-			"15*phi*phi",
-			"33*phi*phi",
-			"33*phi",
-			"phi",
-			"phi = .5 + .5*5**.5",
-			"tau/5",
-			"tau/6",
-			"tau/8",
-			"tau/4",
-			"tau=pi*2",
-			"pi=3.1415926536",
-			"pi",
-			"(tau / 128 / 2048) / (1/65536)",
-			"tau / 128 / 2048",
-			"tau / 128 / 4096"
+			"2.5/(768/2)",
+			"768/2",
+			"5/6",
+			"5/4",
+			"2.1e-2",
+			"2.1e-2 * 3.2",
+			"2.1e-3 * 32",
+			"2.1e-3",
+			"417*628 - 2**18",
+			"418*628 - 2**18",
+			"418*628",
+			"1-.5**.5",
+			".5**.5",
+			"66666/800",
+			"16/3",
+			"65536/8",
+			"66-40",
+			"66-28",
+			"256.0*65536.0",
+			"100*320*256",
+			".5**(256/10000)",
+			"_*256",
+			"log(.5)/log(_)",
+			".9937 ** (256/100)",
+			".5**(256/200000)",
+			"_*256",
+			"log(.5)/log(.9991)",
+			"from math import log",
+			"log(.5)/log(.9991)",
+			".98**(100./320)",
+			".98**(1./320)",
+			".99973**(256/100)",
+			".99973**(256/3.2)",
+			".9993**(100/256)",
+			".9993**(1/256)",
+			".005**(1/256)",
+			"12288/2",
+			".1817/.3",
+			"9*256",
+			"200*256",
+			"[x>>8 for x in range(0,60000,2500)]",
+			"[x>>8 for x in [1000,2000,2500,5000,10000,20000,40000]]",
+			"200/32",
+			"200/16",
+			"200/8",
+			"[x>>8 for x in range(0,60000,2048)]",
+			"60000/256",
+			"[x for x in range(0,220,8)]",
+			"range(0,220,8)",
+			"[x/250.0 for x in range(0,60000,2500)]",
+			"200*250",
+			"60000/250",
+			"60000/320",
+			"[x/320.0 for x in range(0,60000,2500)]",
+			"(44000-30000)/2500",
+			"(44000-30000)/5",
+			"44000-30000",
+			"43-30",
+			"60000/5000",
+			"60000/2000",
+			"0.9999**320",
+			"43353*(33220/32670)",
+			".2**(1/1000)",
+			".01/.05",
+			".1**(1/1000)",
+			".05/.5",
+			"200/80000",
+			"1/.0025",
+			"313*256",
+			"80000/256",
+			"80000/2560x10000000",
+			"0x10000000",
+			"45000/256",
+			"65536/200",
+			"0.9*a+255*.1",
+			"a+(255-a)*.1",
+			"a",
+			"a+(255-a)*.1",
+			"a=int(a+(255-a)*.1);print(a)",
+			"a=0",
+			"a=int(a+(255-a)*.1);print(a)",
+			"a=int(255*.1+a);print(a)",
+			"a=0",
+			"int(255*.1+a);print a",
+			"80000/256",
+			".9993**(256.0/80000)",
+			".999**(256.0/80000)",
+			".999**(1.0/80000)",
+			"36960/80000",
+			".999**(1.0/80000)",
+			".01**(1.0/80000)",
+			".0183**(1.0/80000)",
+			".99995**80000",
+			".99995**8000",
+			".99995**800",
+			".99995**100",
+			"8192+4096",
+			"(.2126**2+.7152**2+.0722**2)/3",
+			"(.2126+.7152+.0722)/3",
+			"50/129.2939",
+			"30/129",
+			"_/5",
+			"sum(_)",
+			"[a/b for a,b in zip(qsw,qtt)]",
+			"qsw,qtt",
+			"qtt=q[2::3]",
+			"qex=q[1::3]",
+			"qsw=q[0::3]",
+			"q=[30.367, 13.602, 0.233256,26.930, 13.429, 0.217481,25.815, 12.874, 0.202773,24.734, 12.338, 0.189060,23.677, 11.812, 0.176274]",
+			"256*1.8",
+			".3+.8+.2+.5",
+			"0.2126 + 0.7152 + 0.0722 .3+.8+.2+.5",
+			"0.2126 + 0.7152 + 0.0722 ",
+			" 0.2126 + 0.7152 + 0.0722 ",
+			" 0.2126 R + 0.7152 G + 0.0722 B",
+			"0.9995**4",
+			"63<<2",
+			".2126+.7152+.0722",
+			"(4*64)**2",
+			"print 1/196608",
+			"1/196608",
+			"_*3",
+			"(4*64)**2",
+			"(4*64)",
+			"0x10000000",
+			"0xffffffff",
+			".7152/.0722",
+			".2126/.0722"
 		]
 	},
 	"distraction_free":
@@ -672,20 +719,86 @@
 		"/home/ritz/git/tripzilch/processing/flollock",
 		"/home/ritz/git/tripzilch/processing/fluids",
 		"/home/ritz/git/tripzilch/processing/gkale",
-		"/home/ritz/ownCloud/processing"
+		"/home/ritz/git/tripzilch/processing/libraries",
+		"/home/ritz/git/tripzilch/processing/linetrace",
+		"/home/ritz/git/tripzilch/processing/rgb2",
+		"/home/ritz/git/tripzilch/processing/rgb2/data",
+		"/home/ritz/git/tripzilch/processing/tools",
+		"/home/ritz/git/tripzilch/processing/wupix"
 	],
 	"file_history":
 	[
+		"/home/ritz/git/protobuf/README.md",
+		"/run/user/1000/gvfs/sftp:host=aerv.nl,user=ritz/home/ritz/public_html/doc/botter.txt",
+		"/home/ritz/gfx/principia discordia/emotoes/default/index.html",
+		"/home/ritz/gfx/principia discordia/emotoes/default/index.php",
+		"/tmp/mozilla_ritz0/README.txt",
+		"/home/ritz/.config/beets/config.yaml",
+		"/home/ritz/.config/beets/discogs_token.json",
+		"/home/ritz/git/tripzilch/processing/gkale/grid.pde",
+		"/usr/local/lib/python2.7/dist-packages/beetsplug/discogs.py",
+		"/home/ritz/git/tripzilch/processing/rgb1/rgb1.pde",
+		"/home/ritz/git/tripzilch/processing/rgb1/CMMCRandom.pde",
+		"/home/ritz/git/tripzilch/processing/wupix/pixaa.pde",
+		"/home/ritz/git/tripzilch/processing/wupix/wupix.pde",
+		"/home/ritz/Desktop/txt/3D printed things.txt",
+		"/home/ritz/git/tripzilch/processing/rgb2/rgb2.pde",
+		"/home/ritz/Desktop/txt/solk.txt",
+		"/home/ritz/git/tripzilch/glsl-liveproc/glslLiveproc/glslLiveproc.pde",
+		"/home/ritz/git/tripzilch/processing/fluids/fluids.pde",
+		"/home/ritz/git/tripzilch/processing/thing_grid_1/thing_grid_1.pde",
+		"/home/ritz/git/tripzilch/processing/linetrace/linetrace.pde",
+		"/home/ritz/git/tripzilch/processing/gkale/gkale.pde",
+		"/home/ritz/git/tripzilch/processing/gkale/vec2.pde",
+		"/home/ritz/owncloud/gebruikers/Piter/processing/AA_circle/AA_circle.pde",
+		"/home/ritz/owncloud/gebruikers/Piter/processing/AA_circle/CMMCRandom.pde",
+		"/home/ritz/stack/budbrotplot.py",
+		"/home/ritz/video/series/The.Big.Bang.Theory.S09E14.720p.HDTV.X264-DIMENSION[ettv]/The.Big.Bang.Theory.S09E14.The Meemaw Materialization.DIMENSION.English.C.updated.Addic7ed.com.srt",
+		"/home/ritz/owncloud/gebruikers/Piter/processing/AA_circle/buddhabrot-old-AA_circle.pde.old",
+		"/tmp/mozilla_ritz0/home.folder.tar",
+		"/home/ritz/owncloud/gebruikers/Annejan/processing/sketch/sketch.pde",
+		"/home/ritz/owncloud/gebruikers/Annejan/julia27/julia27.pde",
+		"/home/ritz/git/tripzilch/dsp/maximum-length-sequence.py",
+		"/home/ritz/Dropbox/the doorway part 4 - when you come hundun.txt",
+		"/home/ritz/owncloud2/gebruikers/Piter/processing/CFD1/CFD1.pde",
+		"/home/ritz/documents/SCN/notulen-20151104-20151107/Notulen SCN dubbeleditie 04-11-2015 en 07-11-2015.md",
+		"/home/ritz/documents/SCN/hackathon-pitch/Hackathon pitch executive summary beschrijving plan.md",
+		"/home/ritz/documents/SCN/95d52ba4c6c2e4e05325/Notulen SCN dubbeleditie 04-11-2015 en 07-11-2015.md",
+		"/home/ritz/Desktop/4eeb40661a7d06ccfbdf/notulen SCN overleg hackathon 28-10-2015.md",
+		"/run/user/1000/gvfs/mtp:host=%5Busb%3A005%2C012%5D/Internal storage/Sketchbook/liveproc/liveproc.pde",
+		"/run/user/1000/gvfs/mtp:host=%5Busb%3A005%2C012%5D/Internal storage/Sketchbook/liveproc/data/jtrap.frag",
+		"/run/user/1000/gvfs/mtp:host=%5Busb%3A005%2C012%5D/Internal storage/Sketchbook/liveproc/data/ns.jpg",
+		"/home/ritz/git/tripzilch/glsl-liveproc/liveproc/liveproc.pde",
+		"/home/ritz/Dropbox/code/liveproc/liveproc.pde",
+		"/run/user/1000/gvfs/mtp:host=%5Busb%3A005%2C012%5D/Internal storage/Sketchbook/liveproc/data/IMG_20150709_001516.jpg",
+		"/home/ritz/Desktop/txt/lyrics.txt",
+		"/home/ritz/Downloads/Evening Run.gpx",
+		"/home/ritz/Desktop/txt/code-uitleg-touw-physics.txt",
+		"/home/ritz/video/series/Blindspot.S01E06.HDTV.x264-LOL[ettv]/Blindspot - 01x06 - Cede Your Soul.LOL.English.C.updated.Addic7ed.com.srt",
+		"/home/ritz/Dropbox/txt/31cb6b36aaf58e397f69/SCN IDEE 235.md",
+		"/home/ritz/gfx/botter-images/2015 Bot Bothoth Fhtagn/bot-bothoth-fhtagn.txt",
+		"/home/ritz/Dropbox/code/CFD1.pde",
+		"/tmp/rnn/tit.txt",
+		"/media/ritz/YESOD/notuuls.md.txt",
+		"/home/ritz/Desktop/txt/SCN IDEE 235.md.txt",
+		"/home/ritz/documents/meditatie/secular.txt",
+		"/home/ritz/ownCloud/processing/CFD1/CFD1.pde",
+		"/home/ritz/Downloads/Doctor Who - 09x00 - Series Prologue.TM (WB-DL).English.C.updated.Addic7ed.com.srt",
+		"/home/ritz/git/tripzilch/processing/gkale/util.pde",
+		"/home/ritz/ownCloud/processing/AA_circle/AA_circle.pde",
+		"/home/ritz/git/tripzilch/processing/gkale/regularPolygon.pde",
+		"/run/user/1000/gvfs/sftp:host=new.aerv.nl,user=ritz/home/ritz/zipplebot/Electric_Monk.txt",
+		"/home/ritz/.cache/.fr-MncYvF/bots/ircbot.py",
+		"/home/ritz/.cache/.fr-tSUy40/bots/zipplebot.py",
+		"/home/ritz/.cache/.fr-UkwF7B/bots/giggles.py",
+		"/home/ritz/.cache/.fr-2T680o/bots/giggles.rules",
+		"/home/ritz/.cache/.fr-AIALGn/bots/HBOT.py",
 		"/run/user/1000/gvfs/sftp:host=new.aerv.nl,user=ritz/home/ritz/public_html/python/ircbot.py.txt",
 		"/run/user/1000/gvfs/sftp:host=new.aerv.nl,user=ritz/home/ritz/public_html/python/stringgenerator.py.txt",
 		"/run/user/1000/gvfs/sftp:host=new.aerv.nl,user=ritz/home/ritz/public_html/really-really-safe-to-click-really-honest.php",
 		"/run/user/1000/gvfs/sftp:host=new.aerv.nl,user=ritz/home/ritz/public_html/index.html",
 		"/run/user/1000/gvfs/sftp:host=new.aerv.nl,user=ritz/home/ritz/public_html/python/wilhelm.py.txt",
-		"/home/ritz/ownCloud/processing/CFD1/CFD1.pde",
 		"/home/ritz/ownCloud/processing/CFD-1/CFD-1.pde",
-		"/home/ritz/git/tripzilch/processing/gkale/gkale.pde",
-		"/home/ritz/git/tripzilch/processing/gkale/util.pde",
-		"/home/ritz/git/tripzilch/processing/gkale/regularPolygon.pde",
 		"/home/ritz/Dropbox/code/posteststop.pde",
 		"/home/ritz/git/tripzilch/processing/gkale/test1.pde",
 		"/home/ritz/git/tripzilch/processing/gkale/test1",
@@ -693,7 +806,6 @@
 		"/home/ritz/git/tripzilch/processing/wupix/shapes.pde.txt",
 		"/home/ritz/git/tripzilch/processing/flollock/flollock.pde",
 		"/run/user/1000/gvfs/sftp:host=new.aerv.nl,user=ritz/home/ritz/public_html/canvas/gravel.html",
-		"/home/ritz/git/tripzilch/processing/wupix/wupix.pde",
 		"/tmp/chill LQ.txt",
 		"/tmp/chill HQ.txt",
 		"/tmp/music.txt",
@@ -743,71 +855,11 @@
 		"/home/ritz/ownCloud/processing/pathtracer/try_out/vec3.pde",
 		"/home/ritz/ownCloud/processing/MC-miim-julia.pde",
 		"/home/ritz/ownCloud/gl-shaders/julia-trippy.frag",
-		"/home/ritz/ownCloud/gl-shaders/julia-DE.frag",
-		"/home/ritz/video/series/Game.of.Thrones.S05E08.HDTV.x264-KILLERS[ettv]/Game.of.Thrones.S05E08.HDTV.x264-KILLERS.srt",
-		"/home/ritz/video/series/Person of Interest - 04x13 - M.I.A..DIMENSION.English.C.updated.Addic7ed.com.srt",
-		"/home/ritz/ownCloud/processing/pathtracer/vec3.pde",
-		"/home/ritz/.config/sublime-text-3/Packages/User/Base File.sublime-settings",
-		"/home/ritz/.config/sublime-text-3/Packages/Alignment/Base File.sublime-settings",
-		"/home/ritz/ownCloud/gl-shaders/glrender/data/julia-DE.frag",
-		"/home/ritz/ownCloud/mc-miim-j.html",
-		"/home/ritz/ownCloud/gl-shaders/liveproc/data/julia-DE.frag",
-		"/home/ritz/apps/processing-2.2.1/modes/java/examples/Demos/Graphics/LowLevelGL/data/vert.glsl",
-		"/home/ritz/Dropbox/Edzo-het gaat lekker met je PCW hoek..txt",
-		"/home/ritz/ownCloud/gl-shaders/liveproc/data/julia-trippy.frag",
-		"/home/ritz/apps/processing-2.2.1/modes/java/examples/Topics/Shaders/Deform/data/deform.glsl",
-		"/home/ritz/ownCloud/gl-shaders/webgl.html",
-		"/usr/local/lib/python3.4/dist-packages/mps_youtube/main.py",
-		"/home/ritz/bin/extract-audio",
-		"/home/ritz/ownCloud/gl-shaders/webgl-t.js",
-		"/tmp/kees.py",
-		"/run/user/1000/gvfs/sftp:host=new.aerv.nl,user=ritz/home/ritz/public_html/python/irc-parsing.py.txt",
-		"/home/ritz/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-		"/home/ritz/.config/sublime-text-3/Packages/FileDiffs/FileDiffs.sublime-settings",
-		"/home/ritz/.config/sublime-text-3/Packages/User/Diffy.sublime-settings",
-		"/home/ritz/.config/sublime-text-3/Packages/Diffy/Diffy.sublime-settings",
-		"/home/ritz/ownCloud/gl-shaders/julia.frag",
-		"/home/ritz/ownCloud/gl-shaders/julia-radial1.frag",
-		"/home/ritz/ownCloud/gl-shaders/julia-trippy-shadertoy.frag",
-		"/home/ritz/ownCloud/gl-shaders/blabs.frag",
-		"/home/ritz/git/tripzilch/processing/blobs_aa/blobs_aa.pde",
-		"/home/ritz/git/tripzilch/processing/blobs_aa/vec3.pde",
-		"/home/ritz/ownCloud/gl-shaders/julia-DE-external.frag",
-		"/home/ritz/ownCloud/gl-shaders/julia-DE-1.frag",
-		"/home/ritz/Dropbox/pdf/bugreport-2015-05-07-19-30-43.txt",
-		"/home/ritz/.cache/.fr-X9r88m/glslViewer.py",
-		"/home/ritz/.cache/.fr-zPgc9R/glslViewer.py",
-		"/home/ritz/.cache/.fr-EvVJOR/LICENSE",
-		"/home/ritz/.cache/.fr-60LM6P/messages/install.txt",
-		"/home/ritz/.cache/.fr-yRii0o/Default.sublime-commands",
-		"/home/ritz/.cache/.fr-yRii0o/dependencies.json",
-		"/home/ritz/.cache/.fr-yRii0o/GLSL.sublime-build",
-		"/home/ritz/.cache/.fr-yRii0o/glslViewer.py",
-		"/home/ritz/.cache/.fr-yRii0o/glslViewer.sublime-settings",
-		"/home/ritz/.cache/.fr-yRii0o/LICENSE",
-		"/home/ritz/.cache/.fr-yRii0o/messages.json",
-		"/home/ritz/.cache/.fr-yRii0o/package-metadata.json",
-		"/home/ritz/.cache/.fr-yRii0o/README.md",
-		"/home/ritz/.cache/.fr-j2Jxqt/glslViewer.sublime-settings",
-		"/home/ritz/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
-		"/home/ritz/.config/sublime-text-3/Installed Packages/glslViewer.sublime-package",
-		"/home/ritz/.config/sublime-text-3/Packages/OpenGL Shading Language (GLSL)/README.md",
-		"/home/ritz/ownCloud/processing/pathtracer/paftyrees.txt",
-		"/home/ritz/ownCloud/gl-shaders/blabs.glsl",
-		"/home/ritz/git/tripzilch/processing/thing_grid_1/sketch.properties",
-		"/home/ritz/git/tripzilch/processing/blobs_aa/colormix.pde",
-		"/home/ritz/Desktop/txt/thing.txt",
-		"/home/ritz/Desktop/txt/movies.md",
-		"/home/ritz/Desktop/txt/books.md",
-		"/home/ritz/Desktop/txt/quotes3.md",
-		"/home/ritz/Desktop/txt/music.txt",
-		"/home/ritz/Desktop/txt/cartoon-ideas.txt.md",
-		"/home/ritz/Desktop/txt/wk17.txt",
-		"/home/ritz/Desktop/txt/gezeik.txt"
+		"/home/ritz/ownCloud/gl-shaders/julia-DE.frag"
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 45.0
 	},
 	"find_in_files":
 	{
@@ -821,134 +873,134 @@
 		"case_sensitive": true,
 		"find_history":
 		[
-			"09/",
-			"< ",
-			"\\|",
-			"|",
-			"	",
-			"Vec2",
-			"0.25",
-			"q.",
-			"density",
-			",",
-			"Arraylist",
-			"Cell",
-			"500",
-			"g",
-			"xi",
-			"gridhash",
-			"max_distance2",
-			"size",
-			"r",
-			"h",
-			"Cell",
-			"ArrayList",
-			"Arraylist",
-			"Arraylist<Vec2>",
-			"grid",
-			"Bead",
-			"add",
-			"pi",
-			"Vec2",
-			"<Vec2>",
-			"%",
-			"max_neighbour_distance",
-			"hash",
-			"4",
-			"new",
-			"max_dist",
-			"d",
-			"pd",
-			"pt",
-			"p",
-			"rr",
-			"pp",
-			"r",
-			"p",
-			"w_re",
-			"w_nb",
-			"d_nb",
-			"scale_max",
-			",",
-			", .",
-			"w_2nd_neighbour",
-			"w_1st_neighbour",
-			"d_target",
-			"repulsion",
-			"1.0",
-			", ",
-			".3",
-			", \"",
-			"EEp",
+			"fH",
 			"2",
-			"d",
-			"nfs",
-			"mag_target",
-			"double ",
-			"Bead ",
-			"pp.size()",
-			"2,",
-			"nf",
-			"g_old",
-			"g",
-			"+",
-			"pp_E",
-			"m",
-			"4.0",
-			"Vec2",
+			"oframe",
+			"draw",
+			"FL",
+			"5.0",
+			"achtervolgt",
+			"play",
+			"sound",
+			" ",
+			"3",
+			"px",
+			"ac",
+			"qa",
+			"pb",
+			"int",
+			"pa",
+			"qb",
+			"qa",
+			"pb",
+			"pa",
+			"; ",
+			";",
+			"target2mm",
+			"target",
+			"c",
 			"double",
-			"Vec2",
-			"dot_size",
-			"ps",
-			"pscale",
-			"p",
-			"e-5 * t ",
-			"24",
-			" * t",
-			"* t ",
-			"i",
-			"    z",
-			" [+*/-] z .+?; \\}",
-			"; z .?= .+?; \\}",
-			"double x, double y, double z",
-			"x, y, z",
-			"Vec3",
-			"dod",
+			"[]",
+			"56.",
+			"double",
+			"tb",
+			"ta",
+			"pb",
+			"pa",
+			"leak",
+			"epoch_leak",
+			"swap_pp",
+			"leak256",
+			"p256",
+			"N256",
+			".pow",
+			"swap_pct",
+			"pow",
+			"f_count",
+			"r050",
+			"r025",
+			"r2",
+			"r1",
+			"double",
+			"RND.nex",
+			"phase",
+			"eT",
+			"swap100",
+			"explore100",
+			"nfs",
+			"bits",
+			"frameCount",
+			"qq",
+			"E",
+			"Enew",
+			"qq",
+			"<<",
+			"=",
+			"next",
+			"&",
+			" +",
 			"  ",
-			"* t",
-			" * t",
-			"* t",
-			" * t",
-			"const ",
-			"TAU * k",
-			"dod",
-			"t * ",
-			"'",
-			"1000",
-			" * dot_size",
-			"half_width",
-			"dot",
-			"float",
-			"noise",
-			"5",
+			"CMMC",
+			"Z",
+			"i8",
+			"icount",
+			"i",
+			"start_time",
+			" - 1",
 			"1",
-			"8",
-			"2",
-			"2.5",
-			"half_width",
-			"rgb",
-			"color",
-			"float",
-			"now",
-			"^ ?[0-9]* ?",
-			"[^a-z0-9\\n]+",
-			"^ ?[0-9]* ?",
-			"^ ?[0-9]+ ?",
-			"[^a-z0-9\\n]+",
-			"\\.(mp3|ogg)$",
-			".*/([^/]+$)",
-			"/home/ritz/music/",
-			"delete"
+			"nextDouble",
+			"for",
+			"< 0",
+			"ii",
+			"int ",
+			"MAXITER2",
+			"orbit[i]",
+			"MAXITER3",
+			"MAXITER2",
+			"MAXITER",
+			"150",
+			"0xFF",
+			".y",
+			"Z.y",
+			"=",
+			"next",
+			"Math.random",
+			"private",
+			"public",
+			"ComplimentaryMultiplyWithCarryRandom",
+			" ",
+			"Math",
+			"lo",
+			".",
+			"tzoom",
+			"frag.set(",
+			"frag.set",
+			"aspect",
+			"mouseX / RW",
+			"mouseY / RH",
+			"mouseX / RW",
+			"mouseY / RH",
+			"1.0",
+			"width",
+			"height",
+			"double",
+			"R",
+			"w",
+			"*w",
+			"modesc",
+			"Roos",
+			"roos",
+			"> 00",
+			"python",
+			"[2]",
+			"[1]",
+			"[2]",
+			"[0]",
+			"[2]",
+			".",
+			"0",
+			"[i][j]",
+			"RHO"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -956,6 +1008,12 @@
 		"regex": true,
 		"replace_history":
 		[
+			" ",
+			"_",
+			"'",
+			"H",
+			"W",
+			"\\n",
 			"",
 			"<",
 			"",
@@ -1008,29 +1066,38 @@
 			[
 				{
 					"buffer": 0,
-					"file": "fluids/fluids.pde",
+					"file": "rgb2/rgb2.pde",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1627,
+						"buffer_size": 8143,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								158,
-								158
+								275,
+								275
 							]
 						],
 						"settings":
 						{
+							"WordCount":
+							{
+								"changes": 0,
+								"count": 496,
+								"modified": false,
+								"selection": true,
+								"status": -1,
+								"syntax": "plain text"
+							},
 							"syntax": "Packages/Processing/Syntaxes/Processing.tmLanguage",
-							"tab_size": 2,
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 54.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -1038,28 +1105,38 @@
 				},
 				{
 					"buffer": 1,
-					"file": "/home/ritz/ownCloud/processing/CFD1/CFD1.pde",
+					"file": "flollock/flollock.pde",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3653,
+						"buffer_size": 3090,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3653,
-								3653
+								1235,
+								1235
 							]
 						],
 						"settings":
 						{
+							"WordCount":
+							{
+								"changes": 0,
+								"count": 297,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
 							"syntax": "Packages/Processing/Syntaxes/Processing.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2133.0,
+						"translation.y": 496.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1067,150 +1144,32 @@
 				},
 				{
 					"buffer": 2,
-					"file": "gkale/gkale.pde",
+					"file": "rgb1/rgb1.pde",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7282,
+						"buffer_size": 6963,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								840,
+								840
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Processing/Syntaxes/Processing.tmLanguage",
-							"tab_size": 2,
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 252.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "gkale/grid.pde",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1382,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								105,
-								105
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Processing/Syntaxes/Processing.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "gkale/vec2.pde",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1713,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								186,
-								186
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Processing/Syntaxes/Processing.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "gkale/regularPolygon.pde",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 479,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								374,
-								374
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Processing/Syntaxes/Processing.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "gkale/util.pde",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 406,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								405,
-								405
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Processing/Syntaxes/Processing.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -1218,7 +1177,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 23.0
+		"height": 43.0
 	},
 	"input":
 	{
@@ -1249,7 +1208,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 300.0
+		"height": 269.0
 	},
 	"output.find_results":
 	{
@@ -1259,7 +1218,7 @@
 	"project": "processing.sublime-project",
 	"replace":
 	{
-		"height": 64.0
+		"height": 82.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1283,7 +1242,7 @@
 		[
 			[
 				"",
-				"~/Desktop/txt/txt.sublime-project"
+				"~/code/sublime-projects/js13k.sublime-project"
 			]
 		],
 		"width": 380.0

@@ -25,10 +25,6 @@ public class gkale extends PApplet {
 
 
 
-int c0 = 0xff000000;
-int c1 = 0xffFFFFFF;
-int c2 = 0xff8888AA;
-
 class Particle extends Vec2 {
   Vec2 v;
   Particle(double x, double y) {
@@ -39,16 +35,20 @@ class Particle extends Vec2 {
 
 ArrayList<Particle> points;
 Grid grid;
-float ax_size;
 static final double GDIST = 0.5f;
+int W, H;
+int W2, H2;
 public void setup() {
   size(500, 500, P2D);
-  ax_size = width;
-  //smooth(4);
-  colorMode(RGB, 1.0f);
-  noStroke();
-  strokeWeight(0.02f);
-  dot = regularPolygon(5);
+  W = width;
+  H = height;
+  W2 = width / 2;
+  H2 = height / 2;
+  // smooth(4);
+  // colorMode(RGB, 1.0);
+  // noStroke();
+  // strokeWeight(0.02);
+  // dot = regularPolygon(5);
 
   points = new ArrayList<Particle>(1000);
   for (int i = 0; i < 500; i++) {
@@ -59,21 +59,16 @@ public void setup() {
   grid = new Grid(GDIST);
 }
 
-public void line(double x0, double y0, double x1, double y1) {
-  line((float) x0,(float) y0,(float) x1,(float) y1);
-}
-
-static final double ad = .03f;
-public double frr(double r) { return 1.0f / (r*r + ad) - 1.0f / (GDIST*GDIST + ad); }
+public double window(double r) { return Math.min(1, 4 * r / GDIST); }
 
 double start_time = millis();
 public void draw() {
   double now = (double) (millis() - start_time) / 1000.0f;
   if (frameCount % 32 == 31) println(frameRate);
-  fill(c0);
-  rect(0, 0, width, height);
-  translate(width/2, height/2);
-  scale(ax_size / 0.8f);
+  fill(0);
+  rect(0, 0, W, H);
+  loadPixels();
+  // translate(W/2, H/2);
 
   grid.clear();
   for (Particle p: points) {
@@ -81,23 +76,59 @@ public void draw() {
     grid.add(p);
   }
 
-  double dx,dy,dd;
+  double dx, dy, dist, pd;
   fill(1,1,1);
   for (Particle p : points) {
     //stroke(1,1,1,.1);
-    p.v.rand(.25f);
+    p.v.rand(.25f); // ??
     for (Vec2 q : grid.query(p, GDIST)) {
       //line(p.x, p.y, q.x, q.y);
-      dx = q.x - p.x;
-      dy = q.y - p.y;
-      dd = Math.sqrt(dx*dx + dy*dy);
-      dd = frr(dd) * (.25f - dd);
-      p.v.x -= dx * dd;
-      p.v.y -= dy * dd;
+      // dx = q.x - p.x;
+      // dy = q.y - p.y;
+      // dist = Math.sqrt(dx*dx+dy*dy);
+      // dist = frr(dist) * (.25 - dist);
+      // p.v.x -= dx * dist;
+      // p.v.y -= dy * dist;
+      dist = Math.sqrt(q.last_sqDist);
+      pd = 0.1f * ((.25f - dist) / (q.last_sqDist * q.last_sqDist + .03f));
+      pd *= window(dist);
+      p.v.x += q.last_dx * pd;
+      p.v.y += q.last_dy * pd;
     }
     //noStroke();
     //ellipse((float)p.x,(float)p.y, 0.01, 0.01);
-    dot(p, .01f);
+    //dot(p, .01);
+    wupix(W2 + 200 * p.x, H2 + 200 * p.y, 1.0f);
+
+  }
+  updatePixels();
+}
+
+// void line(double x0, double y0, double x1, double y1) {
+//   line((float) x0,(float) y0,(float) x1,(float) y1);
+// }
+
+public void wupix(double x, double y, double k) {
+  int xi = (int) x, yi = (int) y;
+  if (xi >= 0 && xi < W - 1 && yi >= 0 && yi < H - 1) {
+    int idx = yi * W + xi;
+    double k255 = k * 255;
+    double xf = x % 1, yf = y % 1;
+    double xg = 1 - xf, yg = 1 - yf;
+
+    pixels[idx] = (Math.min(255, (pixels[idx] & 0xFF) + (int) (k255 * xg * yg)) * 0x010101) | 0xFF000000;
+    idx++;
+    pixels[idx] = (Math.min(255, (pixels[idx] & 0xFF) + (int) (k255 * xf * yg)) * 0x010101) | 0xFF000000;
+    idx += W;
+    pixels[idx] = (Math.min(255, (pixels[idx] & 0xFF) + (int) (k255 * xf * yf)) * 0x010101) | 0xFF000000;
+    idx--;
+    pixels[idx] = (Math.min(255, (pixels[idx] & 0xFF) + (int) (k255 * xg * yf)) * 0x010101) | 0xFF000000;
+
+    /*double xfyf = xf * yf;
+    pixels[idx] = grey(1 - yf - xf + xfyf);
+    pixels[idx + 1] = grey(xf - xfyf);
+    pixels[idx + W] = grey(yf - xfyf);
+    pixels[idx + W + 1] = grey(xfyf);*/
   }
 }
 
@@ -316,9 +347,8 @@ void draw() {
   }
 
   fill(c0);
-  rect(0, 0, width, height);
-  translate(width/2, height/2);
-  scale(.7235 * ax_size / (float) p_scale);
+  rect(0, 0, W, H);
+  translate(W/2, H/2);
   for (Bead p : pp) {
     stroke(cAlpha(c1, 0.5));
     line((float)p.x, (float)p.y, (float)p.r.x, (float)p.r.y);
@@ -367,7 +397,7 @@ class Grid {
   }
 
   public ArrayList<Vec2> query(Vec2 p, double d) {
-    double dd = d * d;
+    double sqd = d * d;
     int xi0 = (int) ((p.x - d) / grid_spacing);
     int yi0 = (int) ((p.y - d) / grid_spacing);
     int xi1 = (int) ((p.x + d) / grid_spacing);
@@ -376,9 +406,9 @@ class Grid {
     for (int xi = xi0; xi <= xi1; xi++) {
       int xk = xi << 16;
       for (int yi = yi0; yi <= yi1; yi++) {
-        int key = (xi << 16) + yi;
+        //int key = xk + yi;
         ArrayList<Vec2> cell = grid.get(xk + yi); // maybe null
-        if (cell != null) for (Vec2 q: cell) if (p != q && p.sqDist(q) < dd)
+        if (cell != null) for (Vec2 q: cell) if (p != q && q.sqDist(p) < sqd)
           result.add(q);
       }
     }
@@ -463,9 +493,13 @@ class Vec2 {
     double dx = v.x - x, dy = v.y - y;
     return Math.sqrt(dx * dx + dy * dy);
   }
+
+  double last_sqDist = 0, last_dx = 0, last_dy = 0;
   public double sqDist(Vec2 v) {
-    double dx = v.x - x, dy = v.y - y;
-    return dx * dx + dy * dy;
+    last_dx = v.x - x;
+    last_dy = v.y - y;
+    last_sqDist = last_dx * last_dx + last_dy * last_dy;
+    return last_sqDist;
   }
 
   public void normalize() {

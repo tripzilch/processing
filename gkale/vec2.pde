@@ -45,9 +45,13 @@ class Vec2 {
     double dx = v.x - x, dy = v.y - y;
     return Math.sqrt(dx * dx + dy * dy);
   }
+
+  double last_sqDist = 0, last_dx = 0, last_dy = 0;
   double sqDist(Vec2 v) {
-    double dx = v.x - x, dy = v.y - y;
-    return dx * dx + dy * dy;
+    last_dx = v.x - x;
+    last_dy = v.y - y;
+    last_sqDist = last_dx * last_dx + last_dy * last_dy;
+    return last_sqDist;
   }
 
   void normalize() {
