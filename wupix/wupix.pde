@@ -3,22 +3,25 @@ import java.lang.Double;
 
 int W, H;
 int W2, H2;
+PCG32Random RNG = new PCG32Random();
 void setup() {
   size(500, 500, P2D);
   W = width;
   H = height;
   W2 = width / 2;
   H2 = height / 2;
-}
-
-void pixaa(Vec2 p, double k) {
-  pixaa(p.x, p.y, k);
+  println(RNG.next(), RNG.next(), RNG.next());
 }
 
 double r2() { return Math.random() - Math.random(); }
+void pixaa(Vec2 p, double k) {
+  pixaa(p.x + r2(), p.y + r2(), k);
+}
+
 double mix(double x, double y, double a) { return x + a * (y - x); }
 
 double start_time = millis();
+double pnow = (double) (millis() - start_time) / 1000.0;
 double now = (double) (millis() - start_time) / 1000.0;
 Vec2 v = new Vec2(0.5, 0.5),
      p = new Vec2(0.0, 0.0), 
@@ -30,8 +33,10 @@ double vx = 0.5, vy = 0.5, px = 0, py = 0, xx = 0, yy = 0;
 
 final int N = 1024;
 void draw() {
-  double pnow = now;
+  double L = 0;
+  pnow = now;
   now = (double) (millis() - start_time) / 1000.0;
+
   double dt = now - pnow;
   Vec2 mouse = new Vec2(mouseX, mouseY);
   Vec2 pmouse = new Vec2(pmouseX, pmouseY);
@@ -42,8 +47,9 @@ void draw() {
 
   for (int i = 0; i < N; i++) {
     pimouse = imouse.copy();
-    imouse.mix(mouse, .001)
-    pixaa(imouse, .1);
+    imouse.mix(mouse, .0005);
+    L = imouse.mag();
+    pixaa(imouse, 0.1);
     // double a = Math.pow(0.99, dt / 0.01);  
     // vx = vx * a + (mouseX - pmouseX) * (1 - a) * 0.25;
     // vy = vy * a + (mouseY - pmouseY) * (1 - a) * 0.25;
@@ -57,11 +63,11 @@ void draw() {
     // double b = Math.pow(0.9, dt / 0.01);
     // xx = xx * b + mouseX * (1 - b);
     // yy = yy * b + mouseY * (1 - b);
-    pixaa((float)(xx + xo + r2()),  (float) (yy + yo + r2()), 0.05);
+    // pixaa((float)(xx + xo + r2()),  (float) (yy + yo + r2()), 0.05);
   }
   updatePixels();
   if (frameCount % 32 == 0) {
-    println("L: ", L, "vx: ", vx , "vy: ", vy, "dt: ", dt);
+    //println("L: ", L, "vx: ", vx , "vy: ", vy, "dt: ", dt);
   }
 
 }

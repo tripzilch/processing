@@ -1,0 +1,46 @@
+
+  box = createShape();
+  box.beginShape(TRIANGLE_STRIP);
+  box.noStroke();
+  box.fill(#000000);
+  box.vertex(-0.707,  0.707);
+  box.vertex(-0.707, -0.707);
+  box.vertex( 0.707,  0.707);
+  box.vertex( 0.707, -0.707);
+  box.endShape(CLOSE);
+  box.disableStyle();
+
+  hex = createShape();
+  hex.beginShape(TRIANGLE_STRIP);
+  hex.noStroke();
+  hex.fill(#000000);
+  hex.vertex(-0.866,  0.5);
+  hex.vertex(-0.866, -0.5);
+  hex.vertex( 0.000,  1.0);
+  hex.vertex( 0.000, -1.0);
+  hex.vertex( 0.866,  0.5);
+  hex.vertex( 0.866, -0.5);
+  hex.endShape(CLOSE);
+  hex.disableStyle();
+
+  dod = createShape();
+  dod.beginShape(TRIANGLE_FAN);
+  dod.noStroke();
+  dod.fill(#000000);
+  dod.vertex( 0.000, 0.000);
+  dod.vertex( 1.000, 0.000);
+  dod.vertex( 0.866, 0.500);
+  dod.vertex( 0.500, 0.866);
+  dod.vertex( 0.000, 1.000);
+  dod.vertex(-0.500, 0.866);
+  dod.vertex(-0.866, 0.500);
+  dod.vertex(-1.000, 0.000);
+  dod.vertex(-0.866,-0.500);
+  dod.vertex(-0.500,-0.866);
+  dod.vertex(-0.000,-1.000);
+  dod.vertex( 0.500,-0.866);
+  dod.vertex( 0.866,-0.500);
+  dod.vertex( 1.000, 0.000);
+  dod.endShape(CLOSE);
+  dod.disableStyle();
+

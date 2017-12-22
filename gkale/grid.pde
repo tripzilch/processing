@@ -38,13 +38,13 @@ class Grid {
     int xi1 = (int) ((p.x + d) / grid_spacing);
     int yi1 = (int) ((p.y + d) / grid_spacing);
     ArrayList<Vec2> result = new ArrayList<Vec2>();
+    ArrayList<Vec2> cell;
     for (int xi = xi0; xi <= xi1; xi++) {
       int xk = xi << 16;
-      for (int yi = yi0; yi <= yi1; yi++) {
-        //int key = xk + yi;
-        ArrayList<Vec2> cell = grid.get(xk + yi); // maybe null
-        if (cell != null) for (Vec2 q: cell) if (p != q && q.sqDist(p) < sqd)
-          result.add(q);
+      for (int yi = yi0; yi <= yi1; yi++) {        
+        cell = grid.get(xk + yi); // int key = xk + yi;
+        if (cell == null) continue;
+        for (Vec2 q: cell) if (q.sqDist(p) < sqd) result.add(q);
       }
     }
     return result;

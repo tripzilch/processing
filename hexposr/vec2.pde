@@ -1,5 +1,6 @@
 import java.lang.Math;
 
+PCG32Random v2_RNG = new PCG32Random(3125L, 23L);
 class Vec2 {
   double x, y;
   Vec2(double x, double y) { this.x = x; this.y = y; }
@@ -28,14 +29,19 @@ class Vec2 {
     y += v.y * w.y;
   }
 
-  void addmul(Vec2 v, double w) {
-    x += v.x * w;
-    y += v.y * w;
+  void addmul(Vec2 v, double a) {
+    x += v.x * a;
+    y += v.y * a;
   }
 
   void muladd(Vec2 v, Vec2 w) {
     x = x * v.x + w.x;
     y = y * v.y + w.y;
+  }
+
+  void mix(Vec2 v, double a) {
+    x += (v.x - x) * a;
+    y += (v.y - y) * a;    
   }
 
   double mag() { return Math.sqrt(x * x + y * y); }
@@ -46,7 +52,7 @@ class Vec2 {
     return Math.sqrt(dx * dx + dy * dy);
   }
 
-  double last_sqDist = 0, last_dx = 0, last_dy = 0;
+  double last_sqDist = 0.0, last_dx = 0.0, last_dy = 0.0;
   double sqDist(Vec2 v) {
     last_dx = v.x - x;
     last_dy = v.y - y;
@@ -59,14 +65,27 @@ class Vec2 {
     x /= a; y /= a;
   }
 
+  void rot90() {
+    double t = x;
+    x = -y;
+    y = t;
+  }
+
   String toString() {
     return "(" + Double.toString(x) + ", " + Double.toString(y) + ")";
   }
 
   void rand(double a) {
-    x = a * (2 * Math.random() - 1);
-    y = a * (2 * Math.random() - 1);
+    x = a * (2.0 * v2_RNG.nextDouble() - 1.0);
+    y = a * (2.0 * v2_RNG.nextDouble() - 1.0);
   }
-  void rand() { x = 2 * Math.random() - 1; y = 2 * Math.random() - 1; }
+  void rand() { 
+    x = 2.0 * v2_RNG.nextDouble() - 1.0; 
+    y = 2.0 * v2_RNG.nextDouble() - 1.0; 
+  }
 
+  void setrandoffset(Vec2 v, double a) {
+    x = v.x + a * (2.0 * v2_RNG.nextDouble() - 1.0);
+    y = v.y + a * (2.0 * v2_RNG.nextDouble() - 1.0);
+  }
 }
