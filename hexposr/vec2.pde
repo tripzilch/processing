@@ -1,7 +1,12 @@
 import java.lang.Math;
 
+// interface BinaryFunction {
+//   double call(double a, double b);
+// }
+
 PCG32Random v2_RNG = new PCG32Random(3125L, 23L);
 class Vec2 {
+
   double x, y;
   Vec2(double x, double y) { this.x = x; this.y = y; }
   Vec2(Vec2 v) { this(v.x, v.y); } // copy constructor
@@ -21,6 +26,15 @@ class Vec2 {
   void mul(double a) { x *= a; y *= a; }
   void div(double a) { x /= a; y /= a; }
   void pow(double a) { x = Math.pow(x, a); y = Math.pow(y, a); }
+
+  // void op(Vec2 a, Vec2 b, BinaryFunction f) { 
+  //   x = f.call(a.x, b.x); 
+  //   y = f.call(a.y, b.y); 
+  // }
+  // void iop(Vec2 a, BinaryFunction f) {
+  //   x = f.call(x, a.x); 
+  //   y = f.call(y, a.y);
+  // }
 
   double dot(Vec2 v) { return x * v.x + y * v.y; }
 

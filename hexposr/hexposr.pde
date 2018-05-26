@@ -1,5 +1,6 @@
 import java.lang.Math;
 import java.lang.Double;
+import com.github.varunpant.quadtree.*;
 
 static final int W = 800;
 static final int H = 800;
@@ -18,6 +19,12 @@ void setup() {
     cBuf[i] = Math.floor(10.0 + 10.0 * RNG.nextDouble());
   }
   println("START RENDER");
+  Vec2 p = new Vec2(1.0, 2.0);
+  Vec2 q = new Vec2(10.0, 20.0);
+  Vec2 r = new Vec2(100.0, 200.0);
+  println("p = ", p);
+  println("q = ", q);
+  println("r = ", r);
   // int nx = -17;
   // long r = (nx & 0xFFFFFFFFL);
   // println(nx, r);

@@ -1,12 +1,40 @@
 int N = 7;
 float SEP;
 
+
+long tri(long n) {
+  return n * (n + 1) / 2;
+}
+
+long n_divisors(long x) {
+  long n = 0;
+  for (long d = 1; d <= x; d++) {
+    if (x % d == 0) {
+      n++;
+    }
+  }
+  return n;
+}
+
+
 void setup() {
-  size(600, 600);
+  //size(600, 600);
   //SEP = sqrt(width * width + height * height) / N;
   SEP = 41;
-  
+  long nd_max = 0;  
+  for (long x = 1; x < 32700; x++) {
+    long t = tri(x);
+    long nd = n_divisors(t);
+    if (nd > nd_max) {
+      nd_max = nd;
+      int now = millis() / 1000;
+      println(nfs(int(x), 5) + ".  tri = " + t + "\t ndiv = " + nd + "\t    t = " + now / 60 + ":" + nf(now % 60, 2));
+    }
+  }
+  println("done");
 }
+
+void draw() {}
 
 //static final float[] ZERO3 = {0, 0, 0};
 
@@ -39,7 +67,7 @@ void thing(float x, float y, float px, float py, float t) {
 }
 
 float SQRT75 = sqrt(0.75);
-void draw() {
+void draw__() {
   float t = millis() / 1000.0;
   background(240,192,0);
   
